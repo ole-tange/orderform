@@ -132,8 +132,9 @@ function insertTableSize(){
 
 function generateOrderNoteID(){
 	
-	var date = $("#datepicker")[0].value;
-	var tubetag = $("#t1tubeTag1")[0].value;
+        var date = $("#datepicker")[0].value;
+//	var tubetag = $("#t1tubeTag1")[0].value;
+        var tubetag = getTubeTag();
 	var LabPersonName = $('input[name=LP-name]')[0].value;
 //	var orderNoteID = date.replace("-","") + "_" + tubetag + "_" + LabPersonName;
 	
