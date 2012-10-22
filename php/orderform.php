@@ -73,12 +73,15 @@
 	$mailto = $LPmail;//"lh@binf.ku.dk";// $LPmail . ";" . $BPmail . ";" str_replace(" ","",$PImail) . ";seqcenter@snm.ku.dk"; 
 	$mailfrom = "seqcenter@snm.ku.dk";
 	$mailsubject = 'Your sequencing order ' . $orderNoteID;
-	$mailbody = 	"Attached is your sequencing order " . $orderNoteID . ". Please review it. If you need to change it you need to make a new order. You get create a new order based on this order by going to: https://dna.ku.dk/orderform/?load=". $orderNoteID . "<br><br>" .
-				"When you have reviewed the order please reply to this email that you want the order processed.<br><br>" .
-				"Regards,<br><br>" .
-				"The Sequencing Center";
+	$orderurl = "https://dna.ku.dk/orderform/?load=". $orderNoteID;
+	$mailbody = "Attached is your sequencing order " . $orderNoteID . ". ".
+	"Please review it. If you need to change it you need to make a new order. ".
+	"You get create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br><br>" .
+ 	"When you have reviewed the order please reply to this email that you want the order processed.<br><br>" .
+ 	"Regards,<br><br>" .
+ 	"The Sequencing Center";
 	$mailfileType = "csv";
-	$ReplyTo = "The Sequencing Center <seqcenter@snm.ku.dk>, $BPmail";
+	$ReplyTo = "The Sequencing Center <seqcenter@snm.ku.dk>, $BPmail, ".str_replace(" ","",$PImail);
 	
 /*********Variables end**************/
 
@@ -245,8 +248,8 @@
 //if the message is sent successfully print "Mail sent". Otherwise print "Mail failed"
 	echo $mail_sent ? "<h2>Mail sent.</h2>" : "<h2>Mail failed!<h2>"; 
 	echo "Edit the ordernote: <a href=\"".
-	"http://dna.ku.dk/orderform/?load=". $orderNoteID . 
-	"\">http://dna.ku.dk/orderform/?load=". $orderNoteID . "</a>.";
+	"https://dna.ku.dk/orderform/?load=". $orderNoteID . 
+	"\">https://dna.ku.dk/orderform/?load=". $orderNoteID . "</a>.";
 
 //Close file
 	fclose($fs);

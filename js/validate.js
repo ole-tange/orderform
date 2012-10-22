@@ -274,9 +274,6 @@ function validateEAN(){
  */
 function verifyChar(field){
     var currStr = field.value;
-    if(currStr.replace(/[^A-Z0-9a-z]/g,"_")) {
-	alert("Changed to "+currStr.replace(/[^A-Z0-9a-z]/g,"_"));
-    }
     field.value = currStr.replace(/[^A-Z0-9a-z]/g,"_")
 }
 
