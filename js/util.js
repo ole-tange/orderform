@@ -27,29 +27,14 @@ function emptyString(value){
 }
 
 /*
- * ...
+ * Get unique 4 character identifier
  */
 function getTubeTag() {
-//	alert("asd");
-//	var page_content = "";
-	//$.get("tubetag/index.php?textonly=1", function(data){
-	
-//	$.get(
-//		"http://dna.ku.dk/tubetag",
-//		{textonly : 1},
-//		function(data) {
-//			alert('page content: ' + data);
-//		}
-//	);
-
-	
 	var httpOutput = null;
-//	alert("her");
 	httpOutput = new XMLHttpRequest();
-	httpOutput.open( "GET", "http://dna.ku.dk/tubetag/?textonly=1", false );
+	httpOutput.open( "GET", "/tubetag/?textonly=1", false );
 	httpOutput.send( null );
 	return chomp(httpOutput.responseText);
-	//	return data;
 }
 
 function chomp(raw_text)
