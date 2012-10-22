@@ -73,7 +73,7 @@
 	$mailto = $LPmail;//"lh@binf.ku.dk";// $LPmail . ";" . $BPmail . ";" str_replace(" ","",$PImail) . ";seqcenter@snm.ku.dk"; 
 	$mailfrom = "seqcenter@snm.ku.dk";
 	$mailsubject = 'Your sequencing order ' . $orderNoteID;
-	$mailbody = 	"Attached is your sequencing order " . $orderNoteID . ". Please review it. If you need to change it you need to make a new order. You get create a new order based on this order by going to: http://dna.ku.dk/orderform/?load=". $orderNoteID . "<br><br>" .
+	$mailbody = 	"Attached is your sequencing order " . $orderNoteID . ". Please review it. If you need to change it you need to make a new order. You get create a new order based on this order by going to: https://dna.ku.dk/orderform/?load=". $orderNoteID . "<br><br>" .
 				"When you have reviewed the order please reply to this email that you want the order processed.<br><br>" .
 				"Regards,<br><br>" .
 				"The Sequencing Center";
