@@ -273,13 +273,11 @@ function validateEAN(){
  * Verify a char and substitute wrong charters (doesn't match the regexp) with an underscore
  */
 function verifyChar(field){
-	var currStr = field.value;
-	if (!/^[a-zA-Z0-9_]+$/.test(currStr)){
-		if( currStr.length != 0){			// check for not set the first char as an underscore!! possible to delete the first char without getting an underscore
-			currStr = currStr.substring(0,currStr.length-1);
-			field.value = currStr + "_";
-		}
-	}
+    var currStr = field.value;
+    if(currStr.replace(/[^A-Z0-9a-z]/g,"_")) {
+	alert("Changed to "+currStr.replace(/[^A-Z0-9a-z]/g,"_"));
+    }
+    field.value = currStr.replace(/[^A-Z0-9a-z]/g,"_")
 }
 
 /*
@@ -571,11 +569,7 @@ alert(i);
  * Validate if the num-variable is a double between concentrationMin to concentrationMax
  */
 function validateConcentrationOnTheFly(num){
-	//alert(num.id);
-	//.css("border","3px solid red");
-	//if(num.value == "" || num.value==null)
-	//	return true;
-	 var boo = validateIfDoubleNumberBetween(num.value,concentrationMin,concentrationMax,"Concentration");
+    var boo = validateIfDoubleNumberBetween(num.value,concentrationMin,concentrationMax,"Concentration");
 	if(boo){
 		setValidOnBox($('#'+num.id));
 		return true;
