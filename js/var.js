@@ -115,9 +115,8 @@ var PIList = {
 	"EAN" : "57980000418028",
 	"Faculty" : "Nat",
 	"Institute" : "Biologi",
-	"Department" : "Mikrobiologisk afdeling // Universitetsparken 15 Bldg 1 // 2100 Kbh OE"
+	"Department" : "Molecular Microbial Ecology Group // Universitetsparken 15 // 2100 Kbh OE"
     },
-
     "Tom Gilbert" : {
 	"BillTo" : "Tom Gilbert",
 	"Email" : "tgilbert @ snm.ku.dk",
