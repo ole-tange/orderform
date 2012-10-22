@@ -5,21 +5,128 @@
 
 //PI person contacts
 var PIList = {	
-		"Anders Krogh" : "krogh @ binf.ku.dk",
-		"Anders Lund" : "Anders.Lund @ bric.ku.dk",
-		"Albin Sandelin" : "albin @ binf.ku.dk",
-		"Bo Porse" : "bo.porse @ bric.ku.dk",
-		"Claus Soerensen" : "Claus.storgaard @ bric.ku.dk",
-		"Eske Willerslev" : "ewillerslev @ snm.ku.dk",
-		"Jeppe Vinther" : "jvinther @ bio.ku.dk",
-		"Kristian Helin" : "Kristian.Helin @ bric.ku.dk",
-		"Kurt Kjaer" : "kurtk @ snm.ku.dk",
-		"Klaus Hansen" : "Klaus.Hansen @ bric.ku.dk",
-		"Ludovic Orlando" : "lorlando @ snm.ku.dk",
-		"Morten Froedin" : "Morten.Frodin @ bric.ku.dk",
-		"Soeren Soerensen" : "sjs @ bio.ku.dk",
-		"Tom Gilbert" : "tgilbert @ snm.ku.dk"
-	};
+    "Anders Krogh" : { 
+	"BillTo" : "Anders Krogh",
+	"Email" : "krogh @ binf.ku.dk",
+	"EAN" : "5798000422476",
+	"Faculty" : "naturvidenskab",
+	"Institute" : "Biologi",
+	"Department" : "Bioinformatik // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Anders Lund" : {
+	"BillTo" : "Diana Goetz // Anders Lund",
+	"Email" : "Anders.Lund @ bric.ku.dk",
+	"EAN" : "5798000422834",
+	"Faculty" : "BRIC",
+	"Institute" : "BRIC",
+	"Department" : "BRIC // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Albin Sandelin" : {
+	"BillTo" : "Albin Sandelin",
+	"Email" : "albin @ binf.ku.dk",
+	"EAN" : "5798000422476",
+	"Faculty" : "naturvidenskab",
+	"Institute" : "Biologi",
+	"Department" : "Bioinformatik // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Bo Porse" : {
+	"BillTo" : "Diana Goetz // Bo Porse",
+	"Email" : "bo.porse @ bric.ku.dk",
+	"EAN" : "5798000422834",
+	"Faculty" : "BRIC",
+	"Institute" : "BRIC",
+	"Department" : "BRIC // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Claus Soerensen" : {
+	"BillTo" : "Diana Goetz // Claus Soerensen",
+	"Email" : "Claus.storgaard @ bric.ku.dk",
+	"EAN" : "5798000422834",
+	"Faculty" : "BRIC",
+	"Institute" : "BRIC",
+	"Department" : "BRIC // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Eske Willerslev" : {
+	"BillTo" : "Eske Willerslev",
+	"Email" : "ewillerslev @ snm.ku.dk",
+	"EAN" : "5798000418004",
+	"Faculty" : "SCIENCE",
+	"Institute" : "Natural History Museum",
+	"Department" : "Centre for Geogenetics // Oester Voldgade 5-7 // 1350 Kbh K"
+    },
+    "Jeppe Vinther" : {
+	"BillTo" : "Jeppe Vinther",
+	"Email" : "jvinther @ bio.ku.dk",
+	"EAN" : "5798000422476",
+	"Faculty" : "naturvidenskab",
+	"Institute" : "Biologi",
+	"Department" : "Bioinformatik // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Jette Lange" : {
+	"BillTo" : "Jette Lange",
+	"Email" : "bornholdt@binf.ku.dk",
+	"EAN" : "5798000422476",
+	"Faculty" : "naturvidenskab",
+	"Institute" : "Biologi",
+	"Department" : "Bioinformatik // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Kristian Helin" : {
+	"BillTo" : "Diana Goetz // Kristian Helin",
+	"Email" : "Kristian.Helin @ bric.ku.dk",
+	"EAN" : "5798000422834",
+	"Faculty" : "BRIC",
+	"Institute" : "BRIC",
+	"Department" : "BRIC // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Kurt Kjaer" : {
+	"BillTo" : "Kurt Kjaer",
+	"Email" : "kurtk @ snm.ku.dk",
+	"EAN" : "5798000418004",
+	"Faculty" : "SCIENCE",
+	"Institute" : "Natural History Museum",
+	"Department" : "Centre for Geogenetics // Oester Voldgade 5-7 // 1350 Kbh K"
+    },
+    "Klaus Hansen" : {
+	"BillTo" : "Diana Goetz // Klaus Hansen",
+	"Email" : "Klaus.Hansen @ bric.ku.dk",
+	"EAN" : "5798000422834",
+	"Faculty" : "BRIC",
+	"Institute" : "BRIC",
+	"Department" : "BRIC // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Ludovic Orlando" : {
+	"BillTo" : "Ludovic Orlando",
+	"Email" : "lorlando @ snm.ku.dk",
+	"EAN" : "5798000418004",
+	"Faculty" : "SCIENCE",
+	"Institute" : "Natural History Museum",
+	"Department" : "Centre for Geogenetics // Oester Voldgade 5-7 // 1350 Kbh K"
+    },
+    "Morten Froedin": {
+	"BillTo" : "Diana Goetz // Morten Froedin",
+	"Email" : "Morten.Frodin @ bric.ku.dk",
+	"EAN" : "5798000422834",
+	"Faculty" : "BRIC",
+	"Institute" : "BRIC",
+	"Department" : "BRIC // Ole Maaloes Vej 5 // 2200 Kbh N"
+    },
+    "Soeren Soerensen" : {
+	"BillTo" : "Soeren Soerensen",
+	"Email" : "sjs @ bio.ku.dk",
+	"EAN" : "57980000418028",
+	"Faculty" : "Nat",
+	"Institute" : "Biologi",
+	"Department" : "Mikrobiologisk afdeling // Universitetsparken 15 Bldg 1 // 2100 Kbh OE"
+    },
+
+    "Tom Gilbert" : {
+	"BillTo" : "Tom Gilbert",
+	"Email" : "tgilbert @ snm.ku.dk",
+	"EAN" : "5798000418004",
+	"Faculty" : "SCIENCE",
+	"Institute" : "Natural History Museum",
+	"Department" : "Centre for Geogenetics // Oester Voldgade 5-7 // 1350 Kbh K"
+    }
+};
 	
 	var tubeTagList = {	
 		"Anders Krogh" : "ANK",

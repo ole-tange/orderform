@@ -72,9 +72,15 @@ function PIOther(){
 }
 
 function PIInsert(str){
-	$('#PI-name').val(str.value);
-	$('#PI-email').val(PIList[str.value]);
-	$('.PI-field').hide();
+    $('#PI-name').val(str.value);
+    $('#PI-email').val(PIList[str.value]["Email"]);
+    $('#BillTo_name').val(PIList[str.value]["BillTo"]);
+    $('#EAN_No_id').val(PIList[str.value]["EAN"]);
+    $('#EAN_Fakultet_id').val(PIList[str.value]["Faculty"]);
+    $('#EAN_Institut_id').val(PIList[str.value]["Institute"]);
+    $('#EAN_Afdeling_id').val(PIList[str.value]["Department"]);
+
+    $('.PI-field').hide();
 }
 
 function addPI2TubeTag(){
