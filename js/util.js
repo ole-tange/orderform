@@ -48,10 +48,14 @@ function getTubeTag() {
 	httpOutput = new XMLHttpRequest();
 	httpOutput.open( "GET", "http://dna.ku.dk/tubetag/?textonly=1", false );
 	httpOutput.send( null );
-//alert(httpOutput.responseText);
-	return httpOutput.responseText;
+	return chomp(httpOutput.responseText);
 	//	return data;
+}
 
+function chomp(raw_text)
+{
+    // do perl chomp
+    return raw_text.replace(/(\n|\r)+$/, '');
 }
 
 /*
