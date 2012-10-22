@@ -302,12 +302,14 @@ function checkNumberBetween(num, from, to, vali){
  * Check if str-variable is a double
  */
 function validateIfDoubleNumberBetween(str, from, to, vali){
-	if(str.match(/^([0-9.])*$/)){	//Check if it's a number
-		return checkNumberBetween(str,from,to,vali);
-	} else{                                                              
+    var myArray = str.match(/^([0-9.]*) *(nM|ng.mL)?$/i);
+
+    if(myArray != null) {
+	return checkNumberBetween(myArray[1],from,to,vali);
+    } else{                                                              
 //		alert(vali + " - " + doublerr);
-		return false;
-	}
+	return false;
+    }
 }
 
 /*
