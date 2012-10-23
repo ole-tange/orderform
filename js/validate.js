@@ -10,7 +10,7 @@ function projectVal(){
 	var projectNameColumn = $("table#t1 tr td input.ProjectName");
 	projectNameColumn.css("border","13px solid red");
 
-	for(i = 0; i < projectNameColumn.length;i++){
+	for(var i = 0; i < projectNameColumn.length;i++){
 		if(!verifyStr(projectNameColumn[i].value)){
 			alert("at index " + i + " it is false!")
 		}
@@ -75,7 +75,7 @@ function validateLabPerson(){
 	}
 	
 	//validate mail
-	var mail=$('input[name=LP-mail]')
+	var mail=$('input[name=LP-mail]');
 	if (!validateEmail(mail[0].value)){
 		setErrorOnBox(mail);
 		//alert(labPMerr);
@@ -86,7 +86,7 @@ function validateLabPerson(){
 	}
 	
 	//validate phone
-	var phone=$('input[name=LP-phone]')
+	var phone=$('input[name=LP-phone]');
 	if (phone[0].value==null || phone[0].value==""){
 		setErrorOnBox(phone);
 		//alert(labPPerr);
@@ -109,7 +109,7 @@ function validateLabPerson(){
  */
 function validateBioPerson(){
 	var boo = true;
-	var name=$('input[name=BP-name]')
+	var name=$('input[name=BP-name]');
 	if (name[0].value==null || name[0].value==""){
 		setErrorOnBox(name);
 	//	alert(bioPNerr);
@@ -119,7 +119,7 @@ function validateBioPerson(){
 		setValidOnBox(name);
 	}
   
-	var mail=$('input[name=BP-mail]')
+	var mail=$('input[name=BP-mail]');
 	if (!validateEmail(mail[0].value)){
 		setErrorOnBox(mail);
 	//	mail.focus();
@@ -180,9 +180,6 @@ function validateBillTo(){
 	}
 	
 	return boo;
-		
-	
-	
 }
 
 /*
@@ -199,13 +196,13 @@ function validateCVRAndEAN(){
 		var CVR = $(".CVR");
 		
 		//check for either CVR or EAN is fullfilled
-		for(i = 0 ; i < CVR.length;i++){
+		for(var i = 0 ; i < CVR.length;i++){
 			if (CVR[i].value != ""){
 				booCVR = true;
 				break;
 			}		
 		}
-		for(i = 0 ; i < EAN.length;i++){
+		for(var i = 0 ; i < EAN.length;i++){
 			if (EAN[i].value != ""){
 				booEAN = true;
 				break;
@@ -244,7 +241,7 @@ function validateCVR(){
 	var boo = true;
 	var cvr = $(".CVR");
 	
-	for(i = 0; i < cvr.length;i++){
+	for(var i = 0; i < cvr.length;i++){
 		if(emptyString(cvr[i].value)){ // check for an empty string
 			setErrorOnBox($("#"+cvr[i].id));
 			boo = false;
@@ -260,7 +257,7 @@ function validateEAN(){
 	var boo = true;
 	var ean = $(".EAN");
 	
-	for(i = 0; i < ean.length;i++){
+	for(var i = 0; i < ean.length;i++){
 		if(emptyString(ean[i].value)){ // check for an empty string
 			setErrorOnBox($("#"+ean[i].id));
 			boo = false;
@@ -333,7 +330,7 @@ function validateRunType(){
 	var counter = 0;
 	
 	// This loop count one up everytime runtype is filled.
-	for(i=0;i<runtype.length;i++){
+	for(var i=0;i<runtype.length;i++){
 		if(runtype[i].value != ""){
 			counter++;
 			temp = runtype[i].value;
@@ -376,7 +373,7 @@ function validateRuntypeOnTheFly(parameter){
 
 
 	// This loop count one up everytime runtype is filled.
-	for(i=0;i<runtype.length;i++){
+	for(var i=0;i<runtype.length;i++){
 		if(runtype[i].value != ""){
 			counter++;
 			temp = runtype[i].value;
@@ -647,7 +644,7 @@ function validateTable(tableid){
 	var concenArr = $("table#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm...
 	var AverageLibArr = $("table#"+tableid+" tr td input."+ averageLibClassname);
 	
-	for(i = 0; i < concenArr.length;i++){
+	for(var i = 0; i < concenArr.length;i++){
 	//	alert(concentrationMin + "    " + concentrationMax);
 //		if(!validateIfDoubleNumberBetween(concenArr[i].value,concentrationMin,concentrationMax,"Concentration")){
 		if(!validateConcentrationOnTheFly(concenArr[i])){
@@ -655,7 +652,7 @@ function validateTable(tableid){
 		}
 	}
 	
-	for(i = 0; i < AverageLibArr.length;i++){
+	for(var i = 0; i < AverageLibArr.length;i++){
 		if(!validateAverageLibInsOnTheFly(AverageLibArr[i])){
 			boo = false;
 		}
@@ -697,7 +694,7 @@ function validateTableStrings(tableid){
 	var projectNameBoo = checkForValidChars(tableid,projectNameColumn,projectNameClassname);
 	var tubeTagBoo = true;
 	
-	for(i = 0; i<tubeTagColumn.length;i++){	// Check if tubetag is null
+	for(var i = 0; i<tubeTagColumn.length;i++){	// Check if tubetag is null
 		if(!checkNull(tubeTagColumn[i])){
 			tubeTagBoo = false;
 		}
@@ -769,17 +766,17 @@ function checkForValidChars(tableid,arr,validating){
 	var boo = true;
 	var temp;
 	
-	for(i = 0;i < arr.length;i++){
+	for(var i = 0;i < arr.length;i++){
 		temp = $("table#"+tableid+" tr td input#"+validating+(i+1));
 		//$("#results").text(" - "+arr[i].value);
 		if(!verifyStr(arr[i].value)){
 			
 		//	arr.css("border","15px solid red");
-			setErrorOnBox(temp);
+			setErrorOnBox($("#" + arr[i].id));
 //			arr[i].focus();
 			boo = false;
 		} else{
-			setValidOnBox(temp);
+			setValidOnBox($("#" + arr[i].id));
 		}
 	}
 //	alert(validating + " - " +  boo);

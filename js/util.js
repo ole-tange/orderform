@@ -3,7 +3,7 @@
  */
 function printArray(arr){
 	var tmp = "";
-	for (j = 0; j < arr.length-1; j++){
+	for (var j = 0; j < arr.length-1; j++){
 		tmp += arr[j].value + " ";			// remember .value
 	}
 	$("#results").text(""+tmp);
@@ -50,7 +50,7 @@ function addLinks(){
 	var arId = Array("BillToLink","LPLink","BPLink","PILink","addInfoLink","runtypeLink","phixLink","seqLibLink","leftoversLink","custSeqLink","date");
 	var arLinks = Array(BilltoLink, LPLink, BPLink, PILink, addInfoLink, runtypeLink, phixLink, seqLibLink, leftoversLink, custSeqLink,dateLink);
 
-	for(i = 0; i < arId.length;i++){
+	for(var i = 0; i < arId.length;i++){
 		$("#"+arId[i]).attr("href", arLinks[i]);
 		$("#"+arId[i]).attr("tabindex", "-1");	// prevend "tabbing" into the link
 	}
@@ -96,7 +96,7 @@ function addPI2TubeTag(){
  */
 function insertTableSize(){
 	var numOfTables = $('.tableNum');
-	for(w = 0;w < numOfTables.length;w++){
+	for(var w = 0;w < numOfTables.length;w++){
 		
 		var tname = "t" + (w+1);
 		var seqTable = document.getElementById(tname);	// 

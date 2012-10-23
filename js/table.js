@@ -2,7 +2,7 @@
  * used for testing purpose
  */
 function append10Rows(id){
-	for(z = 0; z < 10 ;z++){
+	for(var z = 0; z < 10 ;z++){
 	//	alert("create a row...");
 		appendRow(id);
 	}
@@ -11,7 +11,7 @@ function append10Rows(id){
 }
 
 function append10Rows(){
-	for(z = 0; z < 10 ;z++){
+	for(var z = 0; z < 10 ;z++){
 	//	alert("create a row...");
 		appendRow("t" + ($('.tableNum').length));
 	}
@@ -29,6 +29,9 @@ function CreateTableHeader(tableId){
 	seqTable.appendChild(InsertTableHead(tableId));	
 }
 
+/*
+ * Append the header of the table, to the table with id - tableid.
+ */
 function InsertTableHead(tableId){
 	var row0 = document.createElement("TR");
 	
@@ -43,12 +46,16 @@ function InsertTableHead(tableId){
 	headArray[6] = createTableHead("th","hidden",tableId+ "_"+projectNameClassname + "_0","Project name","Project name",projectNameLink);
 
 	//insert 7 new headers in the table
-	for(i = 0; i < 7 ; i++){
+	for(var i = 0; i < 7 ; i++){
 		row0.appendChild(headArray[i]);
 	}
 	return row0;
 }
 
+/*
+ * This function append a "10 new lines row" for each table
+ * (not implemented yet)
+ */
 function appendButton(tableid){
 //	alert("das");
 	var seqTable = document.getElementById(tableid);
@@ -75,6 +82,13 @@ function appendButton(tableid){
 	
 }
 
+/*
+ * This function delete the "10 new lines row"
+ * Used when we want to add 10 new lines, then we first delete the actual button
+ * Then add the 10 rows, and then add a new "10 new lines" buton.
+ * (not implemented yet)
+ */
+
 function deleteButton(){
 	
 }
@@ -96,7 +110,7 @@ function appendRow(tableid){
 		
 	
 	//adds setting to cells and insert into array
-	for(i = 0; i < rowLength;i++){
+	for(var i = 0; i < rowLength;i++){
 		var tempCell = document.createElement("TD");
 		//tempCell.setAttribute('height', "100");
 		//tempcell.width = "500";
@@ -185,7 +199,7 @@ function appendRow(tableid){
 	}
 
 	//add cells to row
-	for(i = 0;i< cells.length;i++){
+	for(var i = 0;i< cells.length;i++){
 		row.appendChild(cells[i]);
 	}
 	
@@ -198,8 +212,9 @@ function appendRow(tableid){
 }
 
 /*
- * Change settings for a input tag.
- */
+ * Use a select box instead of a text input field
+ * NOT implemented yet!!!
+ */ 
 function createInputSettings(tableid,input, numOfRows, columnClass){
 	input.type = "text";
 	input.name = tableid + "_" + columnClass + "_"+numOfRows;
@@ -211,13 +226,13 @@ function createInputSettings(tableid,input, numOfRows, columnClass){
 function createSelect(tableid,select, numOfRows, columnClass, arr){
 //	alert(arr.length);
 //	alert(arr[0]);
-	for(s = 0; s < arr.length;s++){
+	for(var s = 0; s < arr.length;s++){
 //	for(i = 0; i < cells.length;i++)
 	
 		var option = document.createElement("option");
 		//option = "a";
 //		option.value = "aaa";
-		option.id = tableid + "_" + columnClass + "_"+numOfRows;;
+		option.id = tableid + "_" + columnClass + "_"+numOfRows;
 		option.onclick = function () { bricFunction(this) };
 		option.text = arr[s];
 		select.appendChild(option);
@@ -301,15 +316,17 @@ function insertBricTableValidation(tableid){
 	});
 }
 
+/*
+ * Expand All tables with the bric columns, this function calculates the number of tables, and expand each of them
+ */
 function expandAllTables(){
 	//alert($('.tableNum').length);
 		
 	var numOfTables = $('.tableNum');
-	for(k = 0;k < numOfTables.length;k++){
+	for(var k = 0;k < numOfTables.length;k++){
 		var tableid = "t"+(k+1);
-		expandTable(tableid)
-	}
-	
+		expandTable(tableid);
+	}	
 }
 
 /*
@@ -335,14 +352,14 @@ function expandTable(tableid){
 		thArray[4] = createTableHead("th","hidden",tableid+"_"+TOEClassname + "_0","Type of experiment","Type of experiment",TOELink);
 	
 		//insert 5 new headers in the table
-		for(i = 0; i < 5 ; i++){
+		for(var i = 0; i < 5 ; i++){
 			seqTable.rows[0].appendChild(thArray[i]);
 		}
 		
 		// create rows
 		var tdArray = Array();
 	
-		for(i = 1; i < numOfRows ; i++){
+		for(var i = 1; i < numOfRows ; i++){
 			//insert refrerence Genome cell
 			var tdRefG = document.createElement("TD");
 			var inputRefG = document.createElement("input");
@@ -360,11 +377,11 @@ function expandTable(tableid){
 			tdArray[1] = tdSpe;
 				
 			//insert CellType cell
-			var tdCellType_ = document.createElement("TD");
+			var tdCellType = document.createElement("TD");
 			var inputCellType = document.createElement("input");
 			createInputSettings(tableid,inputCellType,i,cellTypeClassname);
-			tdCellType_.appendChild(inputCellType);
-			tdArray[2] = tdCellType_;
+			tdCellType.appendChild(inputCellType);
+			tdArray[2] = tdCellType;
 
 			//insert IP cell
 			var tdIP = document.createElement("TD");
@@ -381,7 +398,7 @@ function expandTable(tableid){
 			tdTOE.appendChild(inputTOE);
 			tdArray[4] = tdTOE;
 		
-			for(j = 0; j < 5 ; j++){
+			for(var j = 0; j < 5 ; j++){
 				seqTable.rows[i].appendChild(tdArray[j]);	// insert each td into the i'ne row
 			}
 		}
@@ -425,7 +442,7 @@ function createTableHead(element, type, name, value, text, link){
 }
 
 /*
- * Add's a new table - this function is need to add a new table whenever we need a new tubetag.
+ * Add's a new table (or tubetag) - this function is need to add a new table whenever we need a new tubetag.
  */
 function addNewTable(){
 	
