@@ -474,7 +474,7 @@ function validUniqueSampleId(tableid){
 	var sampleID = $("." + tableid + "sampleId");
 
 	for(var i = 0;i < sampleID.length;i++){
-		if(sampleID[i].value != ""){
+		if(sampleID[i].value != ""){				// Don't check if empty
 			tmp = map[sampleID[i].value];
 			map[sampleID[i].value] = sampleID[i].id;	//Insert sampleID into map
 			if (tmp != null){				//Check if the sampleID exist before inserting.
@@ -484,7 +484,7 @@ function validUniqueSampleId(tableid){
 			} else {
 				setValidOnBox($("#"+ sampleID[i].id));
 			}
-		}
+		}	// make setValidOnBox when empty ??? insert here then
 	}
 	
 	return boo;
