@@ -134,8 +134,8 @@ function appendRow(tableid){
 			input.value = tubeTag;
 		}else if(i==1){
 			input.name = tableid + "_" + sampleIdClassname +"_"+numOfRows;
-			input.id = sampleIdClassname +numOfRows;
-			input.setAttribute('class', sampleIdClassname);
+			input.id = tableid + sampleIdClassname +numOfRows;
+			input.setAttribute('class', tableid + sampleIdClassname);
 		//	input.onblur= function () { checkNull(this);};
 			input.onkeyup= function () {verifyChar(this)};
 //			input.value = numOfRows;

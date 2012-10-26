@@ -465,101 +465,28 @@ function runtypeCases(cas,r0,r1,r2,r3,r4){
 }
 
 /*
- * Validate the SampleID, to check if all sampleID is unique.
- * (works if id consist of numbers, but error (not validating correct) when contain a speciel charter!!)
+ * Validate the SampleID, to check if a sampleID is unique. validdate on each table - tubetag_sampleID is unique
  */
 function validUniqueSampleId(tableid){
-	//insert all SampleID in array
-	//sort the array
-	//check if the "next one" is equal "this one"
 	var boo = true;
-	
-	var seqTable = document.getElementById(tableid);	
-	var numOfRows = seqTable.rows.length;
-	var array = new Array(numOfRows);
-	var checkArray = new Array(numOfRows);
-	
-	var sampleID = $(".sampleId").get();
-	alert(sampleID);
-	
-	;
-//alert("das");
-	//var a = $.unique(sampleID);
-	var arr = jQuery.unique(sampleID);
-	
+	var map = new Object();
 	var tmp = "";
-	for (j = 0; j < arr.length; j++){
-		tmp += arr[j].value + " ";			// remember .value
-	}
-	$("#results").text(""+tmp);
-	
-//	for (i = 1; i < numOfRows;i++){
-	//	alert(document.forms["seqForm"]["sampleId_"+i]);
-//		 checkArray[i-1] = document.forms["seqForm"]["sampleId"+i];
-//	}
-		
-//	alert(checkArray);
+	var sampleID = $("." + tableid + "sampleId");
 
-//	checkArray.sort(function(a, b){return a.value-b.value;});
-	
-	//checkArray = jQuery.unique(checkArray.value);
-
-//	alert(checkArray.length);
-//	printArray(checkArray);
-	//alert(sampleID);
-	
-//	for (i = 0; i < sampleID.length;i++){
-//		 array[i] = sampleID[i].value;
-//	}
-
-	//hasDuplicate(checkArray);
-//	array.sort();//function(a, b){return a-b;});
-	
-/*	//	printArray(array);
-	alert(array.id);
-	for(j = 1; j < array.length-3; j++){
-		
-//		if(!emptyString(checkArray[j].value)){ // Allow empty strings 
-			
-		var tmp = j+1;
-		
-			if(array[j].value == array[tmp].value){
-	//			alert("dssdads");	
-				setErrorOnBox($('#'+array[j].id));
-				setErrorOnBox($('#'+array[tmp].id));
-				//alert("Sample id's have to be unique!!!");
+	for(var i = 0;i < sampleID.length;i++){
+		if(sampleID[i].value != ""){
+			tmp = map[sampleID[i].value];
+			map[sampleID[i].value] = sampleID[i].id;	//Insert sampleID into map
+			if (tmp != null){				//Check if the sampleID exist before inserting.
+				setErrorOnBox($("#"+tmp));
+				setErrorOnBox($("#"+ sampleID[i].id));
 				boo = false;
-			} else{
-	//			alert("dssdads");	
-				setValidOnBox($('#'+array[j].id));
-				setValidOnBox($('#'+array[tmp].id));
 			}
-//		} else {
-//			setValidOnBox($('#'+checkArray[j].id));
-//		}
+		}
 	}
-*/
 	
 	return boo;
 }
-
-function hasDuplicate(arr) {
-    var i = arr.length, j, val;
-alert(i);
-    while (i--) {
-        val = arr[i];
-        j = i;
-        while (j--) {
-                if (arr[j] === val) {
-			alert(1);
-                        return true;
-                }
-        }
-    }
-    alert(2);
-    return false;
-}
-
 
 /*
  * Validate if the num-variable is a double between concentrationMin to concentrationMax
@@ -626,18 +553,17 @@ function validateAllTables(){
  */
 function validateTable(tableid){
 	var boo = true;
-	
-//	alert(tableid);
-		// Validate for availible chars!
-		if(!validateTableStrings(tableid)){
-			boo = false;
-		}
+
+	// Validate for availible chars!
+	if(!validateTableStrings(tableid)){
+		boo = false;
+	}
 	
 	
 	//validate Sample ID is unique
-//	if(!validUniqueSampleId(tableid)){
-//		boo = false;
-//	}
+	if(!validUniqueSampleId(tableid)){
+		boo = false;
+	}
 	
 	
 	//Validate concentration and Average library insert is between.
@@ -685,8 +611,6 @@ function validateTableStrings(tableid){
 	var tubeTagColumn = $("table#"+tableid+" tr td input."+tubeTagClassname);
 	
 	var boo = true;
-//	alert(tubeTagColumn.length);
-	//alert(indexSeqColumn);
 	
 	var sampleidBoo = checkForValidChars(tableid,sampleIdColumn,sampleIdClassname);
 	var indexSeqBoo = checkForValidChars(tableid,indexSeqColumn,indexSeqClassname);
@@ -707,7 +631,6 @@ function validateTableStrings(tableid){
 		//alert("OK");
 		boo = true;
 	}
-	
 	
 	return boo;
 }
@@ -768,10 +691,8 @@ function checkForValidChars(tableid,arr,validating){
 	
 	for(var i = 0;i < arr.length;i++){
 		temp = $("table#"+tableid+" tr td input#"+validating+(i+1));
-		//$("#results").text(" - "+arr[i].value);
 		if(!verifyStr(arr[i].value)){
-			
-		//	arr.css("border","15px solid red");
+
 			setErrorOnBox($("#" + arr[i].id));
 //			arr[i].focus();
 			boo = false;
@@ -779,7 +700,6 @@ function checkForValidChars(tableid,arr,validating){
 			setValidOnBox($("#" + arr[i].id));
 		}
 	}
-//	alert(validating + " - " +  boo);
 	return boo;
 }
 
