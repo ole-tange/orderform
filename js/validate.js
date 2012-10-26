@@ -481,9 +481,9 @@ function validUniqueSampleId(tableid){
 				setErrorOnBox($("#"+tmp));
 				setErrorOnBox($("#"+ sampleID[i].id));
 				boo = false;
-			} else {
-				setValidOnBox$("#"+ sampleID[i].id);
-			}
+			}// else {
+			//	setValidOnBox$("#"+ sampleID[i].id);
+			//}
 		}
 	}
 	
