@@ -1,21 +1,26 @@
-/* Generate 10 new rows in seq table
- * used for testing purpose
+/* 
+ * Generate 10 new rows in the tubetag table
+ * It will first delete last row - the row with the "Add 10 lines"-button.
+ * Then add 10 new rows
+ * and at last append a new row with a new  "Add 10 lines"-button.
+ * All this in the table with the id "tableid"
  */
-function append10Rows(id){
+function append10RowsWtihID(tableid){
+	deleteButton(tableid);		// Delete the old button
+	
 	for(var z = 0; z < 10 ;z++){
-	//	alert("create a row...");
-		appendRow(id);
+		appendRow(tableid);
 	}
-//	alert("dsa");
-//	appendButton(id);
+	appendButton(tableid);		// Append a new after the rows are inserted
 }
 
+/*
+ * Generate 10 new rows in the last tubetag-table
+ */
 function append10Rows(){
 	for(var z = 0; z < 10 ;z++){
-	//	alert("create a row...");
 		appendRow("t" + ($('.tableNum').length));
 	}
-//	appendButton("t" + ($('.tableNum').length));
 }
 
 /*
@@ -54,43 +59,37 @@ function InsertTableHead(tableId){
 
 /*
  * This function append a "10 new lines row" for each table
- * (not implemented yet)
  */
 function appendButton(tableid){
-//	alert("das");
+
 	var seqTable = document.getElementById(tableid);
-	//var rowLength = seqTable.rows[0].cells.length;
 	var numOfRows = seqTable.rows.length;
-	//var cells = new Array(rowLength);
-	var tbody = document.getElementById(tableid);//.getElementsByTagName("tbody")[0];
 	
 	var row = document.createElement("TR");	// create row
 	row.id = tableid + "_" + numOfRows;
 	var cell = document.createElement("TD");
-	//cell.border = "0";
 	cell.setAttribute('border', "0");
 		
 	var button = document.createElement("input");
 	button.type = "button";
 	button.value = "Add 10 lines";
-	button.setAttribute('onclick', "append10Rows("+tableid+")");	
+	button.setAttribute('onclick', "append10RowsWtihID('"+tableid+"')");	
 	
 	cell.appendChild(button);
 	row.appendChild(cell);
-	tbody.appendChild(row);
-	
-	
+	seqTable.appendChild(row);
 }
 
 /*
- * This function delete the "10 new lines row"
- * Used when we want to add 10 new lines, then we first delete the actual button
- * Then add the 10 rows, and then add a new "10 new lines" buton.
- * (not implemented yet)
+ * This function delete the last row of the an table, with the id "tableid"
+ * This will always be the "Add 10 lines"-button
  */
-
-function deleteButton(){
+function deleteButton(tableid){
+	var seqTable = document.getElementById(tableid);
+	var numOfRows = seqTable.rows.length;
 	
+	var trId = tableid + "_" + (numOfRows-1);
+	$('#' + trId).remove();
 }
 
 /*
@@ -98,7 +97,7 @@ function deleteButton(){
  * Insert proper settings (name, type, onkeyup etc.) for each colum.
  */
 function appendRow(tableid){
-
+	
 	var seqTable = document.getElementById(tableid);
 	var rowLength = seqTable.rows[0].cells.length;
 	var numOfRows = seqTable.rows.length;
@@ -338,7 +337,7 @@ function expandTable(tableid){
 //	alert("dsadsa");
 //	alert(tableid);
 	var seqTable = document.getElementById(tableid);
-	var numOfRows = seqTable.rows.length;
+	var numOfRows = (seqTable.rows.length);  // minus 1 because we don't need to expand the last row, because it contains the "Add 10 lines"-button
 	var columnLength = seqTable.rows[0].cells.length;
 	
 	if(columnLength == 7){	// check not adding columns more then one
@@ -358,8 +357,10 @@ function expandTable(tableid){
 		
 		// create rows
 		var tdArray = Array();
+		numOfRows = numOfRows - (numOfRows%10);		// the modulus operation and the "+1" in the loop
+													// is a bug fix for not inserting input fields in the "Add-10-lines-button"-row
 	
-		for(var i = 1; i < numOfRows ; i++){
+		for(var i = 1; i < numOfRows+1 ; i++){				
 			//insert refrerence Genome cell
 			var tdRefG = document.createElement("TD");
 			var inputRefG = document.createElement("input");
@@ -408,7 +409,6 @@ function expandTable(tableid){
 	
 	//$('#BricButton').css("border","15px solid red");
 	$('#BricButton').hide();
-	
 }
 
 /*
@@ -442,7 +442,7 @@ function createTableHead(element, type, name, value, text, link){
 }
 
 /*
- * Add's a new table (or tubetag) - this function is need to add a new table whenever we need a new tubetag.
+ * Add's a new table (or tubetag) - this function is used whenever we need a new tubetag.
  */
 function addNewTable(){
 	
@@ -472,14 +472,14 @@ function addNewTable(){
 			seqTable.appendChild(table);
 			CreateTableHeader(id);
 			append10Rows(id);
+			appendButton("t"+numOfTables);
 		} else {
 			seqTable.appendChild(table);
 			CreateTableHeader(id);
 			expandTable(id);
 			append10Rows(id);
-			
+			appendButton("t"+numOfTables);
 		}
 	}
-	
 }
 
