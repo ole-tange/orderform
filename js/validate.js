@@ -48,11 +48,13 @@ function validateForm(){
 		return false;
 }
 
+/*
+ * Validate the LabPersonName if it's not null
+ */
 function validateLPname(){
 	var name = $('input[name=LP-name]');
 	if (name[0].value==null || name[0].value==""){
 		setErrorOnBox(name);
-		//alert(name[0].value);
 	//	name.focus();
 		return false;
 	} else{
@@ -66,8 +68,6 @@ function validateLPname(){
  */
 function validateLabPerson(){
 	var boo = true;
-	//validate name
-	//var name=document.forms["seqForm"]["LP-name"];
 
 	//validate name
 	if(!validateLPname()){
@@ -78,7 +78,6 @@ function validateLabPerson(){
 	var mail=$('input[name=LP-mail]');
 	if (!validateEmail(mail[0].value)){
 		setErrorOnBox(mail);
-		//alert(labPMerr);
 		//mail.focus();
 		boo = false;
 	} else{
@@ -89,7 +88,6 @@ function validateLabPerson(){
 	var phone=$('input[name=LP-phone]');
 	if (phone[0].value==null || phone[0].value==""){
 		setErrorOnBox(phone);
-		//alert(labPPerr);
 		//phone.focus();
 		boo = false;
 	} else{
@@ -112,7 +110,6 @@ function validateBioPerson(){
 	var name=$('input[name=BP-name]');
 	if (name[0].value==null || name[0].value==""){
 		setErrorOnBox(name);
-	//	alert(bioPNerr);
 	//	name.focus();
 		boo = false;
 	} else{
@@ -167,7 +164,6 @@ function validateBillTo(){
 	//validate Bill TO
 	var billTo=$('input[name=BillTo_name]');
 	if (billTo[0].value==null || billTo[0].value==""){
-//		alert(billToerr);
 		setErrorOnBox(billTo);
 	//	billTo.focus();
 		boo = false;
@@ -310,12 +306,9 @@ function validateIfDoubleNumberBetween(str, from, to, vali){
  * Check if str-variable is a int
  */
 function validateIfIntNumberBetween(str, from, to, vali){
-//	alert("check: " + str + " - "+str.match(/^[0-9]*$/));
-	
 	if(str.match(/^[0-9]*$/)){	//Check if it's a number
 		return checkNumberBetween(str,from,to,vali);
 	} else{                                                              
-//		alert(vali + " - " +interr);
 		return false;
 	}
 }
@@ -352,6 +345,12 @@ function validateRunType(){
 //	}
 }
 
+/*
+ * Validate Runtype boxes.
+ * Check if only one box is filled
+ * Check if any is filled
+ * if only one is filled, check if it is not out of range
+ */
 function validateRuntypeOnTheFly(parameter){
 	var runtype = $(".runtype");
 	var runtype0 = $("#runtype0");
@@ -401,17 +400,14 @@ function validateRuntypeOnTheFly(parameter){
 	
 	if(counter>1){	//Check only one box is filled
 		setErrorOnBox(runtype);
-		//alert(runtypeerr);
 		return false;
 	} else if (counter == 0){	//Check if any is filled
-		//setErrorOnBox(runtype);
 		//reset all - so it is possible to write to the other boxes again.
 		setRuntypeReset(runtype0);
 		setRuntypeReset(runtype1);
 		setRuntypeReset(runtype2);
 		setRuntypeReset(runtype3);
 		setRuntypeReset(runtype4);
-		//alert(runtypeerr);
 		return false;
 	}else{
 		runtypeCases("runtype"+index,runtype0,runtype1,runtype2,runtype3,runtype4);
@@ -427,7 +423,7 @@ function validateRuntypeOnTheFly(parameter){
 }
 
 /*
- * 
+ *  This function handles which ryntype box need to be grey-scaled (can't insert anything in)
  */
 function runtypeCases(cas,r0,r1,r2,r3,r4){
 	switch (cas) {
@@ -538,6 +534,9 @@ function checkNull(num){
 	}
 }
 
+/*
+ * Validate all tables (Tubetag-tables).
+ */
 function validateAllTables(){
 	var boo = true;
 	var numOfTables = $('.tableNum');
@@ -559,17 +558,15 @@ function validateTable(tableid){
 	// Validate for availible chars!
 	if(!validateTableStrings(tableid)){
 		boo = false;
-	}
-	
+	}	
 	
 	//validate Sample ID is unique
 	if(!validUniqueSampleId(tableid)){
 		boo = false;
 	}
 	
-	
 	//Validate concentration and Average library insert is between.
-	var concenArr = $("table#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm...
+	var concenArr = $("table#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm... ????
 	var AverageLibArr = $("table#"+tableid+" tr td input."+ averageLibClassname);
 	
 	for(var i = 0; i < concenArr.length;i++){
@@ -585,7 +582,6 @@ function validateTable(tableid){
 			boo = false;
 		}
 	}
-	
 
 /*	
 	if(!validateBricTable){
@@ -595,6 +591,9 @@ function validateTable(tableid){
 	return boo;
 }
 
+/*
+ * Validate the Bric table.
+ */
 function validateBricTable(){
 	var boo = true;
 	
@@ -637,10 +636,13 @@ function validateTableStrings(tableid){
 	return boo;
 }
 
+/*
+ * Validate if the date is not null
+ */
 function validateDate(){
 	var boo;
 	var date = $("#datepicker");
-	//alert("value is = " + date[0].value);
+
 	if(emptyString(date[0].value)){
 		setErrorOnBox(date);
 		boo = false;
@@ -687,16 +689,13 @@ function checkForValidCharsOnBox(str){
  * Check if the array "arr" has any unvalid chars
  */
 function checkForValidChars(tableid,arr,validating){
-//	alert(validating);
 	var boo = true;
 	var temp;
 	
 	for(var i = 0;i < arr.length;i++){
 		temp = $("table#"+tableid+" tr td input#"+validating+(i+1));
 		if(!verifyStr(arr[i].value)){
-
 			setErrorOnBox($("#" + arr[i].id));
-//			arr[i].focus();
 			boo = false;
 		} else{
 			setValidOnBox($("#" + arr[i].id));
@@ -705,6 +704,9 @@ function checkForValidChars(tableid,arr,validating){
 	return boo;
 }
 
+/*
+ * Set redboxes on all at startup (not used).
+ */
 function setRedBoxes(){
 	setInputBox2RedBorder($('input[name=LP-name]'));
 	setInputBox2RedBorder($('input[name=LP-mail]'));
@@ -726,29 +728,44 @@ function setInputBox2RedBorder(input){
 	input.css("border","3px solid red");
 }
 
+/*
+ * Set input box, border to red.
+ * Show error-box on top.
+ */
 function setErrorOnBox(input){
 	input.css("border","3px solid red");
 	$('#t0').show();
 }
 
+/*
+ * Set Runtype input filed to grey border.
+ * Set not able to insert any data in the box
+ */
 function setRuntypeNoInput(input){
 	input.css("background-color","gray");
-//	input.css("border","white");
 	input.attr('maxlength', "0");
 	input.css("border","");
 }
 
+/*
+ * Reset the runtype input field
+ */
 function setRuntypeReset(input){
 	input.css("background-color","");
 	input.attr('maxlength', "");
-//	input.css("border","1px solid gray");
 	input.css("border","");
 }
 
+/*
+ * Set the box to "valid". remove any border on the input box.
+ */
 function setValidOnBox(input){
 	input.css("border","");
 }
 
+/*
+ * Test function
+ */
 function test123(str){
 	alert(str.id);
 }

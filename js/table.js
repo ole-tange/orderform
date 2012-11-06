@@ -222,14 +222,15 @@ function createInputSettings(tableid,input, numOfRows, columnClass){
 	return input;
 }
 
+/*
+ * Use a select instead of a input textbox
+ * (NOT implemented yet...)
+ */
 function createSelect(tableid,select, numOfRows, columnClass, arr){
-//	alert(arr.length);
-//	alert(arr[0]);
 	for(var s = 0; s < arr.length;s++){
 //	for(i = 0; i < cells.length;i++)
 	
 		var option = document.createElement("option");
-		//option = "a";
 //		option.value = "aaa";
 		option.id = tableid + "_" + columnClass + "_"+numOfRows;
 		option.onclick = function () { bricFunction(this) };
@@ -257,20 +258,13 @@ function bricFunction(obj){
 function addValidation2Row(tableid,rowLength){
 	//add autocomplete for all in column index Sequencing.
 	var indexSeqCol = $("table#"+tableid+" tr td input.indexSeq");
-//	alert(indexSeqCol);
-//	indexSeqCol.css("border","13px solid red");
+
 	indexSeqCol.autocomplete({
 		source: $indexSequenceList,
 		position: { 	my: "center top",
 					at: "center bottom",
 					collision: "none"
-		}
-
-		
-//		open: function(event, ui){
-  //               field_autocomplete.autocomplete("widget").css("width","300px");       
-    //         }
-			
+				}
 		});
 		
 		//indexSeqCol.autocomplete({ position: { my : "right top", at: "right bottom" } });
@@ -420,7 +414,6 @@ function createTableHead(element, type, name, value, text, link){
 	var input = document.createElement("input");
 	var a = document.createElement("a");
 	a.setAttribute("href",link);
-	//a.href="http://google.dk";
 
 	//Set when click on table go to url:
 	//th.setAttribute('onClick', "document.location.href='http://www.google.com';");
@@ -445,22 +438,14 @@ function createTableHead(element, type, name, value, text, link){
  * Add's a new table (or tubetag) - this function is used whenever we need a new tubetag.
  */
 function addNewTable(){
-	
 	var seqTable = document.getElementById("t");
-	
 	var table = document.createElement("TABLE");
 	var numOfTables = $('.tableNum').length;
-//	alert("t" + $('.tableNum').length);
 	var id = "t" + ($('.tableNum').length + 1);
-//	alert(id);
+
 	table.id = id;
 	table.border="1";
 	table.setAttribute('class', "tableNum");
-	
-	//table.class = "tableNum";
-//	table.cellspacing = "200";
-//	var seqTable = document.getElementById("t1");
-//	table.appendChild(InsertTableHead());
 	
 	if(numOfTables < 1){			// first table(tubetag) add'ed
 		seqTable.appendChild(table);

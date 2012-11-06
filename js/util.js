@@ -18,6 +18,9 @@ function sortArray(array){
 				});
 }
 
+/*
+ * Function check if value (string) is empty
+ */
 function emptyString(value){
 	if(value == null || value == ""){
 		return true;
@@ -65,12 +68,24 @@ function test(){
 //a.css("border","13px solid red");
 }
 
+/*
+ * Resert automatic insertion, when a Principle Investigator is selected.
+ */
 function PIOther(){
 	$('#PI-name').val("");
 	$('#PI-email').val("");
+	$('#BillTo_name').val("");
+	$('#EAN_No_id').val("");
+	$('#EAN_Fakultet_id').val("");
+	$('#EAN_Institut_id').val("");
+	$('#EAN_Afdeling_id').val("");
+		
 	$('.PI-field').show();
 }
 
+/*
+ * Insert PI data, when a PI is selected.
+ */
 function PIInsert(str){
     $('#PI-name').val(str.value);
     $('#PI-email').val(PIList[str.value]["Email"]);
@@ -83,6 +98,9 @@ function PIInsert(str){
     $('.PI-field').hide();
 }
 
+/*
+ * Add the PI shortcut to the PIShort hidden input, used to insert PI-shortcut before the tubetag in the csv file generated from php.
+ */
 function addPI2TubeTag(){
 	str = $("#PI")[0].value;
 	if(str != "other")
@@ -125,6 +143,9 @@ function insertTableSize(){
 	
 }
 
+/*
+ *  Generate OrderNoteID in format: date_(first)tubetag_LabPersonName
+ */
 function generateOrderNoteID(){
 	
         var date = $("#datepicker")[0].value;
