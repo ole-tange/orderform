@@ -185,31 +185,31 @@ var PIList = {
 	$TOEList = ["ChiP","DIP","RNA","shRNA","Exome","Genome"]
 	
 //wiki Links
-	var dateLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_date";
-	var BilltoLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_billto";
-	var LPLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_labperson";
-	var BPLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_bioperson";
-	var PILink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_pi";
-	var addInfoLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_addinfo";
-	var runtypeLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_runtype";
-	var phixLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_phix";
-	var seqLibLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_seqLib";
-	var leftoversLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_leftovers";
-	var custSeqLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_custSeq";
+	var dateLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_date";
+	var BilltoLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_billto";
+	var LPLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_labperson";
+	var BPLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_bioperson";
+	var PILink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_pi";
+	var addInfoLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_addinfo";
+	var runtypeLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_runtype";
+	var phixLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_phix";
+	var seqLibLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_seqLib";
+	var leftoversLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_leftovers";
+	var custSeqLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_custSeq";
 
-	var tubeTagLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_tubetag";
-	var simpleIdLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_sampleid";
-	var concentrationLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_concentration";
-	var averageLibLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_averageLib";
-	var indexSeqLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_indexSeq";
-	var indexNameLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_indexName";
-	var projectNameLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_projectName";
+	var tubeTagLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_tubetag";
+	var simpleIdLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_sampleid";
+	var concentrationLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_concentration";
+	var averageLibLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_averageLib";
+	var indexSeqLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_indexSeq";
+	var indexNameLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_indexName";
+	var projectNameLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_projectName";
 	
-	var refGenomeLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_refGenome";
-	var speciesLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_species";
-	var cellTypeLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_cellType";
-	var ipLink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_ip";
-	var TOELink = "https://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_typeofexperiment";
+	var refGenomeLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_refGenome";
+	var speciesLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_species";
+	var cellTypeLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_cellType";
+	var ipLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_ip";
+	var TOELink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_typeofexperiment";
 
 //Error msg:
 	var labPNerr = "Lab person name must be filled out";
