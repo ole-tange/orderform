@@ -51,7 +51,7 @@
 
   <form name="seqForm" id="seqForm" action="php/orderform.php"
   onsubmit="return validateForm()" method="post">
-    <table border="0" cellspacing="0">
+    <table border="1" cellspacing="0">
       <tr>
         <td>
           <h4><a id="date">Date:</a></h4>
@@ -155,7 +155,7 @@
         </td>
 
         <td><input type="text" onChange="verifyChar(this)" id="LP-name" name=
-        "LP-name"></td>
+        "LP-name" size="50"></td>
 
         <td></td>
       </tr>
@@ -163,7 +163,7 @@
       <tr>
         <td>E-mail:<span style="color:red">*</span></td>
 
-        <td><input type="text" name="LP-mail"></td>
+        <td><input type="text" name="LP-mail" size="50"></td>
 
         <td></td>
       </tr>
@@ -171,7 +171,7 @@
       <tr>
         <td>Emergency phone:<span style="color:red">*</span></td>
 
-        <td><input type="text" name="LP-phone"></td>
+        <td><input type="text" name="LP-phone" size="50"></td>
 
         <td></td>
       </tr>
@@ -189,7 +189,7 @@
       <tr>
         <td>Name:<span style="color:red">*</span></td>
 
-        <td><input type="text" name="BP-name"></td>
+        <td><input type="text" name="BP-name" size="50"></td>
 
         <td></td>
       </tr>
@@ -197,7 +197,7 @@
       <tr>
         <td>E-mail:<span style="color:red">*</span></td>
 
-        <td><input type="text" name="BP-mail"></td>
+        <td><input type="text" name="BP-mail" size="50"></td>
 
         <td></td>
       </tr>
@@ -205,7 +205,7 @@
       <tr>
         <td>Phone:</td>
 
-        <td><input type="text" name="BP-phone"></td>
+        <td><input type="text" name="BP-phone" size="50"></td>
       </tr>
 
       <tr>
@@ -288,7 +288,7 @@
       <tr class="PI-field">
         <td>Name:<span style="color:red">*</span></td>
 
-        <td><input type="text" id="PI-name" name="PI-name"></td>
+        <td><input type="text" id="PI-name" name="PI-name" size="50"></td>
 
         <td></td>
       </tr>
@@ -296,7 +296,7 @@
       <tr class="PI-field">
         <td>E-mail:<span style="color:red">*</span></td>
 
-        <td><input type="text" id="PI-email" name="PI-email"></td>
+        <td><input type="text" id="PI-email" name="PI-email" size="50"></td>
 
         <td></td>
       </tr>
@@ -452,11 +452,11 @@
         $('.PI-field').hide();	// PI-other fields
 
         //Add datepicker
+        $("#datepicker").datepicker('setDate', "now");
         $('#datepicker').datepicker({
                         appendText: " (yyyy-mm-dd)",
                         dateFormat: "yy-mm-dd"          
                 });
-        $("#datepicker").datepicker('setDate', "now");
 
         // create table header and add a row
                 addNewTable();  // first tubetag
