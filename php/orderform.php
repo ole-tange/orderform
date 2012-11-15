@@ -76,7 +76,8 @@
 	$orderurl = "https://dna.ku.dk/orderform/?load=". $orderNoteID;
 	$mailbody = "Attached is your sequencing order " . $orderNoteID . ". ".
 	"Please review it. If you need to change it you need to make a new order. ".
-	"You get create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br><br>" .
+// Enable when loading works:
+//	"You get create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br><br>" .
  	"When you have reviewed the order please reply to this email that you want the order processed.<br><br>" .
  	"Regards,<br><br>" .
  	"The Sequencing Center";
@@ -243,13 +244,25 @@
 	"--PHP-mixed-" . $random_hash . "--";
 
 	//send the email
-		$mail_sent = @mail( $mailto, $mailsubject, $message, $headers );
+	$mail_sent = @mail( $mailto, $mailsubject, $message, $headers );
 
-//if the message is sent successfully print "Mail sent". Otherwise print "Mail failed"
-	echo $mail_sent ? "<h2>Mail sent.</h2>" : "<h2>Mail failed!<h2>"; 
-	echo "Edit the ordernote: <a href=\"".
-	"https://dna.ku.dk/orderform/?load=". $orderNoteID . 
-	"\">https://dna.ku.dk/orderform/?load=". $orderNoteID . "</a>.";
+	if($mail_sent) {
+	?>
+	<h2>Mail sent to <? echo $mailto ?> with ordernote <? echo $orderNoteID; ?>.</h2>
+	Follow the instructions in the email to submit the ordernote to the sequencing center for processing.
+        <p>
+<!--
+	Enable this when ?load works
+        Edit the ordernote: <a href="https://dna.ku.dk/orderform/?load=<? echo $orderNoteID; ?>">
+	https://dna.ku.dk/orderform/?load=<? echo $orderNoteID; ?></a>.
+-->
+	<?
+	} else {
+	?>
+	   <h2>Mail failed!<h2>
+	   Sending email failed. Please contact seqcenter@snm.ku.dk to investigate why.
+	   <? 
+        }
 
 //Close file
 	fclose($fs);
