@@ -3,7 +3,7 @@
  */
 function printArray(arr){
 	var tmp = "";
-	for (j = 0; j < arr.length-1; j++){
+	for (var j = 0; j < arr.length-1; j++){
 		tmp += arr[j].value + " ";			// remember .value
 	}
 	$("#results").text(""+tmp);
@@ -18,6 +18,9 @@ function sortArray(array){
 				});
 }
 
+/*
+ * Function check if value (string) is empty
+ */
 function emptyString(value){
 	if(value == null || value == ""){
 		return true;
@@ -50,7 +53,7 @@ function addLinks(){
 	var arId = Array("BillToLink","LPLink","BPLink","PILink","addInfoLink","runtypeLink","phixLink","seqLibLink","leftoversLink","custSeqLink","date");
 	var arLinks = Array(BilltoLink, LPLink, BPLink, PILink, addInfoLink, runtypeLink, phixLink, seqLibLink, leftoversLink, custSeqLink,dateLink);
 
-	for(i = 0; i < arId.length;i++){
+	for(var i = 0; i < arId.length;i++){
 		$("#"+arId[i]).attr("href", arLinks[i]);
 		$("#"+arId[i]).attr("tabindex", "-1");	// prevend "tabbing" into the link
 	}
@@ -65,10 +68,12 @@ function test(){
 //a.css("border","13px solid red");
 }
 
+/*
+ * Resert automatic insertion, when a Principle Investigator is selected.
+ */
 function PIOther(){
     alert("Error. Contact Ole");
 }
-
 
 function PIInsert(str){
     if(str.value == "other") {
@@ -94,6 +99,9 @@ function PIInsert(str){
     }
 }
 
+/*
+ * Add the PI shortcut to the PIShort hidden input, used to insert PI-shortcut before the tubetag in the csv file generated from php.
+ */
 function addPI2TubeTag(){
 	str = $("#PI")[0].value;
 	if(str != "other")
@@ -107,7 +115,7 @@ function addPI2TubeTag(){
  */
 function insertTableSize(){
 	var numOfTables = $('.tableNum');
-	for(w = 0;w < numOfTables.length;w++){
+	for(var w = 0;w < numOfTables.length;w++){
 		
 		var tname = "t" + (w+1);
 		var seqTable = document.getElementById(tname);	// 
@@ -136,6 +144,9 @@ function insertTableSize(){
 	
 }
 
+/*
+ *  Generate OrderNoteID in format: date_(first)tubetag_LabPersonName
+ */
 function generateOrderNoteID(){
 	
         var date = $("#datepicker")[0].value;

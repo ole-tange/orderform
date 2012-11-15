@@ -1,21 +1,26 @@
-/* Generate 10 new rows in seq table
- * used for testing purpose
+/* 
+ * Generate 10 new rows in the tubetag table
+ * It will first delete last row - the row with the "Add 10 lines"-button.
+ * Then add 10 new rows
+ * and at last append a new row with a new  "Add 10 lines"-button.
+ * All this in the table with the id "tableid"
  */
-function append10Rows(id){
-	for(z = 0; z < 10 ;z++){
-	//	alert("create a row...");
-		appendRow(id);
+function append10RowsWtihID(tableid){
+	deleteButton(tableid);		// Delete the old button
+	
+	for(var z = 0; z < 10 ;z++){
+		appendRow(tableid);
 	}
-//	alert("dsa");
-//	appendButton(id);
+	appendButton(tableid);		// Append a new after the rows are inserted
 }
 
+/*
+ * Generate 10 new rows in the last tubetag-table
+ */
 function append10Rows(){
-	for(z = 0; z < 10 ;z++){
-	//	alert("create a row...");
+	for(var z = 0; z < 10 ;z++){
 		appendRow("t" + ($('.tableNum').length));
 	}
-//	appendButton("t" + ($('.tableNum').length));
 }
 
 /*
@@ -29,6 +34,9 @@ function CreateTableHeader(tableId){
 	seqTable.appendChild(InsertTableHead(tableId));	
 }
 
+/*
+ * Append the header of the table, to the table with id - tableid.
+ */
 function InsertTableHead(tableId){
 	var row0 = document.createElement("TR");
 	
@@ -43,40 +51,45 @@ function InsertTableHead(tableId){
 	headArray[6] = createTableHead("th","hidden",tableId+ "_"+projectNameClassname + "_0","Project name","Project name",projectNameLink);
 
 	//insert 7 new headers in the table
-	for(i = 0; i < 7 ; i++){
+	for(var i = 0; i < 7 ; i++){
 		row0.appendChild(headArray[i]);
 	}
 	return row0;
 }
 
+/*
+ * This function append a "10 new lines row" for each table
+ */
 function appendButton(tableid){
-//	alert("das");
+
 	var seqTable = document.getElementById(tableid);
-	//var rowLength = seqTable.rows[0].cells.length;
 	var numOfRows = seqTable.rows.length;
-	//var cells = new Array(rowLength);
-	var tbody = document.getElementById(tableid);//.getElementsByTagName("tbody")[0];
 	
 	var row = document.createElement("TR");	// create row
 	row.id = tableid + "_" + numOfRows;
 	var cell = document.createElement("TD");
-	//cell.border = "0";
 	cell.setAttribute('border', "0");
 		
 	var button = document.createElement("input");
 	button.type = "button";
 	button.value = "Add 10 lines";
-	button.setAttribute('onclick', "append10Rows("+tableid+")");	
+	button.setAttribute('onclick', "append10RowsWtihID('"+tableid+"')");	
 	
 	cell.appendChild(button);
 	row.appendChild(cell);
-	tbody.appendChild(row);
-	
-	
+	seqTable.appendChild(row);
 }
 
-function deleteButton(){
+/*
+ * This function delete the last row of the an table, with the id "tableid"
+ * This will always be the "Add 10 lines"-button
+ */
+function deleteButton(tableid){
+	var seqTable = document.getElementById(tableid);
+	var numOfRows = seqTable.rows.length;
 	
+	var trId = tableid + "_" + (numOfRows-1);
+	$('#' + trId).remove();
 }
 
 /*
@@ -84,7 +97,7 @@ function deleteButton(){
  * Insert proper settings (name, type, onkeyup etc.) for each colum.
  */
 function appendRow(tableid){
-
+	
 	var seqTable = document.getElementById(tableid);
 	var rowLength = seqTable.rows[0].cells.length;
 	var numOfRows = seqTable.rows.length;
@@ -96,7 +109,7 @@ function appendRow(tableid){
 		
 	
 	//adds setting to cells and insert into array
-	for(i = 0; i < rowLength;i++){
+	for(var i = 0; i < rowLength;i++){
 		var tempCell = document.createElement("TD");
 		//tempCell.setAttribute('height', "100");
 		//tempcell.width = "500";
@@ -120,8 +133,8 @@ function appendRow(tableid){
 			input.value = tubeTag;
 		}else if(i==1){
 			input.name = tableid + "_" + sampleIdClassname +"_"+numOfRows;
-			input.id = sampleIdClassname +numOfRows;
-			input.setAttribute('class', sampleIdClassname);
+			input.id = tableid + sampleIdClassname +numOfRows;
+			input.setAttribute('class', tableid + sampleIdClassname);
 		//	input.onblur= function () { checkNull(this);};
 			input.onkeyup= function () {verifyChar(this)};
 //			input.value = numOfRows;
@@ -185,7 +198,7 @@ function appendRow(tableid){
 	}
 
 	//add cells to row
-	for(i = 0;i< cells.length;i++){
+	for(var i = 0;i< cells.length;i++){
 		row.appendChild(cells[i]);
 	}
 	
@@ -198,8 +211,9 @@ function appendRow(tableid){
 }
 
 /*
- * Change settings for a input tag.
- */
+ * Use a select box instead of a text input field
+ * NOT implemented yet!!!
+ */ 
 function createInputSettings(tableid,input, numOfRows, columnClass){
 	input.type = "text";
 	input.name = tableid + "_" + columnClass + "_"+numOfRows;
@@ -208,16 +222,17 @@ function createInputSettings(tableid,input, numOfRows, columnClass){
 	return input;
 }
 
+/*
+ * Use a select instead of a input textbox
+ * (NOT implemented yet...)
+ */
 function createSelect(tableid,select, numOfRows, columnClass, arr){
-//	alert(arr.length);
-//	alert(arr[0]);
-	for(s = 0; s < arr.length;s++){
+	for(var s = 0; s < arr.length;s++){
 //	for(i = 0; i < cells.length;i++)
 	
 		var option = document.createElement("option");
-		//option = "a";
 //		option.value = "aaa";
-		option.id = tableid + "_" + columnClass + "_"+numOfRows;;
+		option.id = tableid + "_" + columnClass + "_"+numOfRows;
 		option.onclick = function () { bricFunction(this) };
 		option.text = arr[s];
 		select.appendChild(option);
@@ -243,20 +258,13 @@ function bricFunction(obj){
 function addValidation2Row(tableid,rowLength){
 	//add autocomplete for all in column index Sequencing.
 	var indexSeqCol = $("table#"+tableid+" tr td input.indexSeq");
-//	alert(indexSeqCol);
-//	indexSeqCol.css("border","13px solid red");
+
 	indexSeqCol.autocomplete({
 		source: $indexSequenceList,
 		position: { 	my: "center top",
 					at: "center bottom",
 					collision: "none"
-		}
-
-		
-//		open: function(event, ui){
-  //               field_autocomplete.autocomplete("widget").css("width","300px");       
-    //         }
-			
+				}
 		});
 		
 		//indexSeqCol.autocomplete({ position: { my : "right top", at: "right bottom" } });
@@ -301,15 +309,17 @@ function insertBricTableValidation(tableid){
 	});
 }
 
+/*
+ * Expand All tables with the bric columns, this function calculates the number of tables, and expand each of them
+ */
 function expandAllTables(){
 	//alert($('.tableNum').length);
 		
 	var numOfTables = $('.tableNum');
-	for(k = 0;k < numOfTables.length;k++){
+	for(var k = 0;k < numOfTables.length;k++){
 		var tableid = "t"+(k+1);
-		expandTable(tableid)
-	}
-	
+		expandTable(tableid);
+	}	
 }
 
 /*
@@ -321,7 +331,7 @@ function expandTable(tableid){
 //	alert("dsadsa");
 //	alert(tableid);
 	var seqTable = document.getElementById(tableid);
-	var numOfRows = seqTable.rows.length;
+	var numOfRows = (seqTable.rows.length);  // minus 1 because we don't need to expand the last row, because it contains the "Add 10 lines"-button
 	var columnLength = seqTable.rows[0].cells.length;
 	
 	if(columnLength == 7){	// check not adding columns more then one
@@ -335,14 +345,16 @@ function expandTable(tableid){
 		thArray[4] = createTableHead("th","hidden",tableid+"_"+TOEClassname + "_0","Type of experiment","Type of experiment",TOELink);
 	
 		//insert 5 new headers in the table
-		for(i = 0; i < 5 ; i++){
+		for(var i = 0; i < 5 ; i++){
 			seqTable.rows[0].appendChild(thArray[i]);
 		}
 		
 		// create rows
 		var tdArray = Array();
+		numOfRows = numOfRows - (numOfRows%10);		// the modulus operation and the "+1" in the loop
+													// is a bug fix for not inserting input fields in the "Add-10-lines-button"-row
 	
-		for(i = 1; i < numOfRows ; i++){
+		for(var i = 1; i < numOfRows+1 ; i++){				
 			//insert refrerence Genome cell
 			var tdRefG = document.createElement("TD");
 			var inputRefG = document.createElement("input");
@@ -360,11 +372,11 @@ function expandTable(tableid){
 			tdArray[1] = tdSpe;
 				
 			//insert CellType cell
-			var tdCellType_ = document.createElement("TD");
+			var tdCellType = document.createElement("TD");
 			var inputCellType = document.createElement("input");
 			createInputSettings(tableid,inputCellType,i,cellTypeClassname);
-			tdCellType_.appendChild(inputCellType);
-			tdArray[2] = tdCellType_;
+			tdCellType.appendChild(inputCellType);
+			tdArray[2] = tdCellType;
 
 			//insert IP cell
 			var tdIP = document.createElement("TD");
@@ -381,7 +393,7 @@ function expandTable(tableid){
 			tdTOE.appendChild(inputTOE);
 			tdArray[4] = tdTOE;
 		
-			for(j = 0; j < 5 ; j++){
+			for(var j = 0; j < 5 ; j++){
 				seqTable.rows[i].appendChild(tdArray[j]);	// insert each td into the i'ne row
 			}
 		}
@@ -391,7 +403,6 @@ function expandTable(tableid){
 	
 	//$('#BricButton').css("border","15px solid red");
 	$('#BricButton').hide();
-	
 }
 
 /*
@@ -403,7 +414,6 @@ function createTableHead(element, type, name, value, text, link){
 	var input = document.createElement("input");
 	var a = document.createElement("a");
 	a.setAttribute("href",link);
-	//a.href="http://google.dk";
 
 	//Set when click on table go to url:
 	//th.setAttribute('onClick', "document.location.href='http://www.google.com';");
@@ -425,25 +435,17 @@ function createTableHead(element, type, name, value, text, link){
 }
 
 /*
- * Add's a new table - this function is need to add a new table whenever we need a new tubetag.
+ * Add's a new table (or tubetag) - this function is used whenever we need a new tubetag.
  */
 function addNewTable(){
-	
 	var seqTable = document.getElementById("t");
-	
 	var table = document.createElement("TABLE");
 	var numOfTables = $('.tableNum').length;
-//	alert("t" + $('.tableNum').length);
 	var id = "t" + ($('.tableNum').length + 1);
-//	alert(id);
+
 	table.id = id;
 	table.border="1";
 	table.setAttribute('class', "tableNum");
-	
-	//table.class = "tableNum";
-//	table.cellspacing = "200";
-//	var seqTable = document.getElementById("t1");
-//	table.appendChild(InsertTableHead());
 	
 	if(numOfTables < 1){			// first table(tubetag) add'ed
 		seqTable.appendChild(table);
@@ -455,14 +457,14 @@ function addNewTable(){
 			seqTable.appendChild(table);
 			CreateTableHeader(id);
 			append10Rows(id);
+			appendButton("t"+numOfTables);
 		} else {
 			seqTable.appendChild(table);
 			CreateTableHeader(id);
 			expandTable(id);
 			append10Rows(id);
-			
+			appendButton("t"+numOfTables);
 		}
 	}
-	
 }
 

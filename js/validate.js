@@ -10,7 +10,7 @@ function projectVal(){
 	var projectNameColumn = $("table#t1 tr td input.ProjectName");
 	projectNameColumn.css("border","13px solid red");
 
-	for(i = 0; i < projectNameColumn.length;i++){
+	for(var i = 0; i < projectNameColumn.length;i++){
 		if(!verifyStr(projectNameColumn[i].value)){
 			alert("at index " + i + " it is false!")
 		}
@@ -48,11 +48,13 @@ function validateForm(){
 		return false;
 }
 
+/*
+ * Validate the LabPersonName if it's not null
+ */
 function validateLPname(){
 	var name = $('input[name=LP-name]');
 	if (name[0].value==null || name[0].value==""){
 		setErrorOnBox(name);
-		//alert(name[0].value);
 	//	name.focus();
 		return false;
 	} else{
@@ -66,8 +68,6 @@ function validateLPname(){
  */
 function validateLabPerson(){
 	var boo = true;
-	//validate name
-	//var name=document.forms["seqForm"]["LP-name"];
 
 	//validate name
 	if(!validateLPname()){
@@ -75,10 +75,9 @@ function validateLabPerson(){
 	}
 	
 	//validate mail
-	var mail=$('input[name=LP-mail]')
+	var mail=$('input[name=LP-mail]');
 	if (!validateEmail(mail[0].value)){
 		setErrorOnBox(mail);
-		//alert(labPMerr);
 		//mail.focus();
 		boo = false;
 	} else{
@@ -86,10 +85,9 @@ function validateLabPerson(){
 	}
 	
 	//validate phone
-	var phone=$('input[name=LP-phone]')
+	var phone=$('input[name=LP-phone]');
 	if (phone[0].value==null || phone[0].value==""){
 		setErrorOnBox(phone);
-		//alert(labPPerr);
 		//phone.focus();
 		boo = false;
 	} else{
@@ -109,17 +107,16 @@ function validateLabPerson(){
  */
 function validateBioPerson(){
 	var boo = true;
-	var name=$('input[name=BP-name]')
+	var name=$('input[name=BP-name]');
 	if (name[0].value==null || name[0].value==""){
 		setErrorOnBox(name);
-	//	alert(bioPNerr);
 	//	name.focus();
 		boo = false;
 	} else{
 		setValidOnBox(name);
 	}
   
-	var mail=$('input[name=BP-mail]')
+	var mail=$('input[name=BP-mail]');
 	if (!validateEmail(mail[0].value)){
 		setErrorOnBox(mail);
 	//	mail.focus();
@@ -167,7 +164,6 @@ function validateBillTo(){
 	//validate Bill TO
 	var billTo=$('input[name=BillTo_name]');
 	if (billTo[0].value==null || billTo[0].value==""){
-//		alert(billToerr);
 		setErrorOnBox(billTo);
 	//	billTo.focus();
 		boo = false;
@@ -180,9 +176,6 @@ function validateBillTo(){
 	}
 	
 	return boo;
-		
-	
-	
 }
 
 /*
@@ -199,13 +192,13 @@ function validateCVRAndEAN(){
 		var CVR = $(".CVR");
 		
 		//check for either CVR or EAN is fullfilled
-		for(i = 0 ; i < CVR.length;i++){
+		for(var i = 0 ; i < CVR.length;i++){
 			if (CVR[i].value != ""){
 				booCVR = true;
 				break;
 			}		
 		}
-		for(i = 0 ; i < EAN.length;i++){
+		for(var i = 0 ; i < EAN.length;i++){
 			if (EAN[i].value != ""){
 				booEAN = true;
 				break;
@@ -244,7 +237,7 @@ function validateCVR(){
 	var boo = true;
 	var cvr = $(".CVR");
 	
-	for(i = 0; i < cvr.length;i++){
+	for(var i = 0; i < cvr.length;i++){
 		if(emptyString(cvr[i].value)){ // check for an empty string
 			setErrorOnBox($("#"+cvr[i].id));
 			boo = false;
@@ -260,7 +253,7 @@ function validateEAN(){
 	var boo = true;
 	var ean = $(".EAN");
 	
-	for(i = 0; i < ean.length;i++){
+	for(var i = 0; i < ean.length;i++){
 		if(emptyString(ean[i].value)){ // check for an empty string
 			setErrorOnBox($("#"+ean[i].id));
 			boo = false;
@@ -313,12 +306,9 @@ function validateIfDoubleNumberBetween(str, from, to, vali){
  * Check if str-variable is a int
  */
 function validateIfIntNumberBetween(str, from, to, vali){
-//	alert("check: " + str + " - "+str.match(/^[0-9]*$/));
-	
 	if(str.match(/^[0-9]*$/)){	//Check if it's a number
 		return checkNumberBetween(str,from,to,vali);
 	} else{                                                              
-//		alert(vali + " - " +interr);
 		return false;
 	}
 }
@@ -333,7 +323,7 @@ function validateRunType(){
 	var counter = 0;
 	
 	// This loop count one up everytime runtype is filled.
-	for(i=0;i<runtype.length;i++){
+	for(var i=0;i<runtype.length;i++){
 		if(runtype[i].value != ""){
 			counter++;
 			temp = runtype[i].value;
@@ -355,6 +345,12 @@ function validateRunType(){
 //	}
 }
 
+/*
+ * Validate Runtype boxes.
+ * Check if only one box is filled
+ * Check if any is filled
+ * if only one is filled, check if it is not out of range
+ */
 function validateRuntypeOnTheFly(parameter){
 	var runtype = $(".runtype");
 	var runtype0 = $("#runtype0");
@@ -376,7 +372,7 @@ function validateRuntypeOnTheFly(parameter){
 
 
 	// This loop count one up everytime runtype is filled.
-	for(i=0;i<runtype.length;i++){
+	for(var i=0;i<runtype.length;i++){
 		if(runtype[i].value != ""){
 			counter++;
 			temp = runtype[i].value;
@@ -404,17 +400,14 @@ function validateRuntypeOnTheFly(parameter){
 	
 	if(counter>1){	//Check only one box is filled
 		setErrorOnBox(runtype);
-		//alert(runtypeerr);
 		return false;
 	} else if (counter == 0){	//Check if any is filled
-		//setErrorOnBox(runtype);
 		//reset all - so it is possible to write to the other boxes again.
 		setRuntypeReset(runtype0);
 		setRuntypeReset(runtype1);
 		setRuntypeReset(runtype2);
 		setRuntypeReset(runtype3);
 		setRuntypeReset(runtype4);
-		//alert(runtypeerr);
 		return false;
 	}else{
 		runtypeCases("runtype"+index,runtype0,runtype1,runtype2,runtype3,runtype4);
@@ -430,7 +423,7 @@ function validateRuntypeOnTheFly(parameter){
 }
 
 /*
- * 
+ *  This function handles which ryntype box need to be grey-scaled (can't insert anything in)
  */
 function runtypeCases(cas,r0,r1,r2,r3,r4){
 	switch (cas) {
@@ -468,101 +461,30 @@ function runtypeCases(cas,r0,r1,r2,r3,r4){
 }
 
 /*
- * Validate the SampleID, to check if all sampleID is unique.
- * (works if id consist of numbers, but error (not validating correct) when contain a speciel charter!!)
+ * Validate the SampleID, to check if a sampleID is unique. validdate on each table - tubetag_sampleID is unique
  */
 function validUniqueSampleId(tableid){
-	//insert all SampleID in array
-	//sort the array
-	//check if the "next one" is equal "this one"
 	var boo = true;
-	
-	var seqTable = document.getElementById(tableid);	
-	var numOfRows = seqTable.rows.length;
-	var array = new Array(numOfRows);
-	var checkArray = new Array(numOfRows);
-	
-	var sampleID = $(".sampleId").get();
-	alert(sampleID);
-	
-	;
-//alert("das");
-	//var a = $.unique(sampleID);
-	var arr = jQuery.unique(sampleID);
-	
+	var map = new Object();
 	var tmp = "";
-	for (j = 0; j < arr.length; j++){
-		tmp += arr[j].value + " ";			// remember .value
-	}
-	$("#results").text(""+tmp);
-	
-//	for (i = 1; i < numOfRows;i++){
-	//	alert(document.forms["seqForm"]["sampleId_"+i]);
-//		 checkArray[i-1] = document.forms["seqForm"]["sampleId"+i];
-//	}
-		
-//	alert(checkArray);
+	var sampleID = $("." + tableid + "sampleId");
 
-//	checkArray.sort(function(a, b){return a.value-b.value;});
-	
-	//checkArray = jQuery.unique(checkArray.value);
-
-//	alert(checkArray.length);
-//	printArray(checkArray);
-	//alert(sampleID);
-	
-//	for (i = 0; i < sampleID.length;i++){
-//		 array[i] = sampleID[i].value;
-//	}
-
-	//hasDuplicate(checkArray);
-//	array.sort();//function(a, b){return a-b;});
-	
-/*	//	printArray(array);
-	alert(array.id);
-	for(j = 1; j < array.length-3; j++){
-		
-//		if(!emptyString(checkArray[j].value)){ // Allow empty strings 
-			
-		var tmp = j+1;
-		
-			if(array[j].value == array[tmp].value){
-	//			alert("dssdads");	
-				setErrorOnBox($('#'+array[j].id));
-				setErrorOnBox($('#'+array[tmp].id));
-				//alert("Sample id's have to be unique!!!");
+	for(var i = 0;i < sampleID.length;i++){
+		if(sampleID[i].value != ""){				// Don't check if empty
+			tmp = map[sampleID[i].value];
+			map[sampleID[i].value] = sampleID[i].id;	//Insert sampleID into map
+			if (tmp != null){				//Check if the sampleID exist before inserting.
+				setErrorOnBox($("#"+tmp));
+				setErrorOnBox($("#"+ sampleID[i].id));
 				boo = false;
-			} else{
-	//			alert("dssdads");	
-				setValidOnBox($('#'+array[j].id));
-				setValidOnBox($('#'+array[tmp].id));
+			} else {
+				setValidOnBox($("#"+ sampleID[i].id));
 			}
-//		} else {
-//			setValidOnBox($('#'+checkArray[j].id));
-//		}
+		}	// make setValidOnBox when empty ??? insert here then
 	}
-*/
 	
 	return boo;
 }
-
-function hasDuplicate(arr) {
-    var i = arr.length, j, val;
-alert(i);
-    while (i--) {
-        val = arr[i];
-        j = i;
-        while (j--) {
-                if (arr[j] === val) {
-			alert(1);
-                        return true;
-                }
-        }
-    }
-    alert(2);
-    return false;
-}
-
 
 /*
  * Validate if the num-variable is a double between concentrationMin to concentrationMax
@@ -612,6 +534,9 @@ function checkNull(num){
 	}
 }
 
+/*
+ * Validate all tables (Tubetag-tables).
+ */
 function validateAllTables(){
 	var boo = true;
 	var numOfTables = $('.tableNum');
@@ -629,25 +554,22 @@ function validateAllTables(){
  */
 function validateTable(tableid){
 	var boo = true;
-	
-//	alert(tableid);
-		// Validate for availible chars!
-		if(!validateTableStrings(tableid)){
-			boo = false;
-		}
-	
+
+	// Validate for availible chars!
+	if(!validateTableStrings(tableid)){
+		boo = false;
+	}	
 	
 	//validate Sample ID is unique
-//	if(!validUniqueSampleId(tableid)){
-//		boo = false;
-//	}
-	
+	if(!validUniqueSampleId(tableid)){
+		boo = false;
+	}
 	
 	//Validate concentration and Average library insert is between.
-	var concenArr = $("table#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm...
+	var concenArr = $("table#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm... ????
 	var AverageLibArr = $("table#"+tableid+" tr td input."+ averageLibClassname);
 	
-	for(i = 0; i < concenArr.length;i++){
+	for(var i = 0; i < concenArr.length;i++){
 	//	alert(concentrationMin + "    " + concentrationMax);
 //		if(!validateIfDoubleNumberBetween(concenArr[i].value,concentrationMin,concentrationMax,"Concentration")){
 		if(!validateConcentrationOnTheFly(concenArr[i])){
@@ -655,12 +577,11 @@ function validateTable(tableid){
 		}
 	}
 	
-	for(i = 0; i < AverageLibArr.length;i++){
+	for(var i = 0; i < AverageLibArr.length;i++){
 		if(!validateAverageLibInsOnTheFly(AverageLibArr[i])){
 			boo = false;
 		}
 	}
-	
 
 /*	
 	if(!validateBricTable){
@@ -670,6 +591,9 @@ function validateTable(tableid){
 	return boo;
 }
 
+/*
+ * Validate the Bric table.
+ */
 function validateBricTable(){
 	var boo = true;
 	
@@ -688,8 +612,6 @@ function validateTableStrings(tableid){
 	var tubeTagColumn = $("table#"+tableid+" tr td input."+tubeTagClassname);
 	
 	var boo = true;
-//	alert(tubeTagColumn.length);
-	//alert(indexSeqColumn);
 	
 	var sampleidBoo = checkForValidChars(tableid,sampleIdColumn,sampleIdClassname);
 	var indexSeqBoo = checkForValidChars(tableid,indexSeqColumn,indexSeqClassname);
@@ -697,7 +619,7 @@ function validateTableStrings(tableid){
 	var projectNameBoo = checkForValidChars(tableid,projectNameColumn,projectNameClassname);
 	var tubeTagBoo = true;
 	
-	for(i = 0; i<tubeTagColumn.length;i++){	// Check if tubetag is null
+	for(var i = 0; i<tubeTagColumn.length;i++){	// Check if tubetag is null
 		if(!checkNull(tubeTagColumn[i])){
 			tubeTagBoo = false;
 		}
@@ -711,14 +633,16 @@ function validateTableStrings(tableid){
 		boo = true;
 	}
 	
-	
 	return boo;
 }
 
+/*
+ * Validate if the date is not null
+ */
 function validateDate(){
 	var boo;
 	var date = $("#datepicker");
-	//alert("value is = " + date[0].value);
+
 	if(emptyString(date[0].value)){
 		setErrorOnBox(date);
 		boo = false;
@@ -765,27 +689,24 @@ function checkForValidCharsOnBox(str){
  * Check if the array "arr" has any unvalid chars
  */
 function checkForValidChars(tableid,arr,validating){
-//	alert(validating);
 	var boo = true;
 	var temp;
 	
-	for(i = 0;i < arr.length;i++){
+	for(var i = 0;i < arr.length;i++){
 		temp = $("table#"+tableid+" tr td input#"+validating+(i+1));
-		//$("#results").text(" - "+arr[i].value);
 		if(!verifyStr(arr[i].value)){
-			
-		//	arr.css("border","15px solid red");
-			setErrorOnBox(temp);
-//			arr[i].focus();
+			setErrorOnBox($("#" + arr[i].id));
 			boo = false;
 		} else{
-			setValidOnBox(temp);
+			setValidOnBox($("#" + arr[i].id));
 		}
 	}
-//	alert(validating + " - " +  boo);
 	return boo;
 }
 
+/*
+ * Set redboxes on all at startup (not used).
+ */
 function setRedBoxes(){
 	setInputBox2RedBorder($('input[name=LP-name]'));
 	setInputBox2RedBorder($('input[name=LP-mail]'));
@@ -807,29 +728,44 @@ function setInputBox2RedBorder(input){
 	input.css("border","3px solid red");
 }
 
+/*
+ * Set input box, border to red.
+ * Show error-box on top.
+ */
 function setErrorOnBox(input){
 	input.css("border","3px solid red");
 	$('#t0').show();
 }
 
+/*
+ * Set Runtype input filed to grey border.
+ * Set not able to insert any data in the box
+ */
 function setRuntypeNoInput(input){
 	input.css("background-color","gray");
-//	input.css("border","white");
 	input.attr('maxlength', "0");
 	input.css("border","");
 }
 
+/*
+ * Reset the runtype input field
+ */
 function setRuntypeReset(input){
 	input.css("background-color","");
 	input.attr('maxlength', "");
-//	input.css("border","1px solid gray");
 	input.css("border","");
 }
 
+/*
+ * Set the box to "valid". remove any border on the input box.
+ */
 function setValidOnBox(input){
 	input.css("border","");
 }
 
+/*
+ * Test function
+ */
 function test123(str){
 	alert(str.id);
 }

@@ -429,7 +429,7 @@
     <table border="0">
       <tr>
         <td><input type="button" onclick="append10Rows()" value=
-        "Add 10 new rows"></td>
+        "Add 10 lines"></td>
 
         <td><input type="button" onclick="addNewTable()" value=
         "Add new Tubetag"></td>
@@ -447,9 +447,9 @@
         // Add wiki links for headlines
         addLinks();
 
-        // Hide error box at startup
-        $('#t0').hide();
-        $('.PI-field').hide();
+        // Hide boxes at startup
+        $('#t0').hide();	// error box
+        $('.PI-field').hide();	// PI-other fields
 
         //Add datepicker
         $('#datepicker').datepicker({
