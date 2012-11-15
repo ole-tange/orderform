@@ -97,13 +97,15 @@ function deleteButton(tableid){
  * Insert proper settings (name, type, onkeyup etc.) for each colum.
  */
 function appendRow(tableid){
-	
-	var seqTable = document.getElementById(tableid);
-	var rowLength = seqTable.rows[0].cells.length;
-	var numOfRows = seqTable.rows.length;
-	var cells = new Array(rowLength);
-	var tbody = document.getElementById(tableid);//.getElementsByTagName("tbody")[0];
-	var row = document.createElement("TR");
+    var seqTable = document.getElementById(tableid);
+    var row0 = seqTable.rows[0];
+    var cells = row0.cells;
+    var len = cells.length;
+    var rowLength = seqTable.rows[0].cells.length;
+    var numOfRows = seqTable.rows.length;
+    var cells = new Array(rowLength);
+    var tbody = document.getElementById(tableid);//.getElementsByTagName("tbody")[0];
+    var row = document.createElement("TR");
 	
 	row.id = tableid + "_" + numOfRows;
 		
@@ -414,6 +416,7 @@ function createTableHead(element, type, name, value, text, link){
 	var input = document.createElement("input");
 	var a = document.createElement("a");
 	a.setAttribute("href",link);
+	a.setAttribute("target","_blank");
 
 	//Set when click on table go to url:
 	//th.setAttribute('onClick', "document.location.href='http://www.google.com';");
