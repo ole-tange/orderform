@@ -124,6 +124,14 @@ var PIList = {
 	"Faculty" : "SCIENCE",
 	"Institute" : "Natural History Museum",
 	"Department" : "Centre for Geogenetics // Oester Voldgade 5-7 // 1350 Kbh K"
+    },
+    "other" : {
+	"BillTo" : "",
+	"Email" : "",
+	"EAN" : "",
+	"Faculty" : "",
+	"Institute" : "",
+	"Department" : ""
     }
 };
 	

@@ -5,6 +5,12 @@
   <!-- Order form Version 1.0 -->
 
   <title>Order form</title>
+<!-- Locally cached: http://code.jquery.com/jquery-1.8.2.js -->
+  <script src="js/jquery-1.8.2.js" type="text/javascript">
+</script>
+<!-- Locally cached: http://js-tables.googlecode.com/svn/trunk/jquery.csv.min.js -->
+  <script src="js/jquery.csv.min.js" type="text/javascript">
+</script>
   <script src="js/var.js" type="text/javascript">
 </script>
   <script src="js/validate.js" type="text/javascript">
@@ -13,13 +19,7 @@
 </script>
   <script src="js/table.js" type="text/javascript">
 </script>
-<!-- Locally cached: http://js-tables.googlecode.com/svn/trunk/jquery.csv.min.js -->
-  <script src="js/jquery.csv.min.js" type="text/javascript">
-</script>
 
-<!-- Locally cached: http://code.jquery.com/jquery-1.8.2.js -->
-  <script src="js/jquery-1.8.2.js" type="text/javascript">
-</script>
 
 <!-- Locally cached: http://code.jquery.com/ui/1.9.0/jquery-ui.js -->
   <script src="js/jquery-ui.js" type="text/javascript">
@@ -214,70 +214,69 @@
           "color:red">*</span></h4>
         </td>
 
-        <td><select id="PI" name="PI">
-          <option onclick="PIInsert(this)" value="person" selected=
+        <td><select id="PI" name="PI" onclick="PIInsert(this)">
+          <option value="person" selected=
           "selected">
             Select person
           </option>
 
-          <option onclick="PIInsert(this)" value="Anders Krogh">
+          <option value="Anders Krogh">
             Anders Krogh
           </option>
 
-          <option onclick="PIInsert(this)" value="Anders Lund">
+          <option value="Anders Lund">
             Anders Lund
           </option>
 
-          <option onclick="PIInsert(this)" value="Albin Sandelin">
+          <option value="Albin Sandelin">
             Albin Sandelin
           </option>
 
-          <option onclick="PIInsert(this)" value="Bo Porse">
+          <option value="Bo Porse">
             Bo Porse
           </option>
 
-          <option onclick="PIInsert(this)" value="Claus Soerensen">
+          <option value="Claus Soerensen">
             Claus Soerensen
           </option>
 
-          <option onclick="PIInsert(this)" value="Eske Willerslev">
+          <option value="Eske Willerslev">
             Eske Willerslev
           </option>
 
-          <option onclick="PIInsert(this)" value="Jeppe Vinther">
+          <option value="Jeppe Vinther">
             Jeppe Vinther
           </option>
 
-          <option onclick="PIInsert(this)" value="Kristian Helin">
+          <option value="Kristian Helin">
             Kristian Helin
           </option>
 
-          <option onclick="PIInsert(this)" value="Kurt Kjaer">
+          <option value="Kurt Kjaer">
             Kurt Kjaer
           </option>
 
-          <option onclick="PIInsert(this)" value="Klaus Hansen">
+          <option value="Klaus Hansen">
             Klaus Hansen
           </option>
 
-          <option onclick="PIInsert(this)" value="Ludovic Orlando">
+          <option value="Ludovic Orlando">
             Ludovic Orlando
           </option>
 
-          <option onclick="PIInsert(this)" value="Morten Froedin">
+          <option value="Morten Froedin">
             Morten Froedin
           </option>
 
-          <option onclick="PIInsert(this)" value=
-          "Soeren Soerensen">
+          <option value="Soeren Soerensen">
             Soeren Soerensen
           </option>
 
-          <option value="Tom Gilbert" onclick="PIInsert(this)">
+          <option value="Tom Gilbert">
             Tom Gilbert
           </option>
 
-          <option value="other" onclick="PIOther()">
+          <option value="other">
             PRincipal Investigator
           </option>
         </select></td>

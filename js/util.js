@@ -66,21 +66,32 @@ function test(){
 }
 
 function PIOther(){
-	$('#PI-name').val("");
-	$('#PI-email').val("");
-	$('.PI-field').show();
+    alert("Error. Contact Ole");
 }
 
-function PIInsert(str){
-    $('#PI-name').val(str.value);
-    $('#PI-email').val(PIList[str.value]["Email"]);
-    $('#BillTo_name').val(PIList[str.value]["BillTo"]);
-    $('#EAN_No_id').val(PIList[str.value]["EAN"]);
-    $('#EAN_Fakultet_id').val(PIList[str.value]["Faculty"]);
-    $('#EAN_Institut_id').val(PIList[str.value]["Institute"]);
-    $('#EAN_Afdeling_id').val(PIList[str.value]["Department"]);
 
-    $('.PI-field').hide();
+function PIInsert(str){
+    if(str.value == "other") {
+	$('#PI-name').val("");
+	$('#PI-email').val("");
+	$('#PI-name').val("");
+	$('#PI-email').val("");
+	$('#BillTo_name').val("");
+	$('#EAN_No_id').val("");
+	$('#EAN_Fakultet_id').val("");
+	$('#EAN_Institut_id').val("");
+	$('#EAN_Afdeling_id').val("");
+	$('.PI-field').show();
+    } else {
+	$('#PI-name').val(str.value);
+	$('#PI-email').val(PIList[str.value]["Email"]);
+	$('#BillTo_name').val(PIList[str.value]["BillTo"]);
+	$('#EAN_No_id').val(PIList[str.value]["EAN"]);
+	$('#EAN_Fakultet_id').val(PIList[str.value]["Faculty"]);
+	$('#EAN_Institut_id').val(PIList[str.value]["Institute"]);
+	$('#EAN_Afdeling_id').val(PIList[str.value]["Department"]);
+	$('.PI-field').hide();
+    }
 }
 
 function addPI2TubeTag(){
