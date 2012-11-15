@@ -55,6 +55,7 @@ function addLinks(){
 
 	for(var i = 0; i < arId.length;i++){
 		$("#"+arId[i]).attr("href", arLinks[i]);
+		$("#"+arId[i]).attr("target", "_blank"); // Open in new window because 'Back' clears the form.
 		$("#"+arId[i]).attr("tabindex", "-1");	// prevend "tabbing" into the link
 	}
 }
