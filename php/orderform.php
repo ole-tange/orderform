@@ -86,37 +86,32 @@
 
 //Openfile	to store the csvfile		- Remember file permission on folder/!
 $fh = fopen($path . $filename,"w") or die("can't open file"); 
-
 $csv_array = array_merge(required_section(), tube_section());
 $csv_content = csv_from_array($csv_array);
-
 //Save file
 fwrite($fh,$csv_content);
+//Close file
+fclose($fh);
 
 //send the email
 if(mail_csv($csv_content)) {
-	?>
-	<h2>Mail sent to <? echo $mailto ?> with ordernote <? echo $orderNoteID; ?>.</h2>
-	Follow the instructions in the email to submit the ordernote to the sequencing center for processing.
-        <p>
-<!--
+  ?>
+  <h2>Mail sent to <? echo $mailto ?> with ordernote <? echo $orderNoteID; ?>.</h2>
+  Follow the instructions in the email to submit the ordernote to the sequencing center for processing.
+  <p>
+  <!--
 	Enable this when ?load works
         Edit the ordernote: <a href="https://dna.ku.dk/orderform/?load=<? echo $orderNoteID; ?>">
 	https://dna.ku.dk/orderform/?load=<? echo $orderNoteID; ?></a>.
--->
-	<?
-	   $a = array_merge(required_section(), tube_section());
-	   $out = csv_from_array($a);
-	   print $out;
-	} else {
-	?>
-	   <h2>Mail failed!<h2>
-	   Sending email failed. Please contact seqcenter@snm.ku.dk to investigate why.
-	   <? 
-        }
+  -->
+  <?
+} else {
+  ?>
+  <h2>Mail failed!<h2>
+  Sending email failed. Please contact seqcenter@snm.ku.dk to investigate why.
+  <? 
+}
 
-//Close file
-	fclose($fs);
 
 function required_section() {
   $date = $_POST["date"];
