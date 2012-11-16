@@ -214,7 +214,7 @@
           "color:red">*</span></h4>
         </td>
 
-        <td><select id="PI" name="PI" onclick="PIInsert(this)">
+        <td><select id="PI" name="PI" onkeyup="PIInsert(this)">
           <option value="person" selected=
           "selected">
             Select person
@@ -464,6 +464,11 @@
         // Add "frame" for EAN and cvr
         $("#EAN-table").css("border","1px solid black");
         $("#CVR-table").css("border","1px solid black");
+	
+	// Fixing mouseevent bug for some browsers
+	$("#PI").mouseout(function(){
+		PIInsert(this);
+	});
         
         $('input[name=LP-name]').focus();
   });
