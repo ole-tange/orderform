@@ -50,8 +50,8 @@ function chomp(raw_text)
  * Add's Link to all "headlines".
  */
 function addLinks(){
-	var arId = Array("BillToLink","LPLink","BPLink","PILink","addInfoLink","runtypeLink","phixLink","seqLibLink","leftoversLink","custSeqLink","date");
-	var arLinks = Array(BilltoLink, LPLink, BPLink, PILink, addInfoLink, runtypeLink, phixLink, seqLibLink, leftoversLink, custSeqLink,dateLink);
+    var arId = Array("BillToLink","LPLink","BPLink","PILink","addInfoLink","runtypeLink","phixLink","seqLibLink","leftoversLink","custSeqLink","date","concentrationUnitLink");
+    var arLinks = Array(BilltoLink, LPLink, BPLink, PILink, addInfoLink, runtypeLink, phixLink, seqLibLink, leftoversLink,custSeqLink,dateLink,concentrationUnitLink);
 
 	for(var i = 0; i < arId.length;i++){
 		$("#"+arId[i]).attr("href", arLinks[i]);

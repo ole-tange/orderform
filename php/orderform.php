@@ -95,6 +95,7 @@ fclose($fh);
 
 //send the email
 if(mail_csv($csv_content)) {
+  $mailto = $LPmail;
   ?>
   <h2>Mail sent to <? echo $mailto ?> with ordernote <? echo $orderNoteID; ?>.</h2>
   Follow the instructions in the email to submit the ordernote to the sequencing center for processing.
@@ -142,6 +143,7 @@ function required_section() {
   $PhiX = $_POST["phiX"];
   $SeqLib = $_POST["seqLib"];
   $Leftovers = $_POST["leftovers"];
+  $ConcentrationUnit = $_POST["concentration_unit"];
   $SeqPrim = $_POST["seqPrim"];
   
   $tubeLay = "tubeTag_";
@@ -196,6 +198,9 @@ function required_section() {
 	     array("Do you want to pick up leftover sample? (if any)", $Leftovers),
 	     array("Is usage of custom sequencing primer required?", $SeqPrim),
 	     array(),
+	     array("Are concentrations in nM or ng/ul?", $ConcentrationUnit),
+	     array(),
+
 	     );
   return $a;
 }

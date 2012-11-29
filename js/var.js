@@ -351,6 +351,7 @@ var PIList = {
 	var seqLibLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_seqLib";
 	var leftoversLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_leftovers";
 	var custSeqLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_custSeq";
+	var concentrationUnitLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_concentration_unit";
 
 	var tubeTagLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_tubetag";
 	var simpleIdLink = "http://wiki.dna.ku.dk/dokuwiki/doku.php?id=orderform_sampleid";
