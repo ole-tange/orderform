@@ -4,9 +4,6 @@
 
 
 /*********variables**************/
-	// wrap text after charter
-	$wrapSize = 70;
-
 	//Get variables from POST
 	$date = $_POST["date"];
 	$BillTo_name = $_POST["BillTo_name"];
@@ -77,12 +74,6 @@
 	
 /*********Variables end**************/
 
-//wrapping Additional info, to fit into one page
-	$strSplitted = str_split($Addinfo,$wrapSize);	// split text after wrapSize char
-	$AddinfoWrapped = "";
-	for($i = 0; $i < sizeof($strSplitted);$i++){
-			$AddinfoWrapped .= $strSplitted[$i] . "\n";	// insert line break after each split
-	}
 
 //Openfile	to store the csvfile		- Remember file permission on folder/!
 $fh = fopen($path . $filename,"w") or die("can't open file"); 
@@ -153,54 +144,59 @@ function required_section() {
   $indexSeq = "indexSeq_";
   $indexName = "indexName_";
   $ProjectName = "ProjectName_";
-  
+
+  $br = array("------------------------","-----------------------","--------------");
+  //wrapping Additional info, to fit into one page
+  // wrap text after character
+  $wrapSize = 70;
+
+  $strSplitted = str_split($Addinfo,$wrapSize);	// split text after wrapSize char
+  $AddinfoWrapped = "";
+  for($i = 0; $i < sizeof($strSplitted);$i++){
+      $AddinfoWrapped .= $strSplitted[$i] . "\n";	// insert line break after each split
+  }
+
   
   $a = array(
 	     array("OrderForm version:", "1.0"),
-	     array(),
 	     array("Date:", $date),
+	     $br,
+	     array("| Lab Person"),
+	     array("| Name:", $LPname),
+	     array("| Mail:", $LPmail),
+	     array("| Phone:", $LPphone),
+	     $br,
+	     array("| Bioinformatician"),
+	     array("| Name:",$BPname),
+	     array("| Mail:",$BPmail),
+	     array("| Phone:", $BPphone),
+	     $br,
+	     array("| PI"),
+	     array("| Name:", $PIname),
+	     array("| Mail:", $PImail),
+	     array("| Phone:", $PI),
+	     $br,
+	     array("| Bill to:", $BillTo_name),
+	     array("|"),
+	     array("| EAN no.:", $EAN_no),
+	     array("| Fakultet:", $EAN_Fakultet),
+	     array("| Institut:", $EAN_Institut),
+	     array("|"),
+	     array("| CVR no:", $CVR_no),
+	     array("| Address:", $CVR_adr),
+	     $br,
+	     array("Additional info:",$AddinfoWrapped),
 	     array(),
-	     array("Lab Person"),
-	     array("Name:", $LPname),
-	     array("Mail:", $LPmail),
-	     array("Phone:", $LPphone),
-	     array(),
-	     array("Bioinformatics Person"),
-	     array("Name:",$BPname),
-	     array("Mail:",$BPmail),
-	     array("Phone:", $BPphone),
-	     array(),
-	     array("PI"),
-	     array("Name:", $PIname),
-	     array("Mail:", $PImail),
-	     array("Phone:", $PI),
-	     array(),
-	     array("Bill to:", $BillTo_name),
-	     array(),
-	     array("EAN no.:", $EAN_no),
-	     array("Fakultet:", $EAN_Fakultet),
-	     array("Institut:", $EAN_Institut),
-	     array(),
-	     array("CVR no:", $CVR_no),
-	     array("Address:", $CVR_adr),
-	     array(),
-	     array("Additional information for sequencing center"),
-	     array("Add info:",$AddinfoWrapped),
-	     array(),
-	     array("Number of Cycles", "Single-Read", "Paired-End"),
+	     array("Cycles", "Single-Read", "Paired-End"),
 	     array("50",               $Runtype0,     $Runtype1),
 	     array("75",               "",            $Runtype2),
 	     array("100",              $Runtype3,     $Runtype4),
-	     array(),
-	     array("Is addition of phiX required? (low complexity sample)",$PhiX),
-	     array("Are the sequencing libraries already built?", $SeqLib),
-	     array(),
-	     array("Do you want to pick up leftover sample? (if any)", $Leftovers),
-	     array("Is usage of custom sequencing primer required?", $SeqPrim),
-	     array(),
-	     array("Are concentrations in nM or ng/ul?", $ConcentrationUnit),
-	     array(),
-
+	     $br,
+	     array("phiX required?",$PhiX),
+	     array("Libraries built?", $SeqLib),
+	     $br,
+	     array("Pick up leftover?", $Leftovers),
+	     array("Custom seq. primer?", $SeqPrim),
 	     );
   return $a;
 }
@@ -224,13 +220,16 @@ function tube_section() {
   $columnlength = $_POST["t1_tableColSize"];
   $bric = ($columnlength == 7);
 
+  $a[] = array(" ==============="," ============"," ==========");
   // create header line
+  $ConcentrationUnit = $_POST["concentration_unit"];
   if($bric) {
     $a[] = array($_POST["t1_" . $tubeLay . "0"], 
 		 $_POST["t1_" . $sampleId . "0"],
-		 $_POST["t1_" . $concentration . "0"],
+		 $_POST["t1_" . $concentration . "0"]."(".$ConcentrationUnit.")",
 		 $_POST["t1_" . $aveLibIns . "0"],
 		 $_POST["t1_" . $indexSeq . "0"],
+		 $_POST["t1_" . $indexName . "0"],
 		 $_POST["t1_" . $ProjectName ."0"],
 		 $_POST["t1_" . $refgenome ."0"],
 		 $_POST["t1_" . $species ."0"],
@@ -241,9 +240,10 @@ function tube_section() {
   } else {
     $a[] = array($_POST["t1_" . $tubeLay . "0"], 
 		 $_POST["t1_" . $sampleId . "0"],
-		 $_POST["t1_" . $concentration . "0"],
+		 $_POST["t1_" . $concentration . "0"]."(".$ConcentrationUnit.")",
 		 $_POST["t1_" . $aveLibIns . "0"],
 		 $_POST["t1_" . $indexSeq . "0"],
+		 $_POST["t1_" . $indexName . "0"],
 		 $_POST["t1_" . $ProjectName ."0"],
 		 );
   }
@@ -318,8 +318,9 @@ function mail_csv($csvFile) {
   $mailbody = "Attached is your sequencing order " . $orderNoteID . ". ".
     "Please review it. If you need to change it you need to make a new order. ".
     // Enable when loading works:
-    //	"You get create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br><br>" .
-    "When you have reviewed the order please reply to this email that you want the order processed.<br><br>" .
+    //	"You get create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br/><br/>" .
+    "When you have reviewed the order please reply to this email that you want the order processed.<br/><br/>" .
+    "Do NOT change the attached csv-file<br/><br/>" .
     "Regards,<br><br>" .
     "The Sequencing Center";
   

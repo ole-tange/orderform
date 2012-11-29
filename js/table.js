@@ -44,9 +44,9 @@ function InsertTableHead(tableId){
 	var headArray = Array();
 	headArray[0] = createTableHead("th","hidden",tableId+ "_"+tubeTagClassname+"_0","Tube tag","Tube tag",tubeTagLink);
 	headArray[1] = createTableHead("th","hidden",tableId+ "_"+sampleIdClassname+"_0","Sample ID","Sample ID",simpleIdLink);
-	headArray[2] = createTableHead("th","hidden",tableId+ "_"+concentrationClassname+"_0","Concentration","Concentration\n(nM or ng/ul)",concentrationLink);
-	headArray[3] = createTableHead("th","hidden",tableId+ "_"+averageLibClassname+"_0","Average library insert","Average library insert",averageLibLink);
-	headArray[4] = createTableHead("th","hidden",tableId+ "_"+indexSeqClassname + "_0","Index Sequence","Index Sequence",indexSeqLink);
+	headArray[2] = createTableHead("th","hidden",tableId+ "_"+concentrationClassname+"_0","Conc","Concentration\n(nM or ng/ul)",concentrationLink);
+	headArray[3] = createTableHead("th","hidden",tableId+ "_"+averageLibClassname+"_0","Insert","Average library insert",averageLibLink);
+	headArray[4] = createTableHead("th","hidden",tableId+ "_"+indexSeqClassname + "_0","Sequence","Index Sequence",indexSeqLink);
 	headArray[5] = createTableHead("th","hidden",tableId+ "_"+indexNameClassname + "_0","Index Name","Index Name",indexNameLink);
 	headArray[6] = createTableHead("th","hidden",tableId+ "_"+projectNameClassname + "_0","Project name","Project name",projectNameLink);
 
