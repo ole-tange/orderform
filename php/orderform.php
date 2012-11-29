@@ -5,6 +5,8 @@
 
 /*********variables**************/
 	//Get variables from POST
+	$load_csv = $_GET["csv"];
+
 	$date = $_POST["date"];
 	$BillTo_name = $_POST["BillTo_name"];
 	$EAN_no = $_POST["EAN_name"];
@@ -62,21 +64,21 @@
 	$orderNoteID = $_POST["orderNoteID"];
 	
 	//Path to save ordresheets
-	//$path = "/home/lh/ordre/";
-	$path = "/var/tmp/";
+	$path = "/home/seq/ordernotes";
 	$filename = $orderNoteID . ".csv";
-//	str_replace(" ","_",$BillTo_name) ."_" . str_replace("/","-",$date) . "_" . rand(1000,10000) . ".csv";
-	
-		// Email specific variable
-
+	// Email specific variable
+		
 	$mailfileType = "csv";
 
-	
 /*********Variables end**************/
 
+if(isset($load_csv)) {
+    load_csv($path,$load_csv.".csv");
+    exit();
+}
 
 //Openfile	to store the csvfile		- Remember file permission on folder/!
-$fh = fopen($path . $filename,"w") or die("can't open file"); 
+$fh = fopen($path ."/". $filename,"w") or die("can't open file ".$path."/".$filename); 
 $csv_array = array_merge(required_section(), tube_section());
 $csv_content = csv_from_array($csv_array);
 //Save file
@@ -90,6 +92,10 @@ if(mail_csv($csv_content)) {
   ?>
   <h2>Mail sent to <? echo $mailto ?> with ordernote <? echo $orderNoteID; ?>.</h2>
   Follow the instructions in the email to submit the ordernote to the sequencing center for processing.
+  <p>
+  View as CSV file: <a href="https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteID; ?>">
+  https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteID; ?></a>.
+
   <p>
   <!--
 	Enable this when ?load works
@@ -339,6 +345,18 @@ function mail_csv($csvFile) {
     "--PHP-mixed-" . $random_hash . "--";
   $mail_sent_status = @mail($mailto, $mailsubject, $message, $headers);
   return $mail_sent_status;
+}
+
+function load_csv($path,$file) {
+    // Replace weird characters in $file with _
+    $file = preg_replace('[^-_A-Za-z/0-9.]',"_",$file);
+    // Outputting csv file
+    header('Content-Type: text/csv');
+    header('Content-Disposition: inline; filename="'.$file."\"; filename*=UTF-8''".$file);
+    $pathfile = $path."/".$file;
+    $fh = fopen($pathfile,"r") or die("can't open file ".$pathfile); 
+    print fread($fh,filesize($pathfile));
+    fclose($fh);
 }
 
 
