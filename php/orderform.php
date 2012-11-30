@@ -93,7 +93,7 @@ if(mail_csv($csv_content)) {
   <h2>Mail sent to <? echo $mailto ?> with ordernote <? echo $orderNoteID; ?>.</h2>
   Follow the instructions in the email to submit the ordernote to the sequencing center for processing.
   <p>
-  View as CSV file: <a href="https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteID; ?>">
+  View as CSV file: <a href="orderform?csv=<? echo $orderNoteID; ?>">
   https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteID; ?></a>.
 
   <p>
@@ -262,6 +262,7 @@ function tube_section() {
 	$concentration_val = $_POST["t" . $j . "_" . $concentration . $i];
 	$avgLibIns_val = $_POST["t" . $j . "_" . $aveLibIns . $i];
 	$indexSeq_val = $_POST["t" . $j . "_" . $indexSeq . $i];
+	$indexName_val = $_POST["t" . $j . "_" . $indexName . $i];
 	$projectName_val = $_POST["t" . $j . "_" . $ProjectName . $i];
 
 	$refgenome_val = $_POST["t" . $j . "_" . $refgenome . $i];
@@ -275,9 +276,11 @@ function tube_section() {
 	  if($bric) {
 	    // - check if BRIC table is set. - a lot of overhead here, change to nicer code - (but working)
 	    $a[] = array($fulltubetag, $sampleid_val, $concentration_val, $avgLibIns_val, $indexSeq_val,
+			 $indexName_val,
 			  $projectName_val, $refgenome_val, $species_val, $CellType_val, $IP_val, $TOE_val);
 	  } else {
-	    $a[] = array($fulltubetag, $sampleid_val, $concentration_val, $avgLibIns_val, $indexSeq_val);
+	    $a[] = array($fulltubetag, $sampleid_val, $concentration_val, $avgLibIns_val, $indexSeq_val,
+			 $indexName_val, $projectName_val);
 	  }
 	} else {
 	  break;
