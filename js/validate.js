@@ -32,10 +32,11 @@ function validateForm(){
 	
 	var boo6 = validateAllTables();
 	var boo7 = validateDate();
+	var boo8 = validateIAccept();
 	
 //	insertTableSize();
 //	alert("boo1 = " + boo1 + " boo2 = " + boo2 + " boo3 = " + boo3 + " boo4 = " + boo4 +" boo5 = " + boo5 +" boo6 = " + boo6 + " boo7 = " + boo7);
-	if (boo1 && boo2 && boo3 && boo4 && boo5 && boo6 && boo7){	
+	if (boo1 && boo2 && boo3 && boo4 && boo5 && boo6 && boo7 && boo8){	
 //	if(validateLabPerson() && validateBioPerson() && validatePI() && validateBillTo() && validateRunType() && validateTable()){
 		//insert hidden fields
 		insertTableSize();	// insert size of all table - used when generating csv file
@@ -44,8 +45,9 @@ function validateForm(){
 			PIInsert($("#PI")[0]);	// insert PI information (name and e-mail adr. in form) - if not inserted in advance.
 		addPI2TubeTag();		// indsæt "de tre tegn" (fra PI) i tubetaggen.
 		return true;
-	}else
+	} else {
 		return false;
+	}
 }
 
 /*
@@ -643,16 +645,37 @@ function validateDate(){
 	var boo;
 	var date = $("#datepicker");
 
-	if(emptyString(date[0].value)){
+	if(emptyString(date[0].value)) {
 		setErrorOnBox(date);
 		boo = false;
-	} else{
+	} else {
 		setValidOnBox(date);
 		boo = true;
 	}
 	
 	return boo;
 }
+
+
+/*
+ * Validate I accept is checked
+ */
+function validateIAccept(){
+    var boo;
+    var iaccept = $("#iaccept");
+
+    if(iaccept[0].checked) {
+        setValidOnBox(iaccept.closest('td'));
+	boo = true;
+    } else{
+	setErrorOnBox(iaccept.closest('td'));
+	boo = false;
+    }
+    
+    return boo;
+}
+
+
 
 /*
  * validate "str" for any unvalid char according to the regexp.
