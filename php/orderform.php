@@ -310,6 +310,7 @@ function mail_csv($csvFile) {
   $mailfrom = "seqcenter@snm.ku.dk";
   $mailsubject = 'Your sequencing order ' . $orderNoteID;
   $orderurl = "https://dna.ku.dk/orderform/?load=". $orderNoteID;
+  $csvurl = "https://dna.ku.dk/orderform/php/orderform?csv=". $orderNoteID;
   //Send mail
   $ReplyTo = "The Sequencing Center <seqcenter@snm.ku.dk>, $BPmail, ".str_replace(" ","",$PImail);
   //create a boundary string. It must be unique
@@ -324,12 +325,13 @@ function mail_csv($csvFile) {
   $mailfileType = "csv";
   $filename = $orderNoteID . ".csv";
 
-  $mailbody = "Attached is your sequencing order " . $orderNoteID . ". ".
+  $mailbody = "Find your sequencing order " . $orderNoteID . " at: <a href=$csvurl>$csvurl</a>.<br/><br/>" .
     "Please review it. If you need to change it you need to make a new order. ".
     // Enable when loading works:
     //	"You get create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br/><br/>" .
     "When you have reviewed the order please reply to this email that you want the order processed.<br/><br/>" .
-    "Do NOT change the attached csv-file<br/><br/>" .
+    // Disabled: Send a link to the csv-file instead
+    //    "Do NOT change the attached csv-file<br/><br/>" .
     "Regards,<br><br>" .
     "The Sequencing Center";
   
@@ -341,10 +343,11 @@ function mail_csv($csvFile) {
     "Content-Transfer-Encoding: 7bit" . "\r\n\r\n" .
     $mailbody .  "\r\n\r\n" .
     "--PHP-alt-" . $random_hash . "--" .  "\r\n\r\n" .
+    // Send a link to the csv-file instead
     "--PHP-mixed-" . $random_hash .  "\r\n" .
-    "Content-Type: application/". $mailfileType ."; name=\"" . $filename  ."\"" . "\r\n" .
-    "Content-Transfer-Encoding: base64" . "\r\n" .
-    "Content-Disposition: attachment \r\n\r\n" . $attachment . 
+    //    "Content-Type: application/". $mailfileType ."; name=\"" . $filename  ."\"" . "\r\n" .
+    //    "Content-Transfer-Encoding: base64" . "\r\n" .
+    //    "Content-Disposition: attachment \r\n\r\n" . $attachment . 
     "--PHP-mixed-" . $random_hash . "--";
   $mail_sent_status = @mail($mailto, $mailsubject, $message, $headers);
   return $mail_sent_status;
