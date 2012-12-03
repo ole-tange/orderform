@@ -59,7 +59,7 @@
 	$numTubetags = $_POST["tableTotalSize"];
 	$rowlength = $_POST["t1_tableRowSize"];
 	$columnlength = $_POST["t1_tableColSize"];
-        $bric = ($columnlength == 7);
+        $bric = ($columnlength <> 7);
 	
 	$orderNoteID = $_POST["orderNoteID"];
 	
@@ -224,7 +224,7 @@ function tube_section() {
   $numTubetags = $_POST["tableTotalSize"];
   $rowlength = $_POST["t1_tableRowSize"];
   $columnlength = $_POST["t1_tableColSize"];
-  $bric = ($columnlength == 7);
+  $bric = ($columnlength <> 7);
 
   $a[] = array(" ==============="," ============"," ==========");
   // create header line
@@ -272,7 +272,7 @@ function tube_section() {
 	$TOE_val = $_POST["t" . $j . "_" . $TOE . $i];
 
 	if($sampleid_val != "") {
-	  // check for empty rows. by checking for null in sampleID
+	  // check for empty rows. by checking for empty sampleID
 	  if($bric) {
 	    // - check if BRIC table is set. - a lot of overhead here, change to nicer code - (but working)
 	    $a[] = array($fulltubetag, $sampleid_val, $concentration_val, $avgLibIns_val, $indexSeq_val,
