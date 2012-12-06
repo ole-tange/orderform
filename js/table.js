@@ -258,14 +258,27 @@ function bricFunction(obj){
  * (some of the "validation" is add'ed when in the add row function.)
  */
 function addValidation2Row(tableid,rowLength){
-	//add autocomplete for all in column index Sequencing.
+	//add autocomplete forcolumn index Sequencing.
 	var indexSeqCol = $("table#"+tableid+" tr td input.indexSeq");
-
 	indexSeqCol.autocomplete({
 		source: $indexSequenceList,
 		position: { 	my: "center top",
 					at: "center bottom",
 					collision: "none"
+				},
+		focus: 	  function (e,ui) {	updateIndexName(this,ui);
+				}
+		});
+		
+	//add autocomplete forcolumn index Name
+	var indexNameCol = $("table#"+tableid+" tr td input.indexName");
+	indexNameCol.autocomplete({
+		source: $indexNameList,
+		position: { 	my: "center top",
+					at: "center bottom",
+					collision: "none"
+				},
+		focus: 	function (e,ui) {	updateIndexSeq(this,ui);
 				}
 		});
 		

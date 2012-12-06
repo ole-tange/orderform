@@ -165,3 +165,21 @@ function generateOrderNoteID(){
 	
 	//return orderNoteID;
 }
+
+/*
+ * This function is called everytime index seq. is fulfill
+ * It automatic get the indexName value from the $indexSequenceList.
+ */
+function updateIndexName(a,ui){
+	$('#'+(a.id).replace(/indexSeq/g,indexNameClassname)).val(ui.item.id); // set index_name
+	$('#'+a.id).val(ui.item.value);						// set Index_sequence	
+}
+
+/*
+ * This function is called everytime index Name. is fulfill
+ * It automatic get the indexName value from the $indexNameList.
+ */
+function updateIndexSeq(a,ui){
+	$('#'+(a.id).replace(/indexName/g,indexSeqClassname)).val(ui.item.id); // set index_name
+	$('#'+a.id).val(ui.item.value);						// set Index_sequence	
+}
