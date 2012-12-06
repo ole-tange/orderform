@@ -22,7 +22,7 @@ function projectVal(){
  * This function is called when the submit button is pressed.
  */
 function validateForm(){
-	
+
 	// Next tree lines only used for debugging purpose
 	var boo1 = validateLabPerson();
 	var boo2 = validateBioPerson();
@@ -33,21 +33,37 @@ function validateForm(){
 	var boo6 = validateAllTables();
 	var boo7 = validateDate();
 	var boo8 = validateIAccept();
+	var boo9 = validateConcentrationUnit();
 	
 //	insertTableSize();
 //	alert("boo1 = " + boo1 + " boo2 = " + boo2 + " boo3 = " + boo3 + " boo4 = " + boo4 +" boo5 = " + boo5 +" boo6 = " + boo6 + " boo7 = " + boo7);
-	if (boo1 && boo2 && boo3 && boo4 && boo5 && boo6 && boo7 && boo8){	
+	if (boo1 && boo2 && boo3 && boo4 && boo5 && boo6 && boo7 && boo8 && boo9){	
 //	if(validateLabPerson() && validateBioPerson() && validatePI() && validateBillTo() && validateRunType() && validateTable()){
 		//insert hidden fields
 		insertTableSize();	// insert size of all table - used when generating csv file
 		generateOrderNoteID();	// insert orderNoteID
 		if($("#PI")[0].value != "other")
 			PIInsert($("#PI")[0]);	// insert PI information (name and e-mail adr. in form) - if not inserted in advance.
-		addPI2TubeTag();		// indsæt "de tre tegn" (fra PI) i tubetaggen.
+			addPI2TubeTag();		// indsæt "de tre tegn" (fra PI) i tubetaggen.
 		return true;
 	} else {
 		return false;
 	}
+}
+
+function validateConcentrationUnit(){
+	var boo = true;
+	var nMisChecked = $('#unit-nM').attr('checked')?true:false;
+	var ngisChecked = $('#unit-ng').attr('checked')?true:false;
+	
+	if(!nMisChecked && !ngisChecked){
+		setErrorOnBox($('#unit-nM').closest('td'));
+		boo = false;
+	}else{
+		setValidOnBox($('#unit-nM').closest('td'));
+	}
+	
+	return boo;
 }
 
 /*
