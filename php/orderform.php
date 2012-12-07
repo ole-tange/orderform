@@ -113,6 +113,7 @@ if(mail_csv($csv_content)) {
 
 function required_section() {
   $date = $_POST["date"];
+  $orderNoteID = $_POST["orderNoteID"];
   $BillTo_name = $_POST["BillTo_name"];
   $EAN_no = $_POST["EAN_name"];
   $EAN_Fakultet = $_POST["EAN_Fakultet"];
@@ -153,34 +154,30 @@ function required_section() {
 
   $br = array("------------------------","-----------------------","--------------");
   //wrapping Additional info, to fit into one page
-  // wrap text after character
-  $wrapSize = 70;
-
-  $strSplitted = str_split($Addinfo,$wrapSize);	// split text after wrapSize char
-  $AddinfoWrapped = "";
-  for($i = 0; $i < sizeof($strSplitted);$i++){
-      $AddinfoWrapped .= $strSplitted[$i] . "\n";	// insert line break after each split
-  }
+  $AddinfoWrapped = wordwrap($Addinfo, 70);	// split text after 70 chars
 
   
   $a = array(
+ 	     array(""," ============"," =========="),
+	     array("ORDER",$orderNoteID),
+ 	     array(""," ============"," =========="),
 	     array("OrderForm version:", "1.0"),
 	     array("Date:", $date),
 	     $br,
 	     array("| Lab Person"),
-	     array("| Name:", $LPname),
-	     array("| Mail:", $LPmail),
-	     array("| Phone:", $LPphone),
+	     array("| Lab Name:", $LPname),
+	     array("| Lab Mail:", $LPmail),
+	     array("| Lab Phone:", $LPphone),
 	     $br,
 	     array("| Bioinformatician"),
-	     array("| Name:",$BPname),
-	     array("| Mail:",$BPmail),
-	     array("| Phone:", $BPphone),
+	     array("| Bio Name:",$BPname),
+	     array("| Bio Mail:",$BPmail),
+	     array("| Bio Phone:", $BPphone),
 	     $br,
 	     array("| PI"),
-	     array("| Name:", $PIname),
-	     array("| Mail:", $PImail),
-	     array("| Phone:", $PI),
+	     array("| PI Name:", $PIname),
+	     array("| PI Mail:", $PImail),
+	     array("| PI Phone:", $PI),
 	     $br,
 	     array("| Bill to:", $BillTo_name),
 	     array("|"),
@@ -191,12 +188,13 @@ function required_section() {
 	     array("| CVR no:", $CVR_no),
 	     array("| Address:", $CVR_adr),
 	     $br,
-	     array("Additional info:",$AddinfoWrapped),
+	     array("Additional info:"),
+	     array($AddinfoWrapped),
 	     array(),
 	     array("Cycles", "Single-Read", "Paired-End"),
-	     array("50",               $Runtype0,     $Runtype1),
-	     array("75",               "",            $Runtype2),
-	     array("100",              $Runtype3,     $Runtype4),
+	     array("50",  "_".$Runtype0."_", "_".$Runtype1."_"),
+	     array("75",  "",                "_".$Runtype2."_"),
+	     array("100", "_".$Runtype3."_", "_".$Runtype4."_"),
 	     $br,
 	     array("phiX required?",$PhiX),
 	     array("Libraries built?", $SeqLib),
@@ -286,6 +284,7 @@ function tube_section() {
 	  break;
 	}
       }
+      $a[] = array("");
   }
   return $a;
 }
