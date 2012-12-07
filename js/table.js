@@ -32,6 +32,7 @@ function CreateTableHeader(tableId){
 	var seqTable = document.getElementById(tableId);
 	
 	seqTable.appendChild(InsertTableHead(tableId));	
+	
 }
 
 /*
@@ -104,7 +105,6 @@ function appendRow(tableid){
     var rowLength = seqTable.rows[0].cells.length;
     var numOfRows = seqTable.rows.length;
     var cells = new Array(rowLength);
-    var tbody = document.getElementById(tableid);//.getElementsByTagName("tbody")[0];
     var row = document.createElement("TR");
 	
 	row.id = tableid + "_" + numOfRows;
@@ -205,7 +205,7 @@ function appendRow(tableid){
 	}
 	
 	//add row to table body
-	tbody.appendChild(row);
+	seqTable.appendChild(row);
 	
 	//add validation, autocomplete .... to the table.
 	addValidation2Row(tableid,rowLength);
@@ -259,7 +259,7 @@ function bricFunction(obj){
  */
 function addValidation2Row(tableid,rowLength){
 	//add autocomplete forcolumn index Sequencing.
-	var indexSeqCol = $("table#"+tableid+" tr td input.indexSeq");
+	var indexSeqCol = $("tbody#"+tableid+" tr td input.indexSeq");
 	indexSeqCol.autocomplete({
 		source: $indexSequenceList,
 		position: { 	my: "center top",
@@ -271,7 +271,7 @@ function addValidation2Row(tableid,rowLength){
 		});
 		
 	//add autocomplete forcolumn index Name
-	var indexNameCol = $("table#"+tableid+" tr td input.indexName");
+	var indexNameCol = $("tbody#"+tableid+" tr td input.indexName");
 	indexNameCol.autocomplete({
 		source: $indexNameList,
 		position: { 	my: "center top",
@@ -294,31 +294,31 @@ function addValidation2Row(tableid,rowLength){
  */
 function insertBricTableValidation(tableid){
 	//insert auto complete for reference genome
-	var refgenome = $("table#"+tableid+" tr td input."+refGenomeClassname);
+	var refgenome = $("tbody#"+tableid+" tr td input."+refGenomeClassname);
 	refgenome.autocomplete({
 		source: $refgenomeList
 	});
 	
 	//insert auto complete for Species
-	var speciesClass = $("table#"+tableid+" tr td input."+spicesClassname);
+	var speciesClass = $("tbody#"+tableid+" tr td input."+spicesClassname);
 	speciesClass.autocomplete({
 		source: $speciesList
 	});
 	
 	//insert auto complete for CellType
-	var CellType = $("table#"+tableid+" tr td input."+cellTypeClassname);
+	var CellType = $("tbody#"+tableid+" tr td input."+cellTypeClassname);
 	CellType.autocomplete({
 		source: $cellTypeList
 	});
 	
 	//insert auto complete for IP
-	var IP = $("table#"+tableid+" tr td input."+ipClassname);
+	var IP = $("tbody#"+tableid+" tr td input."+ipClassname);
 	IP.autocomplete({
 		source: $IPList
 	});
 	
 	//insert auto complete for Type of Experiment
-	var TOEClass = $("table#"+tableid+" tr td input." + TOEClassname);
+	var TOEClass = $("tbody#"+tableid+" tr td input." + TOEClassname);
 	TOEClass.autocomplete({
 		source: $TOEList
 	});
@@ -430,15 +430,14 @@ function createTableHead(element, type, name, value, text, link){
 	var a = document.createElement("a");
 	a.setAttribute("href",link);
 	a.setAttribute("target","_blank");
-
 	//Set when click on table go to url:
 	//th.setAttribute('onClick', "document.location.href='http://www.google.com';");
 	
 	input.name = name;
 //	input.setAttribute('class', clas);
 	
+	input.type = type;
 	th.appendChild(input);
-		input.type = type;
 
 	if(type == "hidden"){
 		var cellText = document.createTextNode(text);
@@ -456,25 +455,29 @@ function createTableHead(element, type, name, value, text, link){
 function addNewTable(){
 	var seqTable = document.getElementById("t");
 	var table = document.createElement("TABLE");
+	var tbody = document.createElement("TBODY");
 	var numOfTables = $('.tableNum').length;
 	var id = "t" + ($('.tableNum').length + 1);
 
-	table.id = id;
+	tbody.id = id;
 	table.border="1";
-	table.setAttribute('class', "tableNum");
+	tbody.setAttribute('class', "tableNum");
 	
 	if(numOfTables < 1){			// first table(tubetag) add'ed
+		table.appendChild(tbody);
 		seqTable.appendChild(table);
 		CreateTableHeader(id);
 		append10Rows(id);
 	} else {
 		var seqTable1 = document.getElementById("t1");
 		if (seqTable1.rows[0].cells.length == 7){	// check if the tubetag table is expanded with a bric table.
+			table.appendChild(tbody);
 			seqTable.appendChild(table);
 			CreateTableHeader(id);
 			append10Rows(id);
 			appendButton("t"+numOfTables);
 		} else {
+			table.appendChild(tbody);
 			seqTable.appendChild(table);
 			CreateTableHeader(id);
 			expandTable(id);

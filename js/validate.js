@@ -7,7 +7,7 @@
  * Test function
  */
 function projectVal(){
-	var projectNameColumn = $("table#t1 tr td input.ProjectName");
+	var projectNameColumn = $("tbody#t1 tr td input.ProjectName");
 	projectNameColumn.css("border","13px solid red");
 
 	for(var i = 0; i < projectNameColumn.length;i++){
@@ -584,8 +584,8 @@ function validateTable(tableid){
 	}
 	
 	//Validate concentration and Average library insert is between.
-	var concenArr = $("table#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm... ????
-	var AverageLibArr = $("table#"+tableid+" tr td input."+ averageLibClassname);
+	var concenArr = $("tbody#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm... ????
+	var AverageLibArr = $("tbody#"+tableid+" tr td input."+ averageLibClassname);
 	
 	for(var i = 0; i < concenArr.length;i++){
 	//	alert(concentrationMin + "    " + concentrationMax);
@@ -623,11 +623,11 @@ function validateBricTable(){
  */
 function validateTableStrings(tableid){
 	
-	var projectNameColumn = $("table#"+tableid+" tr td input.ProjectName");
-	var indexSeqColumn = $("table#"+tableid+" tr td input.indexSeq");
-	var indexNameColumn = $("table#"+tableid+" tr td input.indexName");
-	var sampleIdColumn = $("table#"+tableid+" tr td input.sampleId");
-	var tubeTagColumn = $("table#"+tableid+" tr td input."+tubeTagClassname);
+	var projectNameColumn = $("tbody#"+tableid+" tr td input.ProjectName");
+	var indexSeqColumn = $("tbody#"+tableid+" tr td input.indexSeq");
+	var indexNameColumn = $("tbody#"+tableid+" tr td input.indexName");
+	var sampleIdColumn = $("tbody#"+tableid+" tr td input.sampleId");
+	var tubeTagColumn = $("tbody#"+tableid+" tr td input."+tubeTagClassname);
 	
 	var boo = true;
 	
@@ -732,7 +732,7 @@ function checkForValidChars(tableid,arr,validating){
 	var temp;
 	
 	for(var i = 0;i < arr.length;i++){
-		temp = $("table#"+tableid+" tr td input#"+validating+(i+1));
+		temp = $("tbody#"+tableid+" tr td input#"+validating+(i+1));
 		if(!verifyStr(arr[i].value)){
 			setErrorOnBox($("#" + arr[i].id));
 			boo = false;
@@ -799,7 +799,7 @@ function setRuntypeReset(input){
  * Set the box to "valid". remove any border on the input box.
  */
 function setValidOnBox(input){
-	input.css("border","");
+	input.css("border","default");
 }
 
 /*
