@@ -163,7 +163,7 @@ function appendRow(tableid){
 		}else if(i == 5){
 			input.name = tableid + "_" + indexNameClassname+"_"+numOfRows;
 			input.id = tableid + indexNameClassname+numOfRows;
-			input.setAttribute('class', indexNameClassname);
+			input.setAttribute('class', tableid + indexNameClassname);
 	//		input.onblur= function () { checkNull(this);};
 			input.onkeyup= function () {verifyChar(this)};
 		}else if(i == 6){
@@ -271,7 +271,7 @@ function addValidation2Row(tableid,rowLength){
 		});
 		
 	//add autocomplete forcolumn index Name
-	var indexNameCol = $("tbody#"+tableid+" tr td input.indexName");
+	var indexNameCol = $("tbody#"+tableid+" tr td input."+tableid+"indexName");
 	indexNameCol.autocomplete({
 		source: $indexNameList,
 		position: { 	my: "center top",

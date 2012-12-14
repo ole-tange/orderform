@@ -1,6 +1,6 @@
 <?php
-//	print(" das " + $_POST[1] + "\n");
-//	var_dump($_POST);
+	print(" das " + $_POST[1] + "\n");
+	var_dump($_POST);
 
 
 /*********variables**************/
@@ -256,7 +256,9 @@ function tube_section() {
       for($i = 1; $i < $rowlength;$i++){
 	// fulltubetag = PRI_XYZV
 	$fulltubetag = $_POST["PIShort"] . "_" . $_POST["t" . $j . "_" . $tubeLay . $i];
+	// sampleid_val = PRI_XYZV_Sampleid
 	$sampleid_val = $_POST["t" . $j . "_" . $sampleId . $i];
+	$fullsampleid = $_POST["PIShort"] . "_" . $_POST["t" . $j . "_" . $tubeLay . $i] . "_" . $sampleid_val;
 	$concentration_val = $_POST["t" . $j . "_" . $concentration . $i];
 	$avgLibIns_val = $_POST["t" . $j . "_" . $aveLibIns . $i];
 	$indexSeq_val = $_POST["t" . $j . "_" . $indexSeq . $i];
@@ -273,11 +275,11 @@ function tube_section() {
 	  // check for empty rows. by checking for empty sampleID
 	  if($bric) {
 	    // - check if BRIC table is set. - a lot of overhead here, change to nicer code - (but working)
-	    $a[] = array($fulltubetag, $sampleid_val, $concentration_val, $avgLibIns_val, $indexSeq_val,
+	    $a[] = array($fulltubetag, $fullsampleid, $concentration_val, $avgLibIns_val, $indexSeq_val,
 			 $indexName_val,
 			  $projectName_val, $refgenome_val, $species_val, $CellType_val, $IP_val, $TOE_val);
 	  } else {
-	    $a[] = array($fulltubetag, $sampleid_val, $concentration_val, $avgLibIns_val, $indexSeq_val,
+	    $a[] = array($fulltubetag, $fullsampleid, $concentration_val, $avgLibIns_val, $indexSeq_val,
 			 $indexName_val, $projectName_val);
 	  }
 	} else {

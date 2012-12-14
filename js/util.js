@@ -162,7 +162,6 @@ function generateOrderNoteID(){
 	orderNoteIDInput.name = "orderNoteID";
 	orderNoteIDInput.value = date.replace(/-/g,"") + "_" + tubetag + "_" + LabPersonName;
 	seqTable.appendChild(orderNoteIDInput);
-	
 	//return orderNoteID;
 }
 

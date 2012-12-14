@@ -500,9 +500,32 @@ function validUniqueSampleId(tableid){
 			}
 		}	// make setValidOnBox when empty ??? insert here then
 	}
-	
 	return boo;
 }
+
+function validUniqueIndexName(tableid){
+        var boo = true;
+        var map = new Object();
+        var tmp = "";
+        var indexName = $("." + tableid + "indexName");
+alert(indexName.length);
+        for(var i = 0;i < indexName.length;i++){
+                if(indexName[i].value != ""){                            // Don't check if empty
+                        tmp = map[indexName[i].value];
+                        map[indexName[i].value] = indexName[i].id;        //Insert sampleID into map
+                        if (tmp != null){                               //Check if the sampleID exist before inserting.
+                                setErrorOnBox($("#"+tmp));
+                                setErrorOnBox($("#"+ indexName[i].id));
+                                boo = false;
+                        } else {
+                                setValidOnBox($("#"+ indexName[i].id));
+                        }
+                }       // make setValidOnBox when empty ??? insert here then
+        }
+	alert(boo);
+        return boo;
+}
+
 
 /*
  * Validate if the num-variable is a double between concentrationMin to concentrationMax
@@ -582,6 +605,12 @@ function validateTable(tableid){
 	if(!validUniqueSampleId(tableid)){
 		boo = false;
 	}
+
+        //validate IndexName is unique
+        if(!validUniqueIndexName(tableid)){
+                boo = false;
+        }
+
 	
 	//Validate concentration and Average library insert is between.
 	var concenArr = $("tbody#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm... ????
@@ -799,7 +828,7 @@ function setRuntypeReset(input){
  * Set the box to "valid". remove any border on the input box.
  */
 function setValidOnBox(input){
-	input.css("border","default");
+	input.css("border","");
 }
 
 /*
