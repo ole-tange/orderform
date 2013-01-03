@@ -508,7 +508,6 @@ function validUniqueIndexName(tableid){
         var map = new Object();
         var tmp = "";
         var indexName = $("." + tableid + "indexName");
-alert(indexName.length);
         for(var i = 0;i < indexName.length;i++){
                 if(indexName[i].value != ""){                            // Don't check if empty
                         tmp = map[indexName[i].value];
@@ -522,7 +521,6 @@ alert(indexName.length);
                         }
                 }       // make setValidOnBox when empty ??? insert here then
         }
-	alert(boo);
         return boo;
 }
 

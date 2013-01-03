@@ -1,6 +1,6 @@
 <?php
-	print(" das " + $_POST[1] + "\n");
-	var_dump($_POST);
+//	print(" das " + $_POST[1] + "\n");
+//	var_dump($_POST);
 
 
 /*********variables**************/

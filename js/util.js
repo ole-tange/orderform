@@ -65,8 +65,6 @@ function addLinks(){
  */
 function test(){
 	alert(testvar);
-	//var a = $(".EAN");
-//a.css("border","13px solid red");
 }
 
 /*
