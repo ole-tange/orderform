@@ -145,24 +145,36 @@ function insertTableSize(){
 	
 }
 
+
 /*
- *  Generate OrderNoteID in format: date_(first)tubetag_LabPersonName
+ *  Generate OrderNoteID in format: date_tubetag
  */
 function generateOrderNoteID(){
-	
-        var date = $("#datepicker")[0].value;
-//	var tubetag = $("#t1tubeTag1")[0].value;
-        var tubetag = getTubeTag();
-	var LabPersonName = $('input[name=LP-name]')[0].value;
-//	var orderNoteID = date.replace("-","") + "_" + tubetag + "_" + LabPersonName;
-	
-	var seqTable = document.getElementById("t");
-	var orderNoteIDInput = document.createElement("input");
-	orderNoteIDInput.type = "hidden";
-	orderNoteIDInput.name = "orderNoteID";
-	orderNoteIDInput.value = date.replace(/-/g,"") + "_" + tubetag + "_" + LabPersonName;
-	seqTable.appendChild(orderNoteIDInput);
-	//return orderNoteID;
+    var date = $("#datepicker")[0].value;
+    var orderNoteID = date.replace(/-/g,"") + "_" + getTubeTag();
+    
+    var seqTable = document.getElementById("t");
+    var orderNoteIDInput = document.createElement("input");
+    orderNoteIDInput.type = "hidden";
+    orderNoteIDInput.name = "orderNoteID";
+    orderNoteIDInput.id = "orderNoteID";
+    orderNoteIDInput.value = orderNoteID;
+    seqTable.appendChild(orderNoteIDInput);
+    generateOrderNoteName(orderNoteID);
+}
+
+/*
+ *  Generate OrderNoteName in format: date_ID_LabPersonName
+ */
+function generateOrderNoteName(orderNoteID) {
+    var LabPersonName = $('input[name=LP-name]')[0].value;
+    
+    var seqTable = document.getElementById("t");
+    var orderNoteNameInput = document.createElement("input");
+    orderNoteNameInput.type = "hidden";
+    orderNoteNameInput.name = "orderNoteName";
+    orderNoteNameInput.value = orderNoteID + "_" + LabPersonName;
+    seqTable.appendChild(orderNoteNameInput);
 }
 
 /*

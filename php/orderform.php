@@ -62,10 +62,11 @@
         $bric = ($columnlength <> 7);
 	
 	$orderNoteID = $_POST["orderNoteID"];
+	$orderNoteName = $_POST["orderNoteName"];
 	
 	//Path to save ordresheets
 	$path = "/home/seq/ordernotes";
-	$filename = $orderNoteID . ".csv";
+	$filename = $orderNoteName . ".csv";
 	// Email specific variable
 		
 	$mailfileType = "csv";
@@ -90,17 +91,17 @@ fclose($fh);
 if(mail_csv($csv_content)) {
   $mailto = $LPmail;
   ?>
-  <h2>Mail sent to <? echo $mailto ?> with ordernote <? echo $orderNoteID; ?>.</h2>
+  <h2>Mail sent to <? echo $mailto ?> with ordernote <? echo $orderNoteName; ?>.</h2>
   Follow the instructions in the email to submit the ordernote to the sequencing center for processing.
   <p>
-  View as CSV file: <a href="orderform?csv=<? echo $orderNoteID; ?>">
-  https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteID; ?></a>.
+  View as CSV file: <a href="orderform?csv=<? echo $orderNoteName; ?>">
+  https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteName; ?></a>.
 
   <p>
   <!--
 	Enable this when ?load works
-        Edit the ordernote: <a href="https://dna.ku.dk/orderform/?load=<? echo $orderNoteID; ?>">
-	https://dna.ku.dk/orderform/?load=<? echo $orderNoteID; ?></a>.
+        Edit the ordernote: <a href="https://dna.ku.dk/orderform/?load=<? echo $orderNoteName; ?>">
+	https://dna.ku.dk/orderform/?load=<? echo $orderNoteName; ?></a>.
   -->
   <?
 } else {
@@ -114,6 +115,7 @@ if(mail_csv($csv_content)) {
 function required_section() {
   $date = $_POST["date"];
   $orderNoteID = $_POST["orderNoteID"];
+  $orderNoteName = $_POST["orderNoteName"];
   $BillTo_name = $_POST["BillTo_name"];
   $EAN_no = $_POST["EAN_name"];
   $EAN_Fakultet = $_POST["EAN_Fakultet"];
@@ -159,7 +161,7 @@ function required_section() {
   
   $a = array(
  	     array(""," ============"," =========="),
-	     array("ORDER",$orderNoteID),
+	     array("ORDER",$orderNoteName),
  	     array(""," ============"," =========="),
 	     array("OrderForm version:", "1.0"),
 	     array("Date:", $date),
@@ -306,12 +308,13 @@ function mail_csv($csvFile) {
   $PImail = $_POST["PI-email"];
   $LPmail = $_POST["LP-mail"];
   $orderNoteID = $_POST["orderNoteID"];
+  $orderNoteName = $_POST["orderNoteName"];
 
   $mailto = $LPmail;
   $mailfrom = "seqcenter@snm.ku.dk";
-  $mailsubject = 'Your sequencing order ' . $orderNoteID;
-  $orderurl = "https://dna.ku.dk/orderform/?load=". $orderNoteID;
-  $csvurl = "https://dna.ku.dk/orderform/php/orderform?csv=". $orderNoteID;
+  $mailsubject = 'Your sequencing order ' . $orderNoteName;
+  $orderurl = "https://dna.ku.dk/orderform/?load=". $orderNoteName;
+  $csvurl = "https://dna.ku.dk/orderform/php/orderform?csv=". $orderNoteName;
   //Send mail
   $ReplyTo = "The Sequencing Center <seqcenter@snm.ku.dk>, $BPmail, ".str_replace(" ","",$PImail);
   //create a boundary string. It must be unique
@@ -324,15 +327,18 @@ function mail_csv($csvFile) {
   //read the file string, encode it with MIME base64, and split it into smaller chunks
   $attachment = chunk_split(base64_encode($csvFile));
   $mailfileType = "csv";
-  $filename = $orderNoteID . ".csv";
+  $filename = $orderNoteName . ".csv";
 
-  $mailbody = "Find your sequencing order " . $orderNoteID . " at: <a href=$csvurl>$csvurl</a>.<br/><br/>" .
+  $mailbody = "Find your sequencing order " . $orderNoteName . " at: <a href=$csvurl>$csvurl</a>.<br/><br/>" .
     "Please review it. If you need to change it you need to make a new order. ".
     // Enable when loading works:
     //	"You get create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br/><br/>" .
     "When you have reviewed the order please reply to this email that you want the order processed.<br/><br/>" .
     // Disabled: Send a link to the csv-file instead
     //    "Do NOT change the attached csv-file<br/><br/>" .
+    "When referring to this order in the future, please refer to " .
+    $orderNoteID . " or " . $orderNoteName . ".<br/><br/>" .
+
     "Regards,<br><br>" .
     "The Sequencing Center";
   
