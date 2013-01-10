@@ -54,7 +54,7 @@
     <table border="0" cellspacing="0">
       <tr>
         <td>
-          <h4><a id="date">Date:</a></h4>
+          <h4><a id="date">Sample hand-in date:</a></h4>
         </td>
 
         <td><input type="text" name="date" id="datepicker"></td>
@@ -210,11 +210,11 @@
 
       <tr>
         <td>
-          <h4><a id="PILink">PI</a><span style=
+          <h4><a id="PILink">Principal Investigator</a><span style=
           "color:red">*</span></h4>
         </td>
 
-        <td><select id="PI" name="PI" onkeyup="PIInsert(this)">
+        <td><select id="PI" name="PI" onchange="PIInsert(this)" onkeyup="PIInsert(this)">
           <option value="person" selected=
           "selected">
             Select person
@@ -277,7 +277,7 @@
           </option>
 
           <option value="other">
-            Principal Investigator
+            Other Principal Investigator
           </option>
         </select></td>
 
@@ -457,7 +457,7 @@
 	<td colspan=3><input type="checkbox" name="iaccept" id="iaccept">I accept <a href="/sla" target="_blank">the Service Level Agreement</a></td>
       </tr>
       <tr>
-        <td><input type="submit" value="Submit"></td>
+        <td><input type="submit" value="Pre-submit the order form"></td>
 
         <td></td>
       </tr>

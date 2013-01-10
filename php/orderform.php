@@ -91,8 +91,13 @@ fclose($fh);
 if(mail_csv($csv_content)) {
   $mailto = $LPmail;
   ?>
-  <h2>Mail sent to <? echo $mailto ?> with ordernote <? echo $orderNoteName; ?>.</h2>
-  Follow the instructions in the email to submit the ordernote to the sequencing center for processing.
+  <h2>Pre-submitted order note <? echo $orderNoteName; ?></h2>
+
+  Your order is <i>NOT</i> submitted yet. To make sure the email
+  address <? echo $mailto ?> is working, you need to reply to the email sent.
+
+  Follow the instructions in the email to submit the order note to the
+  Sequencing Center for processing.
   <p>
   View as CSV file: <a href="orderform?csv=<? echo $orderNoteName; ?>">
   https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteName; ?></a>.
@@ -312,7 +317,7 @@ function mail_csv($csvFile) {
 
   $mailto = $LPmail;
   $mailfrom = "seqcenter@snm.ku.dk";
-  $mailsubject = 'Your sequencing order ' . $orderNoteName;
+  $mailsubject = 'Please confirm: Your sequencing order ' . $orderNoteName;
   $orderurl = "https://dna.ku.dk/orderform/?load=". $orderNoteName;
   $csvurl = "https://dna.ku.dk/orderform/php/orderform?csv=". $orderNoteName;
   //Send mail
@@ -329,7 +334,9 @@ function mail_csv($csvFile) {
   $mailfileType = "csv";
   $filename = $orderNoteName . ".csv";
 
-  $mailbody = "Find your sequencing order " . $orderNoteName . " at: <a href=$csvurl>$csvurl</a>.<br/><br/>" .
+  $mailbody = 
+    "!!! The order will NOT be processed unless you reply to this email !!!<br/><br/>" .
+    "Find your sequencing order " . $orderNoteName . " at: <a href=$csvurl>$csvurl</a>.<br/><br/>" .
     "Please review it. If you need to change it you need to make a new order. ".
     // Enable when loading works:
     //	"You get create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br/><br/>" .
