@@ -222,12 +222,13 @@ function validateCVRAndEAN(){
 				break;
 			}
 		}
-		//check if both is specified
-		if(booEAN && booCVR){
-			setErrorOnBox(EAN);
-			setErrorOnBox(CVR);
-			return false;
-		}
+	
+		//check if both is specified - comment out, it is allowed to specify both EAN and CVR
+	//	if(booEAN && booCVR){
+	//		setErrorOnBox(EAN);
+	//		setErrorOnBox(CVR);
+	//		return false;
+	//	}
 		
 		//validate input for CVR or EAN
 		if(booEAN){
