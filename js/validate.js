@@ -109,7 +109,7 @@ function validateLabPerson(){
 		//phone.focus();
 		boo = false;
 	} else{
-		if(!phone[0].value.match(/^[0-9+]+$/)){
+		if(!phone[0].value.match(/^[0-9+ ]+$/)){
 			setErrorOnBox(phone);
 			boo = false;
 		} else {
