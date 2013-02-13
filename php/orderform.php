@@ -14,7 +14,8 @@
 	$EAN_Institut = $_POST["EAN_Institut"];
 	$EAN_Afdeling = $_POST["EAN_Afdeling"];
 	$CVR_no = $_POST["CVR_no"];
-	$CVR_adr = $_POST["CVR_adr"];
+	$CVR_adr1 = $_POST["CVR_adr1"];
+	$CVR_adr2 = $_POST["CVR_adr2"];
 	$LPname = $_POST["LP-name"];
 	$LPmail = $_POST["LP-mail"];
 	$LPphone = $_POST["LP-phone"];
@@ -83,7 +84,7 @@ if(isset($load_csv)) {
 $fh = fopen($path ."/". $filename,"w") or die("can't open file ".$path."/".$filename); 
 $csv_array = array_merge(required_section(), tube_section());
 $csv_content = csv_from_array($csv_array);
-// echo $csv_content;			- for debugging
+//echo $csv_content;			//- for debugging
 //Save file
 fwrite($fh,$csv_content);
 //Close file
@@ -129,7 +130,8 @@ function required_section() {
   $EAN_Institut = $_POST["EAN_Institut"];
   $EAN_Afdeling = $_POST["EAN_Afdeling"];
   $CVR_no = $_POST["CVR_no"];
-  $CVR_adr = $_POST["CVR_adr"];
+  $CVR_adr1 = $_POST["CVR_adr1"];
+  $CVR_adr2 = $_POST["CVR_adr2"];
   $LPname = $_POST["LP-name"];
   $LPmail = $_POST["LP-mail"];
   $LPphone = $_POST["LP-phone"];
@@ -195,7 +197,8 @@ function required_section() {
 	     array("| Institut:", $EAN_Institut),
 	     array("|"),
 	     array("| CVR no:", $CVR_no),
-	     array("| Address:", $CVR_adr),
+	     array("| Address1:", $CVR_adr1),
+	     array("| Address2:", $CVR_adr2),
 	     $br,
 	     array("Additional info:"),
 	     array($AddinfoWrapped),
