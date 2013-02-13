@@ -47,8 +47,8 @@ function InsertTableHead(tableId){
 	headArray[1] = createTableHead("th","hidden",tableId+ "_"+sampleIdClassname+"_0","Sample ID","Sample ID",simpleIdLink);
 	headArray[2] = createTableHead("th","hidden",tableId+ "_"+concentrationClassname+"_0","Conc","Concentration\n(nM or ng/ul)",concentrationLink);
 	headArray[3] = createTableHead("th","hidden",tableId+ "_"+averageLibClassname+"_0","Insert","Average library insert",averageLibLink);
-	headArray[4] = createTableHead("th","hidden",tableId+ "_"+indexSeqClassname + "_0","Sequence","Index Sequence",indexSeqLink);
-	headArray[5] = createTableHead("th","hidden",tableId+ "_"+indexNameClassname + "_0","Index Name","Index Name",indexNameLink);
+	headArray[4] = createTableHead("th","hidden",tableId+ "_"+indexNameClassname + "_0","Index Name","Index Name",indexNameLink);
+	headArray[5] = createTableHead("th","hidden",tableId+ "_"+indexSeqClassname + "_0","Sequence","Index Sequence",indexSeqLink);
 	headArray[6] = createTableHead("th","hidden",tableId+ "_"+projectNameClassname + "_0","Project name","Project name",projectNameLink);
 
 	//insert 7 new headers in the table
@@ -153,14 +153,13 @@ function appendRow(tableid){
 			input.id = tableid +averageLibClassname+numOfRows;
 			input.onblur= function () {validateAverageLibInsOnTheFly(this)};
 			input.setAttribute('class', averageLibClassname);
-		}else if(i==4){
+		}else if(i==5){
 			input.name = tableid + "_" + indexSeqClassname+"_"+numOfRows;
 			input.id = tableid +indexSeqClassname+numOfRows;
 	//		input.onblur= function () { checkNull(this);};
 			input.setAttribute('maxlength', '6');
 			input.setAttribute('class', indexSeqClassname);
-
-		}else if(i == 5){
+		}else if(i == 4){
 			input.name = tableid + "_" + indexNameClassname+"_"+numOfRows;
 			input.id = tableid + indexNameClassname+numOfRows;
 			input.setAttribute('class', tableid + indexNameClassname);
