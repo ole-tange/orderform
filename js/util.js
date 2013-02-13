@@ -40,6 +40,14 @@ function getTubeTag() {
 	return chomp(httpOutput.responseText);
 }
 
+function tubeTagTaken(tag) {
+	var httpOutput = null;
+	httpOutput = new XMLHttpRequest();
+	httpOutput.open( "GET", "/tubetag/?taken="+tag, false );
+	httpOutput.send( null );
+	return chomp(httpOutput.responseText) == "true";
+}
+
 function chomp(raw_text)
 {
     // do perl chomp

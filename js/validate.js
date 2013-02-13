@@ -525,6 +525,26 @@ function validUniqueIndexName(tableid){
         return boo;
 }
 
+function validTubeTag(tableid){
+        var boo = true;
+        var map = new Object();
+        var tmp = "";
+    // List of all elements of class tubeTag
+        var tubeTag = $(".tubeTag");
+        for(var i = 0;i < tubeTag.length;i++){
+            if(tubeTag[i].value != "") {
+                // Don't check if empty
+		if(! tubeTagTaken(tubeTag[i].value)) {
+                    setErrorOnBox($("#"+ tubeTag[i].id));
+                    boo = false;
+                } else {
+                    setValidOnBox($("#"+ tubeTag[i].id));
+                }
+	    }
+        }
+        return boo;
+}
+
 
 /*
  * Validate if the num-variable is a double between concentrationMin to concentrationMax
@@ -610,6 +630,10 @@ function validateTable(tableid){
                 boo = false;
         }
 
+        //validate TubeTag is known
+        if(!validTubeTag(tableid)){
+                boo = false;
+        }
 	
 	//Validate concentration and Average library insert is between.
 	var concenArr = $("tbody#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm... ????
