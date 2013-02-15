@@ -654,10 +654,9 @@ function validateTable(tableid){
 	}
 	
 	// Validate All fields are required in the table, so if you fill in one field you must fill out the rest.
-//	if(!validAllFieldReqInTable(tableid)){
-  //              boo = false;
-    //    }
-	alert("ny function: " + validAllFieldReqInTable(tableid));
+	if(!validAllFieldReqInTable(tableid)){
+                boo = false;
+       }
 
 /*	
 	if(!validateBricTable){
