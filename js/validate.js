@@ -34,10 +34,10 @@ function validateForm(){
 	var boo7 = validateDate();
 	var boo8 = validateIAccept();
 	var boo9 = validateConcentrationUnit();
+	var boo10 = validateTubesAndLanes();
 	
-//	insertTableSize();
 //	alert("boo1 = " + boo1 + " boo2 = " + boo2 + " boo3 = " + boo3 + " boo4 = " + boo4 +" boo5 = " + boo5 +" boo6 = " + boo6 + " boo7 = " + boo7);
-	if (boo1 && boo2 && boo3 && boo4 && boo5 && boo6 && boo7 && boo8 && boo9){	
+	if (boo1 && boo2 && boo3 && boo4 && boo5 && boo6 && boo7 && boo8 && boo9 && boo10){	
 //	if(validateLabPerson() && validateBioPerson() && validatePI() && validateBillTo() && validateRunType() && validateTable()){
 		//insert hidden fields
 		insertTableSize();	// insert size of all table - used when generating csv file
@@ -49,6 +49,39 @@ function validateForm(){
 	} else {
 		return false;
 	}
+}
+
+/* Validate number of tubes and the requested lanes..
+ *
+ */
+function validateTubesAndLanes(){
+	boo = true;
+	
+	var runtype = $(".runtype");
+	var temp = "";
+	var counter = 0;
+	var tubetagList = $('.tableNum');
+	
+	// This loop count one up everytime runtype is filled, set the temp value to the runtype value.
+	for(var i=0;i<runtype.length;i++){
+		if(runtype[i].value != ""){
+			counter++;
+			temp = runtype[i].value;
+		}
+	}
+	
+	if (counter != 0 && !isNaN(temp)){
+		if (tubetagList.length <= temp){
+			setValidOnBox(runtype);
+			setValidOnBox(tubetagList.closest('table'));
+		} else {
+			setErrorOnBox(runtype);
+			setErrorOnBox(tubetagList.closest('table'));
+			boo = false;
+		}
+	} 	
+	
+	return boo;
 }
 
 function validateConcentrationUnit(){
