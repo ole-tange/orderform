@@ -317,6 +317,14 @@ function validateEAN(){
 /*
  * Verify a char and substitute wrong charters (doesn't match the regexp) with an underscore
  */
+function verifyChar4AddInfo(field){
+    var currStr = field.value;
+    field.value = currStr.replace(/["]/g,"_")
+}
+
+/*
+ * Verify a char and substitute wrong charters (doesn't match the regexp) with an underscore
+ */
 function verifyChar(field){
     var currStr = field.value;
     field.value = currStr.replace(/[^A-Z0-9a-z]/g,"_")
