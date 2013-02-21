@@ -417,6 +417,7 @@ function expandTable(tableid){
 	
 	//$('#BricButton').css("border","15px solid red");
 	$('#BricButton').hide();
+	$('#BricButton1').hide();
 }
 
 /*
