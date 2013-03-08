@@ -106,6 +106,30 @@ function PIInsert(str){
     }
 }
 
+function PIInsert4Load(str){
+    if(str == "other") {
+	$('#PI-name').val("");
+	$('#PI-email').val("");
+	$('#PI-name').val("");
+	$('#PI-email').val("");
+	$('#BillTo_name').val("");
+	$('#EAN_No_id').val("");
+	$('#EAN_Fakultet_id').val("");
+	$('#EAN_Institut_id').val("");
+	$('#EAN_Afdeling_id').val("");
+	$('.PI-field').show();
+    } else {
+	$('#PI-name').val(str);
+	$('#PI-email').val(PIList[str]["Email"]);
+	$('#BillTo_name').val(PIList[str]["BillTo"]);
+	$('#EAN_No_id').val(PIList[str]["EAN"]);
+	$('#EAN_Fakultet_id').val(PIList[str]["Faculty"]);
+	$('#EAN_Institut_id').val(PIList[str]["Institute"]);
+	$('#EAN_Afdeling_id').val(PIList[str]["Department"]);
+	$('.PI-field').hide();
+    }
+}
+
 /*
  * Add the PI shortcut to the PIShort hidden input, used to insert PI-shortcut before the tubetag in the csv file generated from php.
  */

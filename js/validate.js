@@ -671,10 +671,19 @@ function validateTable(tableid){
                 boo = false;
         }
 
-        //validate TubeTag is known
-        if(!validTubeTag(tableid)){
-                boo = false;
-        }
+	// Check if the submittet data is a edit, this mean we don't need to preform Tubetag validation.
+	var load = window.location.search.substring(1);
+	var loadvar = load.substr(5);
+	
+	if(!loadvar){
+		//validate TubeTag is known
+		if(!validTubeTag(tableid)){
+			boo = false;
+		}
+	} else{
+		//addNewTable();  // first tubetag
+		//alert("NOTOK");
+	}
 	
 	//Validate concentration and Average library insert is between.
 	var concenArr = $("tbody#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm... ????
