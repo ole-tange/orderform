@@ -172,7 +172,7 @@ function required_section() {
  	     array(""," ============"," =========="),
 	     array("ORDER",$orderNoteName),
  	     array(""," ============"," =========="),
-	     array("OrderForm version:", "1.0"),
+	     array("OrderForm version:", "1.1"),
 	     array("Date:", $date),
 	     $br,
 	     array("| Lab Person"),

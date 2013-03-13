@@ -528,7 +528,6 @@ function validUniqueSampleId(tableid){
 	var map = new Object();
 	var tmp = "";
 	var sampleID = $("." + tableid + "sampleId");
-
 	for(var i = 0;i < sampleID.length;i++){
 		if(sampleID[i].value != ""){				// Don't check if empty
 			tmp = map[sampleID[i].value];
@@ -655,6 +654,11 @@ function validateAllTables(){
  */
 function validateTable(tableid){
 	var boo = true;
+	
+	// Validate All fields are required in the table, so if you fill in one field you must fill out the rest.
+	if(!validAllFieldReqInTable(tableid)){
+                boo = false;
+       } else {
 
 	// Validate for availible chars!
 	if(!validateTableStrings(tableid)){
@@ -680,18 +684,13 @@ function validateTable(tableid){
 		if(!validTubeTag(tableid)){
 			boo = false;
 		}
-	} else{
-		//addNewTable();  // first tubetag
-		//alert("NOTOK");
 	}
 	
 	//Validate concentration and Average library insert is between.
-	var concenArr = $("tbody#"+tableid+" tr td input."+ concentrationClassname); // ÆNDRE ** virker IKKE - Hm... ????
+	var concenArr = $("tbody#"+tableid+" tr td input."+ concentrationClassname);
 	var AverageLibArr = $("tbody#"+tableid+" tr td input."+ averageLibClassname);
 	
 	for(var i = 0; i < concenArr.length;i++){
-	//	alert(concentrationMin + "    " + concentrationMax);
-//		if(!validateIfDoubleNumberBetween(concenArr[i].value,concentrationMin,concentrationMax,"Concentration")){
 		if(!validateConcentrationOnTheFly(concenArr[i])){
 			boo = false;
 		}
@@ -702,12 +701,7 @@ function validateTable(tableid){
 			boo = false;
 		}
 	}
-	
-	// Validate All fields are required in the table, so if you fill in one field you must fill out the rest.
-	if(!validAllFieldReqInTable(tableid)){
-                boo = false;
-       }
-
+}
 /*	
 	if(!validateBricTable){
 		boo=false;

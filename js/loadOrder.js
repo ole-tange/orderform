@@ -4,21 +4,23 @@ function loadOrder(file){
 
 	var filnavn = file;
 	var end = true;
+	var version = 1;
 
 	// Get csvfil
-		var httpOutput = null;
-		httpOutput = new XMLHttpRequest();
-		httpOutput.open( "GET",  url + filnavn, false );
-		httpOutput.send( null );
-		var csvData = httpOutput.responseText;
+	var httpOutput = null;
+	httpOutput = new XMLHttpRequest();
+	httpOutput.open( "GET",  url + filnavn, false );
+	httpOutput.send( null );
+	var csvData = httpOutput.responseText;
 	
-	try{
+//	try{
+	// change csv fil into 2d array
 		var dataArray = $.csv.toArrays(csvData,{
 							// delimiter:"'", // sets a custom value delimiter character
 							separator: ';' // sets a custom field separator character
 							});
 				
-							
+	// looping through array and insert to the right input boxes.						
 	for(var i = 0; i < dataArray.length;i++){
 		if(end){
 			switch (dataArray[i][0])
@@ -26,6 +28,9 @@ function loadOrder(file){
 		//		case "ORDER":
 				//	alert(dataArray[i][1]);
 		//			break;
+				case "OrderForm version:":
+					version = dataArray[i][1];
+					break;
 				case "Date:":
 					$("#datepicker").val(dataArray[i][1]);
 					break;
@@ -84,22 +89,19 @@ function loadOrder(file){
 				case "| Address2:":
 					$("#CVR_adr2_id").val(dataArray[i][1]);
 					break;
-				case "Additional info:":			// change to handle if the message is wrapped , needed ??
-			/*		var j = i;
-					while(dataArray[j][0] == '"Cycles"'){
-						alert(dataArray[j][0]);
+				case "Additional info:":				// handles if the text is wrapped
+					var j = i;
+					while(dataArray[j][0] != "Cycles"){
 						j++;
 					}
 					var lines = j-i;
 					
-					
 					var tmp = "";
-					for(var z = 0; z < lines;z++){
+					for(var z = 1; z < lines;z++){		// start from one because we don't want to include "Additional info:".
 						tmp += dataArray[i+z][0] + " ";
 					}
-					alert(tmp);
-					//alert(dataArray[i+1][0]);*/
-					$("#Addinfo").val(dataArray[i+1][0]);
+
+					$("#Addinfo").val(tmp);
 					break;
 				case "50":
 					if(dataArray[i][1] != "__")
@@ -178,32 +180,42 @@ function loadOrder(file){
 						addNewTable(tmpTubeTag.substr(4));
 					for(var j = 0; j < tubeTagsRows; j++ ){
 						if(dataArray[i][0] == tmpTubeTag){			
-							if(rowid % 10 == 0 ){	// check om 10 nye rækker skal sættes ind.
+							if(rowid % 11 == 0 ){	// check om 10 nye rækker skal sættes ind.
 								append10RowsWtihIDLoad(table+id,dataArray[i][0].substr(4));
 							}	
 							// indsæt ny række
+								// Same in all versions - for now..
 								$("#"+table+id+tubeTagClassname+rowid).val(dataArray[i][0].substr(4));
-								$("#"+table+id+sampleIdClassname+rowid).val(dataArray[i][1]);
+								$("#"+table+id+sampleIdClassname+rowid).val(dataArray[i][1].substr(getIndexOf2seq(dataArray[i][1])));
 								$("#"+table+id+concentrationClassname+rowid).val(dataArray[i][2]);
 								$("#"+table+id+averageLibClassname+rowid).val(dataArray[i][3]);
-								$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][4]);
-								$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][5]);
+								if(version == 1){
+									$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][5]);
+									$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][4]);
+								} else if(version == 1.1){		// switched index name and index seq column
+									$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][4]);
+									$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][5]);
+								} else{ 						// unknown version !
+									//alert("unknown version");
+									$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][4]);
+									$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][5]);
+								}
 								$("#"+table+id+projectNameClassname+rowid).val(dataArray[i][6]);
 							if(bricBoo){
+								// Same in all versions - for now..
 								$("#"+table+id+refGenomeClassname+rowid).val(dataArray[i][7]);
 								$("#"+table+id+spicesClassname+rowid).val(dataArray[i][8]);
 								$("#"+table+id+cellTypeClassname+rowid).val(dataArray[i][9]);
 								$("#"+table+id+ipClassname+rowid).val(dataArray[i][10]);
 								$("#"+table+id+TOEClassname+rowid).val(dataArray[i][11]);
 							}
-							
 							rowid++;
 						}
 						else if(dataArray[i][0] == ""){	// ny tubetag
 							tmpTubeTag = dataArray[i+1][0];
 							id++;			// indsæt i næste tabel
 							rowid = 1;		// reset rownumber - 0 because there is a blank row between the tubetags, by using 0, we skip it.
-							if(bricBoo){	// indsæt ny tabel
+							if(bricBoo){		// indsæt ny tabel
 								addNewTable(tmpTubeTag.substr(4),true);
 							}else
 								addNewTable(tmpTubeTag.substr(4));
@@ -213,7 +225,7 @@ function loadOrder(file){
 			}
 		}
 	}
-	} catch(error){
-		alert("Error catch: " + error);
-	}
+//	} catch(error){
+//		alert("Error catch: " + error);
+//	}
 }

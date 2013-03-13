@@ -489,17 +489,7 @@ function addNewTable(tubetag,bric){
 	
 	var load = window.location.search.substring(1);
 	var loadvar = load.substr(5);
-/*	
-	if(tubetag)
-	alert("true");
-	else
-	alert("false");
-	
-	if(loadvar)
-	alert("true");
-	else
-	alert("false");
-	*/
+
 	if(numOfTables < 1){			// first table(tubetag) add'ed
 		table.appendChild(tbody);
 		seqTable.appendChild(table);
@@ -508,10 +498,8 @@ function addNewTable(tubetag,bric){
 			if(bric)
 				expandTable(id);
 			append10RowsWtihIDLoad(id,tubetag);
-	//		alert("true");
 		}else{
 			append10Rows(id);
-	//		alert("false");
 		}
 	} else {
 		var seqTable1 = document.getElementById("t1");
@@ -520,11 +508,9 @@ function addNewTable(tubetag,bric){
 			seqTable.appendChild(table);
 			CreateTableHeader(id);
 			if(!tubetag){
-	//			alert("true - in NewTable tubetag is " + tubetag)
 				append10Rows(id);
 			}else{
 				append10RowsWtihIDLoad(id,tubetag);
-	//			alert("false - in NewTable tubetag is " + tubetag)
 			}
 			appendButton("t"+numOfTables);
 		} else {						// it is a bric table remember to expand.

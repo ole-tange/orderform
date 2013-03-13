@@ -224,3 +224,13 @@ function updateIndexSeq(a,ui){
 	$('#'+(a.id).replace(/indexName/g,indexSeqClassname)).val(ui.item.id); // set index_name
 	$('#'+a.id).val(ui.item.value);						// set Index_sequence	
 }
+
+/*
+ * Returns the secound index of a underscore char.
+ */
+function getIndexOf2seq(str){
+	tmpIndex = str.indexOf("_");
+	newStr = str.substr(tmpIndex+1);
+	tempIndex = newStr.indexOf("_");
+	return tempIndex+tmpIndex+2;	// +2 - also exclude the two underscores
+}
