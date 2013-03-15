@@ -525,11 +525,33 @@ function validUniqueIndexName(tableid){
         return boo;
 }
 
+function validUniqueIndexSequences(tableid){
+        var boo = true;
+        var map = new Object();
+        var tmp = "";
+        // Find all in class tXindexSeq
+        var indexSequences = $("." + tableid + "indexSeq");
+        for(var i = 0;i < indexSequences.length;i++){
+                if(indexSequences[i].value != ""){                            // Don't check if empty
+                        tmp = map[indexSequences[i].value];
+                        map[indexSequences[i].value] = indexSequences[i].id;        //Insert sequence into map
+                        if (tmp != null){                               //Check if the sequence exist before inserting.
+                                setErrorOnBox($("#"+tmp));
+                                setErrorOnBox($("#"+ indexSequences[i].id));
+                                boo = false;
+                        } else {
+                                setValidOnBox($("#"+ indexSequences[i].id));
+                        }
+                }       // make setValidOnBox when empty ??? insert here then
+        }
+        return boo;
+}
+
 function validTubeTag(tableid){
         var boo = true;
         var map = new Object();
         var tmp = "";
-    // List of all elements of class tubeTag
+        // List of all elements of class tubeTag
         var tubeTag = $(".tubeTag");
         for(var i = 0;i < tubeTag.length;i++){
             if(tubeTag[i].value != "") {
@@ -627,6 +649,11 @@ function validateTable(tableid){
 
         //validate IndexName is unique
         if(!validUniqueIndexName(tableid)){
+                boo = false;
+        }
+
+        //validate IndexSequence is unique
+        if(!validUniqueIndexSequences(tableid)){
                 boo = false;
         }
 

@@ -158,7 +158,7 @@ function appendRow(tableid){
 			input.id = tableid +indexSeqClassname+numOfRows;
 	//		input.onblur= function () { checkNull(this);};
 			input.setAttribute('maxlength', '6');
-			input.setAttribute('class', indexSeqClassname);
+			input.setAttribute('class', tableid+indexSeqClassname);
 		}else if(i == 4){
 			input.name = tableid + "_" + indexNameClassname+"_"+numOfRows;
 			input.id = tableid + indexNameClassname+numOfRows;
