@@ -14,6 +14,15 @@ function append10RowsWtihID(tableid){
 	appendButton(tableid);		// Append a new after the rows are inserted
 }
 
+function append10RowsWtihIDLoad(tableid,tubetag){
+//	deleteButton(tableid);		// Delete the old button
+
+	for(var z = 0; z < 10 ;z++){
+		appendRow(tableid,tubetag);
+	}
+//	appendButton(tableid);		// Append a new after the rows are inserted
+}
+
 /*
  * Generate 10 new rows in the last tubetag-table
  */
@@ -62,7 +71,6 @@ function InsertTableHead(tableId){
  * This function append a "10 new lines row" for each table
  */
 function appendButton(tableid){
-
 	var seqTable = document.getElementById(tableid);
 	var numOfRows = seqTable.rows.length;
 	
@@ -86,18 +94,22 @@ function appendButton(tableid){
  * This will always be the "Add 10 lines"-button
  */
 function deleteButton(tableid){
+	
 	var seqTable = document.getElementById(tableid);
 	var numOfRows = seqTable.rows.length;
 	
 	var trId = tableid + "_" + (numOfRows-1);
+//	if(!($('#' + trId)[0].id)){
+//		alert($('#' + trId)[0].id);
 	$('#' + trId).remove();
+//	}
 }
 
 /*
  * Append one new row to the seq table
  * Insert proper settings (name, type, onkeyup etc.) for each colum.
  */
-function appendRow(tableid){
+function appendRow(tableid, tempTube){
     var seqTable = document.getElementById(tableid);
     var row0 = seqTable.rows[0];
     var cells = row0.cells;
@@ -107,9 +119,12 @@ function appendRow(tableid){
     var cells = new Array(rowLength);
     var row = document.createElement("TR");
 	
-	row.id = tableid + "_" + numOfRows;
-		
+	//$("#results").text(load);
 	
+	row.id = tableid + "_" + numOfRows;
+	
+	//var load = true;
+		
 	//adds setting to cells and insert into array
 	for(var i = 0; i < rowLength;i++){
 		var tempCell = document.createElement("TD");
@@ -118,8 +133,10 @@ function appendRow(tableid){
 		var input = document.createElement("input");
 		input.type = "text";
 		if(i==0){
+	//		var tubeTag = "";
+			// check for if this row is a row to be created with the load parameter, this mean no new	
 			if(numOfRows > 1){ 					// if not new tube
-				tubetag = $("#"+tableid+tubeTagClassname+"1");
+				tubeTag = $("#"+tableid+tubeTagClassname+"1").val();
 			} else{
 				var tmp = tableid.replace("t","");
 				if($('.tableNum').length == tmp){		 // generate tube in first row
@@ -128,11 +145,17 @@ function appendRow(tableid){
 				}else							// copy tube
 					tubetag = $("#"+tableid+tubeTagClassname+"1");
 			}
-					
-			input.name = tableid + "_" + tubeTagClassname+"_"+numOfRows;
-			input.id = tableid + tubeTagClassname+numOfRows;
-			input.setAttribute('class', tubeTagClassname);	
+		if(!tempTube){
 			input.value = tubeTag;
+		} else {
+			//alert("tempTube = "+tempTube);
+			input.value = tempTube;
+		}
+		
+		input.name = tableid + "_" + tubeTagClassname+"_"+numOfRows;
+		input.id = tableid + tubeTagClassname+numOfRows;
+		input.setAttribute('class', tubeTagClassname);
+		
 		}else if(i==1){
 			input.name = tableid + "_" + sampleIdClassname +"_"+numOfRows;
 			input.id = tableid + sampleIdClassname +numOfRows;
@@ -218,6 +241,7 @@ function appendRow(tableid){
 function createInputSettings(tableid,input, numOfRows, columnClass){
 	input.type = "text";
 	input.name = tableid + "_" + columnClass + "_"+numOfRows;
+	input.id = tableid + columnClass +numOfRows;
 	input.setAttribute('class', columnClass);
 	
 	return input;
@@ -417,6 +441,7 @@ function expandTable(tableid){
 	
 	//$('#BricButton').css("border","15px solid red");
 	$('#BricButton').hide();
+	$('#BricButton1').hide();
 }
 
 /*
@@ -451,7 +476,7 @@ function createTableHead(element, type, name, value, text, link){
 /*
  * Add's a new table (or tubetag) - this function is used whenever we need a new tubetag.
  */
-function addNewTable(){
+function addNewTable(tubetag,bric){
 	var seqTable = document.getElementById("t");
 	var table = document.createElement("TABLE");
 	var tbody = document.createElement("TBODY");
@@ -462,25 +487,41 @@ function addNewTable(){
 	table.border="1";
 	tbody.setAttribute('class', "tableNum");
 	
+	var load = window.location.search.substring(1);
+	var loadvar = load.substr(5);
+
 	if(numOfTables < 1){			// first table(tubetag) add'ed
 		table.appendChild(tbody);
 		seqTable.appendChild(table);
 		CreateTableHeader(id);
-		append10Rows(id);
+		if(tubetag){
+			if(bric)
+				expandTable(id);
+			append10RowsWtihIDLoad(id,tubetag);
+		}else{
+			append10Rows(id);
+		}
 	} else {
 		var seqTable1 = document.getElementById("t1");
 		if (seqTable1.rows[0].cells.length == 7){	// check if the tubetag table is expanded with a bric table.
 			table.appendChild(tbody);
 			seqTable.appendChild(table);
 			CreateTableHeader(id);
-			append10Rows(id);
+			if(!tubetag){
+				append10Rows(id);
+			}else{
+				append10RowsWtihIDLoad(id,tubetag);
+			}
 			appendButton("t"+numOfTables);
-		} else {
+		} else {						// it is a bric table remember to expand.
 			table.appendChild(tbody);
 			seqTable.appendChild(table);
 			CreateTableHeader(id);
 			expandTable(id);
-			append10Rows(id);
+			if(!tubetag)
+				append10Rows(id);
+			else
+				append10RowsWtihIDLoad(id,tubetag);
 			appendButton("t"+numOfTables);
 		}
 	}

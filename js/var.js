@@ -155,7 +155,7 @@ var PIList = {
 //Table variables:
 	var concentrationMin = 0.5; 
 	var concentrationMax = 100;
-	var AverageLibInsMin = 30; 
+	var AverageLibInsMin = 20; 
 	var AverageLibInsMax = 650;
 	
 	//Add runtype min and max
