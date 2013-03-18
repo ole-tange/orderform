@@ -1,6 +1,7 @@
 function loadOrder(file){
 	//var url = "http://people.binf.ku.dk/lh/test/";
-	var url = "http://dna.ku.dk/orderform/php/orderform?csv=";
+        var protocol = window.location.protocol
+	var url = protocol + "//dna.ku.dk/orderform/php/orderform?csv=";
 
 	var filnavn = file;
 	var end = true;
@@ -212,13 +213,17 @@ function loadOrder(file){
 							rowid++;
 						}
 						else if(dataArray[i][0] == ""){	// ny tubetag
+						    if(dataArray[i+1]) {
 							tmpTubeTag = dataArray[i+1][0];
 							id++;			// indsæt i næste tabel
 							rowid = 1;		// reset rownumber - 0 because there is a blank row between the tubetags, by using 0, we skip it.
-							if(bricBoo){		// indsæt ny tabel
-								addNewTable(tmpTubeTag.substr(4),true);
-							}else
-								addNewTable(tmpTubeTag.substr(4));
+							if(bricBoo) {
+							    // indsæt ny tabel
+							    addNewTable(tmpTubeTag.substr(4),true);
+							} else {
+							    addNewTable(tmpTubeTag.substr(4));
+							}
+						    }
 						}
 						i++;
 					}

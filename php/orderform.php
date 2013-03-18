@@ -106,11 +106,8 @@ if(mail_csv($csv_content)) {
   https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteName; ?></a>.
 
   <p>
-  <!--
-	Enable this when ?load works
-        Edit the ordernote: <a href="https://dna.ku.dk/orderform/?load=<? echo $orderNoteName; ?>">
-	https://dna.ku.dk/orderform/?load=<? echo $orderNoteName; ?></a>.
-  -->
+  Edit the ordernote: <a href="<? echo baseurl() . "?load=" . $orderNoteName; ?>">
+  <? echo baseurl() . "?load=" . $orderNoteName; ?></a>.
   <?
 } else {
   ?>
@@ -119,6 +116,14 @@ if(mail_csv($csv_content)) {
   <? 
 }
 
+function selfurl() {
+  $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+  return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+}
+
+function baseurl() {
+  return dirname(dirname(selfurl()));
+}
 
 function required_section() {
   $date = $_POST["date"];
@@ -343,12 +348,9 @@ function mail_csv($csvFile) {
   $mailbody = 
     "!!! The order will NOT be processed unless you reply to this email !!!<br/><br/>" .
     "Find your sequencing order " . $orderNoteName . " at: <a href=$csvurl>$csvurl</a>.<br/><br/>" .
-    "Please review it. If you need to change it you need to make a new order. ".
-    // Enable when loading works:
-    //	"You get create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br/><br/>" .
+    "Please review it. If you need to change it you need to make a new order.<br/><br/>".
+    "You can create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br/><br/>" .
     "When you have reviewed the order please reply to this email that you want the order processed.<br/><br/>" .
-    // Disabled: Send a link to the csv-file instead
-    //    "Do NOT change the attached csv-file<br/><br/>" .
     "When referring to this order in the future, please refer to " .
     $orderNoteID . " or " . $orderNoteName . ".<br/><br/>" .
 
