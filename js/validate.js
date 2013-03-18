@@ -588,23 +588,23 @@ function validUniqueIndexSequences(tableid){
 }
 
 function validTubeTag(tableid){
-        var boo = true;
-        var map = new Object();
-        var tmp = "";
-        // List of all elements of class tubeTag
-        var tubeTag = $(".tubeTag");
-        for(var i = 0;i < tubeTag.length;i++){
-            if(tubeTag[i].value != "") {
-                // Don't check if empty
-		if(! tubeTagTaken(tubeTag[i].value)) {
-                    setErrorOnBox($("#"+ tubeTag[i].id));
-                    boo = false;
-                } else {
-                    setValidOnBox($("#"+ tubeTag[i].id));
-                }
-	    }
-        }
-        return boo;
+    var boo = true;
+    var map = new Object();
+    var tmp = "";
+    // List of all elements of class tubeTag
+    var tubeTag = $(".tubeTag");
+    for(var i = 0;i < tubeTag.length;i++){
+        if(tubeTag[i].value != "") {
+            // Don't check if empty
+	    if(! tubeTagTaken(tubeTag[i].value)) {
+                setErrorOnBox($("#"+ tubeTag[i].id));
+                boo = false;
+            } else {
+                setValidOnBox($("#"+ tubeTag[i].id));
+            }
+	}
+    }
+    return boo;
 }
 
 
@@ -707,17 +707,6 @@ function validateTable(tableid){
                 boo = false;
         }
 
-	// Check if the submittet data is a edit, this mean we don't need to preform Tubetag validation.
-	var load = window.location.search.substring(1);
-	var loadvar = load.substr(5);
-	
-	if(!loadvar){
-		//validate TubeTag is known
-		if(!validTubeTag(tableid)){
-			boo = false;
-		}
-	}
-	
 	//Validate concentration and Average library insert is between.
 	var concenArr = $("tbody#"+tableid+" tr td input."+ concentrationClassname);
 	var AverageLibArr = $("tbody#"+tableid+" tr td input."+ averageLibClassname);
