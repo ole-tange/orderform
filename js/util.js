@@ -234,3 +234,10 @@ function getIndexOf2seq(str){
 	tempIndex = newStr.indexOf("_");
 	return tempIndex+tmpIndex+2;	// +2 - also exclude the two underscores
 }
+
+/*
+ * Insert "str" in all input boxes in tableid with the column class.
+ */
+function autofillRestOfColumn(str,tableid,columnClass){
+	$("tbody#"+tableid+" tr td input."+columnClass).val(str);
+}

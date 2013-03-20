@@ -477,15 +477,25 @@
         <td></td>
       </tr>
     </table>
-  </form><a id="results"></a> <script type="text/javascript">
+    
+      <h4 class="admin">Admin field</h4>
+	<textarea rows="5" cols="80" name="adminInfo" id="adminText" class="admin"></textarea>
+	  <input type="hidden" id="adminStatus" name="adminStatus" value="0"/>
+	
+</form>
+  
+  <a id="results"></a>
+  
+  <script type="text/javascript">
 
   $(document).ready(function(){
         // Add wiki links for headlines
         addLinks();
 
         // Hide boxes at startup
-        $('#t0').hide();	// error box
+        $('#t0').hide();	// The error box
         $('.PI-field').hide();	// PI-other fields
+        $('.admin').hide();	// admin box
 
         //Add datepicker
         $("#datepicker").datepicker('setDate', "now");
@@ -494,19 +504,33 @@
                         dateFormat: "yy-mm-dd"          
                 });
 
-        // create table header and add a row
+	// get GET variable(s) in url
+	var gets = window.location.search.substring(1);
+	var arrayGets = gets.split("?")
+	var loadvar = "";
+	var adminvar = 0;
 	
-//	alert(loadvar);
-
-	var load = window.location.search.substring(1);
-	var loadvar = load.substr(5);
+	for(var i = 0; i < arrayGets.length;i++){
+		var data = arrayGets[i].split("=");
+		if(data[0] == "load"){
+			loadvar = data[1];
+		} else if(data[0] == "admin"){
+			adminvar = data[1];
+		}
+	}
+	
+	// show "admin" filed if specified
+	if(adminvar){
+		$('.admin').show();
+		$('#adminStatus').val(adminvar);
+	}
+	
+	// check if it is a "load" or a new order
 	//try{	
 		if(loadvar){
 			loadOrder(loadvar);
-			//alert("OK");
 		} else{
-			addNewTable();  // first tubetag
-			//alert("NOTOK");
+			addNewTable(); // create table header and add a row // first tubetag
 		}
 	//} catch (error){
 	//	alert(error);
@@ -521,8 +545,9 @@
 		PIInsert(this);
 	});
         
+	// focus on first box
         $('input[name=LP-name]').focus();
-
+	
   });
   </script>
 </body>

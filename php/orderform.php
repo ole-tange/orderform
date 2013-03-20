@@ -6,6 +6,9 @@
 /*********variables**************/
 	//Get variables from POST
 	$load_csv = $_GET["csv"];
+	
+	$admin_info = $_POST["adminInfo"];
+	$admin_status = $_POST["adminStatus"];
 
 	$date = $_POST["date"];
 	$BillTo_name = $_POST["BillTo_name"];
@@ -90,31 +93,37 @@ fwrite($fh,$csv_content);
 //Close file
 fclose($fh);
 
-//send the email
-if(mail_csv($csv_content)) {
-  $mailto = $LPmail;
-  ?>
-  <h2>Pre-submitted order note <? echo $orderNoteName; ?></h2>
+if(empty($admin_info) && $admin_status){ // don't send an email if admin only edditing
+	//don't send mail
+	?> <h2> <? echo "New orderNoteName is " . $orderNoteName; ?> </h2> <?
+} else{
+	//send the email
+	if(mail_csv($csv_content)) {
+	  $mailto = $LPmail;
+	  ?>
+	  <h2>Pre-submitted order note <? echo $orderNoteName; ?></h2>
 
-  Your order is <i>NOT</i> submitted yet. To make sure the email
-  address <? echo $mailto ?> is working, you need to reply to the email sent.
+	  Your order is <i>NOT</i> submitted yet. To make sure the email
+	  address <? echo $mailto ?> is working, you need to reply to the email sent.
 
-  Follow the instructions in the email to submit the order note to the
-  Sequencing Center for processing.
-  <p>
-  View as CSV file: <a href="orderform?csv=<? echo $orderNoteName; ?>">
-  https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteName; ?></a>.
+	  Follow the instructions in the email to submit the order note to the
+	  Sequencing Center for processing.
+	  <p>
+	  View as CSV file: <a href="orderform?csv=<? echo $orderNoteName; ?>">
+	  https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteName; ?></a>.
 
-  <p>
-  Edit the ordernote: <a href="<? echo baseurl() . "?load=" . $orderNoteName; ?>">
-  <? echo baseurl() . "?load=" . $orderNoteName; ?></a>.
-  <?
-} else {
-  ?>
-  <h2>Mail failed!<h2>
-  Sending email failed. Please contact seqcenter@snm.ku.dk to investigate why.
-  <? 
+	  <p>
+	  Edit the ordernote: <a href="<? echo baseurl() . "?load=" . $orderNoteName; ?>">
+	  <? echo baseurl() . "?load=" . $orderNoteName; ?></a>.
+	  <?
+	} else {
+	  ?>
+	  <h2>Mail failed!<h2>
+	  Sending email failed. Please contact seqcenter@snm.ku.dk to investigate why.
+	  <? 
+	}
 }
+
 
 function selfurl() {
   $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
@@ -325,6 +334,7 @@ function mail_csv($csvFile) {
   $LPmail = $_POST["LP-mail"];
   $orderNoteID = $_POST["orderNoteID"];
   $orderNoteName = $_POST["orderNoteName"];
+  $admin_info = $_POST["adminInfo"];
 
   $mailto = $LPmail;
   $mailfrom = "seqcenter@snm.ku.dk";
@@ -352,7 +362,7 @@ function mail_csv($csvFile) {
     "You can create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br/><br/>" .
     "When you have reviewed the order please reply to this email that you want the order processed.<br/><br/>" .
     "When referring to this order in the future, please refer to " .
-    $orderNoteID . " or " . $orderNoteName . ".<br/><br/>" .
+    $orderNoteID . " or " . $orderNoteName . ".<br/><br/>" . $admin_info . "<br/><br/>" .    
 
     "Regards,<br><br>" .
     "The Sequencing Center";
