@@ -33,6 +33,7 @@ function validateForm(){
 	var boo6 = validateAllTables();
 	var boo7 = validateDate();
 	var boo8 = validateIAccept();
+
 	var boo9 = validateConcentrationUnit();
 	var boo10 = validateTubesAndLanes();
 	
@@ -676,9 +677,10 @@ function validateAllTables(){
  */
 function validateTable(tableid){
 	var boo = true;
-	
+
 	// Validate All fields are required in the table, so if you fill in one field you must fill out the rest.
 	if(!validAllFieldReqInTable(tableid)){
+		
                 boo = false;
        } else {
 
@@ -723,6 +725,7 @@ function validateTable(tableid){
 		}
 	}
 }
+
 /*	
 	if(!validateBricTable){
 		boo=false;
@@ -746,16 +749,22 @@ function validateBricTable(){
 function validAllFieldReqInTable(tableid){
 	
 	var projectNameColumn = $("tbody#"+tableid+" tr td input.ProjectName");
-	var indexSeqColumn = $("tbody#"+tableid+" tr td input.indexSeq");
+	var indexSeqColumn = $("."+tableid+"indexSeq");
 	var indexNameColumn = $("."+tableid+"indexName");
 	var sampleIdColumn = $("."+tableid+"sampleId");
 	var concenColumn = $("tbody#"+tableid+" tr td input.concentration");
 	var aveLibInsColumn = $("tbody#"+tableid+" tr td input.aveLibIns");
-	boo = true
+	var boo = true;
+	var tempboo = true;
 
 	for(i = 0; i < sampleIdColumn.length; i++){
-		tempboo = (sampleIdColumn[i].value != "") ^ (indexSeqColumn[i].value != "") ^ (indexNameColumn[i].value != "")
-		^ (projectNameColumn[i].value != "") ^ (concenColumn[i].value != "") ^ (aveLibInsColumn[i].value != "");
+		tempboo = 	(sampleIdColumn[i].value != "") ^
+					(indexSeqColumn[i].value != "") ^
+					(indexNameColumn[i].value != "")	^
+					(projectNameColumn[i].value != "") ^
+					(concenColumn[i].value != "") ^
+					(aveLibInsColumn[i].value != "");
+		
 		if(!tempboo){
 			setValidOnBox($("#" + sampleIdColumn[i].id));
 			setValidOnBox($("#" + indexSeqColumn[i].id));
