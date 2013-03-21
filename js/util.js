@@ -241,3 +241,10 @@ function getIndexOf2seq(str){
 function autofillRestOfColumn(str,tableid,columnClass){
 	$("tbody#"+tableid+" tr td input."+columnClass).val(str);
 }
+
+function XOR() {
+    for (var i = 1; i < arguments.length; i++) 
+        if ( arguments[0] != arguments[i] ) 
+            return false; 
+    return true; 
+}

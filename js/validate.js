@@ -23,21 +23,21 @@ function projectVal(){
  */
 function validateForm(){
 
-	// Next tree lines only used for debugging purpose
 	var boo1 = validateLabPerson();
 	var boo2 = validateBioPerson();
 	var boo3 = validatePI();
 	var boo4 = validateBillTo();
 	var boo5 = validateRunType();
-	
+
 	var boo6 = validateAllTables();
+
 	var boo7 = validateDate();
 	var boo8 = validateIAccept();
 
 	var boo9 = validateConcentrationUnit();
 	var boo10 = validateTubesAndLanes();
 	
-//	alert("boo1 = " + boo1 + " boo2 = " + boo2 + " boo3 = " + boo3 + " boo4 = " + boo4 +" boo5 = " + boo5 +" boo6 = " + boo6 + " boo7 = " + boo7);
+//	alert("boo1 = " + boo1 + " boo2 = " + boo2 + " boo3 = " + boo3 + " boo4 = " + boo4 +" boo5 = " + boo5 +" boo6 = " + boo6 + " boo7 = " + boo7 + " boo8 = " + boo8 + " boo9 = " + boo9 + " boo10 = " + boo10);
 	if (boo1 && boo2 && boo3 && boo4 && boo5 && boo6 && boo7 && boo8 && boo9 && boo10){	
 //	if(validateLabPerson() && validateBioPerson() && validatePI() && validateBillTo() && validateRunType() && validateTable()){
 		//insert hidden fields
@@ -50,6 +50,8 @@ function validateForm(){
 	} else {
 		return false;
 	}
+	
+	return false;
 }
 
 /* Validate number of tubes and the requested lanes..
@@ -677,7 +679,7 @@ function validateAllTables(){
  */
 function validateTable(tableid){
 	var boo = true;
-
+	
 	// Validate All fields are required in the table, so if you fill in one field you must fill out the rest.
 	if(!validAllFieldReqInTable(tableid)){
                 boo = false;
@@ -755,43 +757,36 @@ function validAllFieldReqInTable(tableid){
 	var aveLibInsColumn = $("tbody#"+tableid+" tr td input.aveLibIns");
 	var boo = true;
 	//var tempboo = true;
-
+	
 	for(i = 0; i < sampleIdColumn.length; i++){
-		tempSample = (sampleIdColumn[i].value != "");
-		tempIndexName = (indexNameColumn[i].value != "");
-		tempSeq = (indexSeqColumn[i].value != "");
-		tempConc = (concenColumn[i].value != "");
-		tempAve = (aveLibInsColumn[i].value != "");
-		tempPro = (projectNameColumn[i].value != "");
+		tempSample = (sampleIdColumn[i].value != "");// ? 1 : 0;
+		tempIndexName = (indexNameColumn[i].value != "");// ? 1 : 0;
+		tempSeq = (indexSeqColumn[i].value != "");// ? 1 : 0;
+		tempConc = (concenColumn[i].value != "");// ? 1 : 0;
+		tempAve = (aveLibInsColumn[i].value != "");// ? 1 : 0;
+		tempPro = (projectNameColumn[i].value != "");// ? 1 : 0;
 		
-		tempboo = 	tempSample ^
-					tempIndexName ^
-					tempSeq	^
-					tempConc ^
-					tempAve ^
-					tempPro;
-		//if(i % 8 == 0)
-		//	alert(tempboo);
-		
-		if(!tempboo){
+		tempboo = XOR(tempSample,tempIndexName,tempSeq,tempConc,tempAve,tempPro);
+
+		if(tempboo){
 			setValidOnBox($("#" + sampleIdColumn[i].id));
 			setValidOnBox($("#" + indexSeqColumn[i].id));
 			setValidOnBox($("#" + indexNameColumn[i].id));
 			setValidOnBox($("#" + projectNameColumn[i].id));
 			setValidOnBox($("#" + concenColumn[i].id));
 			setValidOnBox($("#" + aveLibInsColumn[i].id));
-		} else{
-			if(tempSample)
+		} else{	// set error only on boxes not filled
+			if(!tempSample)
 				setErrorOnBox($("#" + sampleIdColumn[i].id));
-			if(tempSeq)
+			if(!tempSeq)
 				setErrorOnBox($("#" + indexSeqColumn[i].id));
-			if(tempIndexName)
+			if(!tempIndexName)
 				setErrorOnBox($("#" + indexNameColumn[i].id));
-			if(tempPro)
+			if(!tempPro)
 				setErrorOnBox($("#" + projectNameColumn[i].id));
-			if(tempConc)
+			if(!tempConc)
 				setErrorOnBox($("#" + concenColumn[i].id));
-			if(tempAve)
+			if(!tempAve)
 				setErrorOnBox($("#" + aveLibInsColumn[i].id));
 			boo = false;
 		}
