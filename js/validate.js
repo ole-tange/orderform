@@ -680,7 +680,6 @@ function validateTable(tableid){
 
 	// Validate All fields are required in the table, so if you fill in one field you must fill out the rest.
 	if(!validAllFieldReqInTable(tableid)){
-		
                 boo = false;
        } else {
 
@@ -755,15 +754,24 @@ function validAllFieldReqInTable(tableid){
 	var concenColumn = $("tbody#"+tableid+" tr td input.concentration");
 	var aveLibInsColumn = $("tbody#"+tableid+" tr td input.aveLibIns");
 	var boo = true;
-	var tempboo = true;
+	//var tempboo = true;
 
 	for(i = 0; i < sampleIdColumn.length; i++){
-		tempboo = 	(sampleIdColumn[i].value != "") ^
-					(indexSeqColumn[i].value != "") ^
-					(indexNameColumn[i].value != "")	^
-					(projectNameColumn[i].value != "") ^
-					(concenColumn[i].value != "") ^
-					(aveLibInsColumn[i].value != "");
+		tempSample = (sampleIdColumn[i].value != "");
+		tempIndexName = (indexNameColumn[i].value != "");
+		tempSeq = (indexSeqColumn[i].value != "");
+		tempConc = (concenColumn[i].value != "");
+		tempAve = (aveLibInsColumn[i].value != "");
+		tempPro = (projectNameColumn[i].value != "");
+		
+		tempboo = 	tempSample ^
+					tempIndexName ^
+					tempSeq	^
+					tempConc ^
+					tempAve ^
+					tempPro;
+		//if(i % 8 == 0)
+		//	alert(tempboo);
 		
 		if(!tempboo){
 			setValidOnBox($("#" + sampleIdColumn[i].id));
@@ -773,12 +781,18 @@ function validAllFieldReqInTable(tableid){
 			setValidOnBox($("#" + concenColumn[i].id));
 			setValidOnBox($("#" + aveLibInsColumn[i].id));
 		} else{
-			setErrorOnBox($("#" + sampleIdColumn[i].id));
-			setErrorOnBox($("#" + indexSeqColumn[i].id));
-			setErrorOnBox($("#" + indexNameColumn[i].id));
-			setErrorOnBox($("#" + projectNameColumn[i].id));
-			setErrorOnBox($("#" + concenColumn[i].id));
-			setErrorOnBox($("#" + aveLibInsColumn[i].id));
+			if(tempSample)
+				setErrorOnBox($("#" + sampleIdColumn[i].id));
+			if(tempSeq)
+				setErrorOnBox($("#" + indexSeqColumn[i].id));
+			if(tempIndexName)
+				setErrorOnBox($("#" + indexNameColumn[i].id));
+			if(tempPro)
+				setErrorOnBox($("#" + projectNameColumn[i].id));
+			if(tempConc)
+				setErrorOnBox($("#" + concenColumn[i].id));
+			if(tempAve)
+				setErrorOnBox($("#" + aveLibInsColumn[i].id));
 			boo = false;
 		}
 	}

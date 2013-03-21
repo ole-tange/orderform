@@ -212,7 +212,7 @@ function generateOrderNoteName(orderNoteID) {
  * It automatic get the indexName value from the $indexSequenceList.
  */
 function updateIndexName(a,ui){
-	$('#'+(a.id).replace(/indexSeq/g,indexNameClassname)).val(ui.item.id); // set index_name
+	$('#'+(a.id).replace(/indexSeq/g,indexNameClassname)).val((ui.item.id).toUpperCase()); // set index_name
 	$('#'+a.id).val(ui.item.value);						// set Index_sequence	
 }
 
@@ -221,8 +221,8 @@ function updateIndexName(a,ui){
  * It automatic get the indexName value from the $indexNameList.
  */
 function updateIndexSeq(a,ui){
-	$('#'+(a.id).replace(/indexName/g,indexSeqClassname)).val(ui.item.id); // set index_name
-	$('#'+a.id).val(ui.item.value);						// set Index_sequence	
+	$('#'+(a.id).replace(/indexName/g,indexSeqClassname)).val(ui.item.id);
+	$('#'+a.id).val((ui.item.value).toUpperCase());							
 }
 
 /*
