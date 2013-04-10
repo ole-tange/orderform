@@ -221,8 +221,8 @@ function updateIndexName(a,ui){
  * It automatic get the indexName value from the $indexNameList.
  */
 function updateIndexSeq(a,ui){
-	$('#'+(a.id).replace(/indexName/g,indexSeqClassname)).val(ui.item.id);
-	$('#'+a.id).val((ui.item.value).toUpperCase());							
+	$('#'+(a.id).replace(/indexName/g,indexSeqClassname)).val(ui.item.id); //set Index_Seq
+	$('#'+a.id).val((ui.item.value).toUpperCase());			// set Index Name
 }
 
 /*
