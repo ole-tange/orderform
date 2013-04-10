@@ -186,7 +186,7 @@ function appendRow(tableid, tempTube){
 			input.name = tableid + "_" + indexNameClassname+"_"+numOfRows;
 			input.id = tableid + indexNameClassname+numOfRows;
 			input.setAttribute('class', tableid + indexNameClassname);
-			input.onblur= function (e,ui) { $("#"+tableid + indexNameClassname+numOfRows).val((this.value).toUpperCase()) };//checkNull(this);};
+			input.onblur= function () { $("#"+tableid + indexNameClassname+numOfRows).val((this.value).toUpperCase()) };//checkNull(this);};
 			input.onkeyup= function () {verifyChar(this)};
 		}else if(i == 6){
 			input.setAttribute('class', projectNameClassname);
@@ -290,7 +290,7 @@ function addValidation2Row(tableid,rowLength){
 					collision: "none"
 				},
 		focus: 	function (e,ui) {	updateIndexName(this,ui);
-				},
+				}
 		});
 		
 	//add autocomplete forcolumn index Name
