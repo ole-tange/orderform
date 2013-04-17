@@ -40,12 +40,10 @@ function validateForm(){
 //	alert("boo1 = " + boo1 + " boo2 = " + boo2 + " boo3 = " + boo3 + " boo4 = " + boo4 +" boo5 = " + boo5 +" boo6 = " + boo6 + " boo7 = " + boo7 + " boo8 = " + boo8 + " boo9 = " + boo9 + " boo10 = " + boo10);
 	if (boo1 && boo2 && boo3 && boo4 && boo5 && boo6 && boo7 && boo8 && boo9 && boo10){	
 //	if(validateLabPerson() && validateBioPerson() && validatePI() && validateBillTo() && validateRunType() && validateTable()){
-		//insert hidden fields
-		insertTableSize();	// insert size of all table - used when generating csv file
-		generateOrderNoteID();	// insert orderNoteID
-		if($("#PI")[0].value != "other")
-			PIInsert($("#PI")[0]);	// insert PI information (name and e-mail adr. in form) - if not inserted in advance.
-			addPI2TubeTag();		// indsæt "de tre tegn" (fra PI) i tubetaggen.
+		//insert fields used to generate csv
+		insertTableSize();					// insert size of all table - used when generating csv file
+		generateOrderNoteID();				// insert orderNoteID
+		addPI2TubeTag();					// indsæt "de tre tegn" (fra PI) i tubetaggen.
 		return true;
 	} else {
 		return false;
@@ -201,6 +199,7 @@ function validatePI(){
  * Validate an email address
  */
 function validateEmail(mailStr){
+	//alert(mailStr.replace(/\//g,","));
 	var atpos=mailStr.indexOf("@");
 	var dotpos=mailStr.lastIndexOf(".");
 	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=mailStr.length){

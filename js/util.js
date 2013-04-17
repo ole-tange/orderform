@@ -86,8 +86,6 @@ function PIInsert(str){
     if(str.value == "other") {
 	$('#PI-name').val("");
 	$('#PI-email').val("");
-	$('#PI-name').val("");
-	$('#PI-email').val("");
 	$('#BillTo_name').val("");
 	$('#EAN_No_id').val("");
 	$('#EAN_Fakultet_id').val("");
