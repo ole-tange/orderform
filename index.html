@@ -26,7 +26,7 @@
 
 
 <!-- Locally cached: http://code.jquery.com/ui/1.9.0/jquery-ui.js -->
-  <script src="js/jquery-ui.js" type="text/javascript">
+<script src="js/jquery-ui.js" type="text/javascript">
 </script>
 <!-- Locally cached http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css -->
   <link rel="stylesheet" type="text/css" media="screen" href=
@@ -224,7 +224,7 @@
           <h4><a id="PILink">Principal Investigator</a><span style=
           "color:red">*</span></h4>
         </td>
-
+		
         <td><select id="PI" name="PI" onchange="PIInsert(this)" onkeyup="PIInsert(this)">
           <option value="person" selected=
           "selected">
@@ -541,9 +541,9 @@
         $("#CVR-table").css("border","1px solid black");
 	
 	// Fixing mouseevent bug for some browsers
-	$("#PI").mouseout(function(){
-		PIInsert(this);
-	});
+//	$("#PI").mouseout(function(){
+//		PIInsert(this);
+//	});
         
 	// focus on first box
         $('input[name=LP-name]').focus();
