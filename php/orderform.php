@@ -9,6 +9,8 @@
 	
 	$admin_info = $_POST["adminInfo"];
 	$admin_status = $_POST["adminStatus"];
+	
+	$orderForm_version = $_POST["orderFormVersion"];
 
 	$date = $_POST["date"];
 	$BillTo_name = $_POST["BillTo_name"];
@@ -70,7 +72,7 @@
 	
 	//Path to save ordresheets
 	$path = "/home/seq/ordernotes";
-	//$path = "/home/lh/ordre";
+	//$path = "/home/lh/order";
 	$filename = $orderNoteName . ".csv";
 	// Email specific variable
 		
@@ -135,6 +137,7 @@ function baseurl() {
 }
 
 function required_section() {
+  $orderForm_version = $_POST["orderFormVersion"];
   $date = $_POST["date"];
   $orderNoteID = $_POST["orderNoteID"];
   $orderNoteName = $_POST["orderNoteName"];
@@ -186,7 +189,7 @@ function required_section() {
  	     array(""," ============"," =========="),
 	     array("ORDER",$orderNoteName),
  	     array(""," ============"," =========="),
-	     array("OrderForm version:", "1.1"),
+	     array("OrderForm version:", $orderForm_version),
 	     array("Date:", $date),
 	     $br,
 	     array("| Lab Person"),

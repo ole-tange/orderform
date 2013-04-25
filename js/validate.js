@@ -22,7 +22,7 @@ function projectVal(){
  * This function is called when the submit button is pressed.
  */
 function validateForm(){
-
+	
 	var boo1 = validateLabPerson();
 	var boo2 = validateBioPerson();
 	var boo3 = validatePI();
@@ -30,6 +30,7 @@ function validateForm(){
 	var boo5 = validateRunType();
 
 	var boo6 = validateAllTables();
+//	var boo6 = true;
 
 	var boo7 = validateDate();
 	var boo8 = validateIAccept();
@@ -44,6 +45,7 @@ function validateForm(){
 		insertTableSize();					// insert size of all table - used when generating csv file
 		generateOrderNoteID();				// insert orderNoteID
 		addPI2TubeTag();					// indsæt "de tre tegn" (fra PI) i tubetaggen.
+		setVersion();						// insert the version number in the hidden field.
 		return true;
 	} else {
 		return false;

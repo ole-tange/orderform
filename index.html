@@ -2,8 +2,10 @@
 
 <html>
 <head>
+<script type="text/javascript">
   <!-- Order form Version 1.1 -->
-
+  var orderFormVersion = "1.1";
+</script>
   <title>Order form</title>
 <!-- Locally cached: http://code.jquery.com/jquery-1.8.2.js -->
   <script src="js/jquery-1.8.2.js" type="text/javascript">
@@ -481,6 +483,7 @@
       <h4 class="admin">Admin field</h4>
 	<textarea rows="5" cols="80" name="adminInfo" id="adminText" class="admin"></textarea>
 	  <input type="hidden" id="adminStatus" name="adminStatus" value="0"/>
+	  <input type="hidden" id="orderFormVersion" name="orderFormVersion"/>
 	
 </form>
   

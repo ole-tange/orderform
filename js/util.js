@@ -246,3 +246,7 @@ function XOR() {
             return false; 
     return true; 
 }
+
+function setVersion() {
+	$("#orderFormVersion").val(orderFormVersion);
+}
