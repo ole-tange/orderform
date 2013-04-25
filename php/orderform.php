@@ -71,8 +71,8 @@
 	$orderNoteName = $_POST["orderNoteName"];
 	
 	//Path to save ordresheets
-	//$path = "/home/seq/ordernotes";
-	$path = "/home/lh/ordre";
+	$path = "/home/seq/ordernotes";
+	//$path = "/home/lh/ordre";
 	$filename = $orderNoteName . ".csv";
 	// Email specific variable
 		
