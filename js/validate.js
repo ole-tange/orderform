@@ -29,8 +29,8 @@ function validateForm(){
 	var boo4 = validateBillTo();
 	var boo5 = validateRunType();
 
-	var boo6 = validateAllTables();
-//	var boo6 = true;
+//	var boo6 = validateAllTables();
+	var boo6 = true;
 
 	var boo7 = validateDate();
 	var boo8 = validateIAccept();

@@ -71,8 +71,8 @@
 	$orderNoteName = $_POST["orderNoteName"];
 	
 	//Path to save ordresheets
-	$path = "/home/seq/ordernotes";
-	//$path = "/home/lh/order";
+	//$path = "/home/seq/ordernotes";
+	$path = "/home/lh/ordre";
 	$filename = $orderNoteName . ".csv";
 	// Email specific variable
 		
@@ -86,7 +86,7 @@ if(isset($load_csv)) {
 }
 
 //Openfile	to store the csvfile		- Remember file permission on folder/!
-$fh = fopen($path ."/". $filename,"w") or die("can't open file ".$path."/".$filename); 
+$fh = fopen($path ."/". $filename,"w") or die("can't open file!");//.$path."/".$filename); // only set for debugging!!, to avoid XSS attack
 $csv_array = array_merge(required_section(), tube_section());
 $csv_content = csv_from_array($csv_array);
 //echo $csv_content;			//- for debugging
@@ -106,7 +106,7 @@ if(empty($admin_info) && $admin_status){ // don't send an email if admin only ed
 	  <h2>Pre-submitted order note <? echo $orderNoteName; ?></h2>
 
 	  Your order is <i>NOT</i> submitted yet. To make sure the email
-	  address <? echo $mailto ?> is working, you need to reply to the email sent.
+	  address <? echo xssafe($mailto) ?> is working, you need to reply to the email sent.
 
 	  Follow the instructions in the email to submit the order note to the
 	  Sequencing Center for processing.
@@ -400,5 +400,9 @@ function load_csv($path,$file) {
     fclose($fh);
 }
 
+//xss mitigation functions
+function xssafe($data,$encoding='UTF-8') {
+	return htmlspecialchars($data,ENT_QUOTES | ENT_HTML401,$encoding);
+}
 
 ?>
