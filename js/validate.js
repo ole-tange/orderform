@@ -680,6 +680,7 @@ function validateAllTables(){
  */
 function validateTable(tableid){
 	var boo = true;
+	var seqLibBuilt = $('input[name=seqLib]:checked', '#seqForm').val();
 	
 	// Validate All fields are required in the table, so if you fill in one field you must fill out the rest.
 	if(!validAllFieldReqInTable(tableid)){
@@ -696,20 +697,22 @@ function validateTable(tableid){
 		boo = false;
 	}
 
-        //validate IndexName is unique
-        if(!validUniqueIndexName(tableid)){
-                boo = false;
-        }
+	if(seqLibBuilt == "yes"){ // index name and index seq should be empty when "Are the sequencing libraries already built" radio is no.
+		//validate IndexName is unique
+		if(!validUniqueIndexName(tableid)){
+			boo = false;
+		}
 
-        //validate IndexSequence is unique
-        if(!validUniqueIndexSequences(tableid)){
-                boo = false;
-        }
-
+		//validate IndexSequence is unique
+		if(!validUniqueIndexSequences(tableid)){
+			boo = false;
+		}
+	}
+	
         //validate TubeTag is known
-        if(!validTubeTag(tableid)){
-                boo = false;
-        }
+ //       if(!validTubeTag(tableid)){
+ //               boo = false;
+ //       }
 
 	//Validate concentration and Average library insert is between.
 	var concenArr = $("tbody#"+tableid+" tr td input."+ concentrationClassname);
@@ -756,33 +759,58 @@ function validAllFieldReqInTable(tableid){
 	var sampleIdColumn = $("."+tableid+"sampleId");
 	var concenColumn = $("tbody#"+tableid+" tr td input.concentration");
 	var aveLibInsColumn = $("tbody#"+tableid+" tr td input.aveLibIns");
+	
+	var seqLibBuilt = $('input[name=seqLib]:checked', '#seqForm').val();
+	
 	var boo = true;
 	//var tempboo = true;
 	
 	for(i = 0; i < sampleIdColumn.length; i++){
-		tempSample = (sampleIdColumn[i].value != "");// ? 1 : 0;
-		tempIndexName = (indexNameColumn[i].value != "");// ? 1 : 0;
-		tempSeq = (indexSeqColumn[i].value != "");// ? 1 : 0;
-		tempConc = (concenColumn[i].value != "");// ? 1 : 0;
-		tempAve = (aveLibInsColumn[i].value != "");// ? 1 : 0;
-		tempPro = (projectNameColumn[i].value != "");// ? 1 : 0;
+		tempIndexName = (indexNameColumn[i].value != "");
+		tempSeq = (indexSeqColumn[i].value != "");
+		tempSample = (sampleIdColumn[i].value != "");
+		tempConc = (concenColumn[i].value != "");
+		tempAve = (aveLibInsColumn[i].value != "");
+		tempPro = (projectNameColumn[i].value != "");
 		
-		tempboo = XOR(tempSample,tempIndexName,tempSeq,tempConc,tempAve,tempPro);
+		if(seqLibBuilt == "yes"){
+			tempboo = XOR(tempSample,tempIndexName,tempSeq,tempConc,tempAve,tempPro);
+		} else if(seqLibBuilt == "no"){	// index name and index seq should be empty when "Are the sequencing libraries already built" radio is no.
+			tempboo = XOR(tempSample,tempConc,tempAve,tempPro);
+			
+			for(j = 0; j < indexSeqColumn.length;j++){
+				if(!emptyString(indexSeqColumn[i].value)){
+					setErrorOnBox($("#" + indexSeqColumn[i].id));
+					boo = false;
+				} else
+					setValidOnBox($("#" + indexSeqColumn[i].id));
+				if(!emptyString(indexNameColumn[i].value)){
+					setErrorOnBox($("#" + indexNameColumn[i].id));
+					boo = false;
+				} else
+					setValidOnBox($("#" + indexNameColumn[i].id));
+			}
+			
+		}
 
 		if(tempboo){
 			setValidOnBox($("#" + sampleIdColumn[i].id));
-			setValidOnBox($("#" + indexSeqColumn[i].id));
-			setValidOnBox($("#" + indexNameColumn[i].id));
+			if(seqLibBuilt == "yes"){
+				setValidOnBox($("#" + indexSeqColumn[i].id));
+				setValidOnBox($("#" + indexNameColumn[i].id));
+			}
 			setValidOnBox($("#" + projectNameColumn[i].id));
 			setValidOnBox($("#" + concenColumn[i].id));
 			setValidOnBox($("#" + aveLibInsColumn[i].id));
 		} else{	// set error only on boxes not filled
 			if(!tempSample)
 				setErrorOnBox($("#" + sampleIdColumn[i].id));
-			if(!tempSeq)
-				setErrorOnBox($("#" + indexSeqColumn[i].id));
-			if(!tempIndexName)
-				setErrorOnBox($("#" + indexNameColumn[i].id));
+			if(seqLibBuilt == "yes"){
+				if(!tempSeq)
+					setErrorOnBox($("#" + indexSeqColumn[i].id));
+				if(!tempIndexName)
+					setErrorOnBox($("#" + indexNameColumn[i].id));
+			}
 			if(!tempPro)
 				setErrorOnBox($("#" + projectNameColumn[i].id));
 			if(!tempConc)
