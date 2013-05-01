@@ -710,9 +710,9 @@ function validateTable(tableid){
 	}
 	
         //validate TubeTag is known
- //       if(!validTubeTag(tableid)){
- //               boo = false;
- //       }
+        if(!validTubeTag(tableid)){
+                boo = false;
+        }
 
 	//Validate concentration and Average library insert is between.
 	var concenArr = $("tbody#"+tableid+" tr td input."+ concentrationClassname);
