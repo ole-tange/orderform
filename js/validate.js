@@ -130,7 +130,7 @@ function validateLabPerson(){
 	
 	//validate mail
 	var mail=$('input[name=LP-mail]');
-	if (!validateEmail(mail[0].value)){
+	if (!validateEmail(mail)){
 		setErrorOnBox(mail);
 		//mail.focus();
 		boo = false;
@@ -171,7 +171,8 @@ function validateBioPerson(){
 	}
   
 	var mail=$('input[name=BP-mail]');
-	if (!validateEmail(mail[0].value)){
+	
+	if (!validateEmail(mail)){
 		setErrorOnBox(mail);
 	//	mail.focus();
 		boo = false;
@@ -200,14 +201,30 @@ function validatePI(){
 /*
  * Validate an email address
  */
-function validateEmail(mailStr){
-	//alert(mailStr.replace(/\//g,","));
-	var atpos=mailStr.indexOf("@");
-	var dotpos=mailStr.lastIndexOf(".");
-	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=mailStr.length){
+function validateEmail(mail){
+	var mailStr = mail[0].value;
+	if(emptyString(mailStr))		// return false if the mail is not specified.
 		return false;
-	} else
-		return true;
+	
+	// trim spaces and replace slash with a comma.
+	mailStr = mailStr.replace(/ /g,"");
+	mailStr = mailStr.replace(/\//g,",");
+	
+	// split string to validate all email addresses.
+	var mailArr = mailStr.split(",");
+	
+	// validate all email addresses, return false if one one the e-mail is wrong formatted
+	for(var i = 0; i < mailArr.length;i++){
+		var atpos=mailArr[i].indexOf("@");
+		var dotpos=mailArr[i].lastIndexOf(".");
+		if (atpos<1 || dotpos<atpos+2 || dotpos+2>=mailArr[i].length)
+			return false;
+	}
+	
+	// Insert changes in the input field.
+	$("#" + mail[0].id).val(mailStr);
+	
+	return true;
 }
 
 /*
@@ -405,7 +422,7 @@ function validateRunType(){
 	}
 //	else{
 				// add if here - to show error box when refreshing and then push submit for not int and not between 1-32 
-		return validateIfIntNumberBetween(temp,1,32,"runtype"); // check when one is filled - check if it's an integer and between 1-32
+		return validateIfIntNumberBetween(temp,runtypeMin,runtypeMax,"runtype"); // check when one is filled - check if it's an integer and between 1-32
 //	}
 }
 
@@ -475,7 +492,7 @@ function validateRuntypeOnTheFly(parameter){
 		return false;
 	}else{
 		runtypeCases("runtype"+index,runtype0,runtype1,runtype2,runtype3,runtype4);
-		var boo = validateIfIntNumberBetween(temp,1,32,"runtype"); // check when one is filled - check if it's an integer and between 1-32
+		var boo = validateIfIntNumberBetween(temp,runtypeMin,runtypeMax,"runtype"); // check when one is filled - check if it's an integer and between 1-32
 		if(boo){
 			setValidOnBox(tempRuntype);
 			return true;

@@ -159,6 +159,8 @@ var PIList = {
 	var AverageLibInsMax = 650;
 	
 	//Add runtype min and max
+	var runtypeMin = 1;
+	var runtypeMax = 32;
 
 //Table class names
 	var tubeTagClassname = "tubeTag";
