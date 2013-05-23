@@ -86,7 +86,7 @@ if(isset($load_csv)) {
 }
 
 //Openfile	to store the csvfile		- Remember file permission on folder/!
-$fh = fopen($path ."/". $filename,"w") or die("can't open file!")//.$path."/".$filename); // only set for debugging!!, to avoid XSS attack
+$fh = fopen($path ."/". $filename,"w") or die("can't open file!");//.$path."/".$filename); // only set for debugging!!, to avoid XSS attack
 $csv_array = array_merge(required_section(), tube_section());
 $csv_content = csv_from_array($csv_array);
 //echo $csv_content;			//- for debugging
