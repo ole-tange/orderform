@@ -334,25 +334,68 @@
           different run types</a></h4>
         </td>
       </tr>
-
+      
+      
+      <tr><td colspan="8">
+      
+      
+<table style="border: 1px solid black;">
+<tbody>
       <tr>
-        <td>Run-type<span style="color:red">*</span></td>
+        <td width="202px">Run-type<span style="color:red">*</span></td>
 
         <td>Single-Read lanes</td>
 
         <td>Paired-End lanes</td>
+	
+	<td>SR_Rapid</td>
+	
+	<td>PE_Rapid</td>
+	
+	<td>SR_MiSeq</td>
+	
+	<td>PE_MiSeq</td>
+	
+      </tr>
+     
+      <tr>
+        <td>25</td>
+
+        <td></td>
+
+        <td></td>
+	
+	       <td></td>
+	       <td></td>
+	       <td></td>
+	       <td><input type="text" name="runtype25PEMiSeq" id="runtype25PEMiSeq"
+        class="runtype" onblur=
+        "validateRuntypeOnTheFly(this)"></td>
+	
       </tr>
 
       <tr>
         <td>50</td>
 
-        <td><input type="text" name="runtype_0" id="runtype0"
+        <td><input type="text" name="runtype50SR" id="runtype50SR"
         class="runtype" onblur=
         "validateRuntypeOnTheFly(this)"></td>
 
         <td><input type="text" onblur=
-        "validateRuntypeOnTheFly(this)" name="runtype_1" id=
-        "runtype1" class="runtype"></td>
+        "validateRuntypeOnTheFly(this)" name="runtype50PE" id=
+        "runtype50PE" class="runtype"></td>
+	
+	       <td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype50SRRapid" id=
+        "runtype50SRRapid" class="runtype"></td>
+	       <td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype50PERapid" id=
+        "runtype50PERapid" class="runtype"></td>
+	       <td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype50SRMiSeq" id=
+        "runtype50SRMiSeq" class="runtype"></td>
+	       <td></td>
+	       
       </tr>
 
       <tr>
@@ -361,21 +404,65 @@
         <td></td>
 
         <td><input type="text" onblur=
-        "validateRuntypeOnTheFly(this)" name="runtype_2" id=
-        "runtype2" class="runtype"></td>
+        "validateRuntypeOnTheFly(this)" name="runtype75PE" id=
+        "runtype75PE" class="runtype"></td>
       </tr>
 
       <tr>
         <td>100</td>
 
         <td><input type="text" onblur=
-        "validateRuntypeOnTheFly(this)" name="runtype_3" id=
-        "runtype3" class="runtype"></td>
+        "validateRuntypeOnTheFly(this)" name="runtype100SR" id=
+        "runtype100SR" class="runtype"></td>
 
         <td><input type="text" onblur=
-        "validateRuntypeOnTheFly(this)" name="runtype_4" id=
-        "runtype4" class="runtype"></td>
+        "validateRuntypeOnTheFly(this)" name="runtype100PE" id=
+        "runtype100PE" class="runtype"></td>
+	
+	<td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype100SRRapid" id=
+        "runtype100SRRapid" class="runtype"></td>
+	<td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype100PERapid" id=
+        "runtype100PERapid" class="runtype"></td>
+	<td></td>
+	<td></td>
+	
       </tr>
+      
+      <tr>
+      <td>150</td>
+      <td></td>
+      <td></td>
+      <td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype150SRRapid" id=
+        "runtype150SRRapid" class="runtype"></td>
+      <td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype150PERapid" id=
+        "runtype150PERapid" class="runtype"></td>
+      <td></td>
+      <td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype150PEMiSeq" id=
+        "runtype150PEMiSeq" class="runtype"></td>
+      </tr>
+      
+      <tr>
+      <td>250</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype250SRMiSeq" id=
+        "runtype250SRMiSeq" class="runtype"></td>
+      <td><input type="text" onblur=
+        "validateRuntypeOnTheFly(this)" name="runtype250PEMiSeq" id=
+        "runtype250PEMiSeq" class="runtype"></td>
+      </tr>
+      
+      </tbody>
+</table>
+</td></tr>
 
       <tr>
         <td colspan="2">

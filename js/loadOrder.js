@@ -104,21 +104,49 @@ function loadOrder(file){
 
 					$("#Addinfo").val(tmp);
 					break;
+				case "25":
+					if(dataArray[i][6] != "__")
+						$("#runtype25PEMiSeq").val(dataArray[i][6].replace(/_/g,""));
+					break;
 				case "50":
 					if(dataArray[i][1] != "__")
-						$("#runtype0").val(dataArray[i][1].replace(/_/g,""));
+						$("#runtype50SR").val(dataArray[i][1].replace(/_/g,""));
 					else if(dataArray[i][2] != "__")
-						$("#runtype1").val(dataArray[i][2].replace(/_/g,""));
+						$("#runtype50PE").val(dataArray[i][2].replace(/_/g,""));
+					else if(dataArray[i][3] != "__")
+						$("#runtype50SRRapid").val(dataArray[i][3].replace(/_/g,""));
+					else if(dataArray[i][4] != "__")
+						$("#runtype50PERapid").val(dataArray[i][4].replace(/_/g,""));
+					else if(dataArray[i][5] != "__")
+						$("#runtype50SRMiSeq").val(dataArray[i][5].replace(/_/g,""));
 					break;
 				case "75":
 					if(dataArray[i][2] != "__")
-						$("#runtype2").val(dataArray[i][2].replace(/_/g,""));
+						$("#runtype75PE").val(dataArray[i][2].replace(/_/g,""));
 					break;
 				case "100":
 					if(dataArray[i][1] != "__")
-						$("#runtype3").val(dataArray[i][1].replace(/_/g,""));
+						$("#runtype100SR").val(dataArray[i][1].replace(/_/g,""));
 					else if(dataArray[i][2] != "__")
-						$("#runtype4").val(dataArray[i][2].replace(/_/g,""));
+						$("#runtype100PE").val(dataArray[i][2].replace(/_/g,""));
+					else if(dataArray[i][3] != "__")
+						$("#runtype100SRRapid").val(dataArray[i][3].replace(/_/g,""));
+					else if(dataArray[i][4] != "__")
+						$("#runtype100PERapid").val(dataArray[i][4].replace(/_/g,""));
+					break;
+				case "150":
+					if(dataArray[i][3] != "__")
+						$("#runtype150SRRapid").val(dataArray[i][3].replace(/_/g,""));
+					else if(dataArray[i][4] != "__")
+						$("#runtype150PERapid").val(dataArray[i][4].replace(/_/g,""));
+					else if(dataArray[i][6] != "__")
+						$("#runtype150PEMiSeq").val(dataArray[i][6].replace(/_/g,""));
+					break;
+				case "250":
+					if(dataArray[i][5] != "__")
+						$("#runtype250SRMiSeq").val(dataArray[i][5].replace(/_/g,""));
+					else if(dataArray[i][6] != "__")
+						$("#runtype250PEMiSeq").val(dataArray[i][6].replace(/_/g,""));
 					break;
 				case "phiX required?":
 					if(dataArray[i][1] == "no"){
@@ -180,30 +208,34 @@ function loadOrder(file){
 					}else
 						addNewTable(tmpTubeTag.substr(4));
 					for(var j = 0; j < tubeTagsRows; j++ ){
-						if(dataArray[i][0] == tmpTubeTag){			
-							if(rowid % 11 == 0 ){	// check om 10 nye rækker skal sættes ind.
-								append10RowsWtihIDLoad(table+id,dataArray[i][0].substr(4));
+						if(dataArray[i][0] == tmpTubeTag){	// not new tubetag			
+							if(rowid % 10 == 0 ){	// check om 10 nye rækker skal sættes ind.
+								if((i+1) < dataArray.length){	// check if last line in spreadsheet is reached
+									if(dataArray[i+1][0] != "") // check if the next line is a new tubetag.
+										append10RowsWtihIDLoad(table+id,dataArray[i][0].substr(4));
+								}
 							}	
 							// indsæt ny række
-								// Same in all versions - for now..
-								$("#"+table+id+tubeTagClassname+rowid).val(dataArray[i][0].substr(4));
-								$("#"+table+id+sampleIdClassname+rowid).val(dataArray[i][1].substr(getIndexOf2seq(dataArray[i][1])));
-								$("#"+table+id+concentrationClassname+rowid).val(dataArray[i][2]);
-								$("#"+table+id+averageLibClassname+rowid).val(dataArray[i][3]);
-								if(version == 1){
-									$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][5]);
-									$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][4]);
-								} else if(version == 1.1){		// switched index name and index seq column
-									$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][4]);
-									$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][5]);
-								} else{ 						// unknown version !
-									//alert("unknown version");
-									$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][4]);
-									$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][5]);
-								}
+								// Same in all versions
+							$("#"+table+id+tubeTagClassname+rowid).val(dataArray[i][0].substr(4));
+							$("#"+table+id+sampleIdClassname+rowid).val(dataArray[i][1].substr(getIndexOf2seq(dataArray[i][1])));
+							$("#"+table+id+concentrationClassname+rowid).val(dataArray[i][2]);
+							$("#"+table+id+averageLibClassname+rowid).val(dataArray[i][3]);
+							if(version == 1){
+								$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][5]);
+								$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][4]);
+							} else if(version == 1.1){		// switched index name and index seq column from version 1.1
+								$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][4]);
+								$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][5]);
+							} else{ 						// unknown version !
+								//alert("unknown version");
+								$("#"+table+id+indexNameClassname+rowid).val(dataArray[i][4]);
+								$("#"+table+id+indexSeqClassname+rowid).val(dataArray[i][5]);
+							}
 								$("#"+table+id+projectNameClassname+rowid).val(dataArray[i][6]);
+							
 							if(bricBoo){
-								// Same in all versions - for now..
+								// Same in all versions
 								$("#"+table+id+refGenomeClassname+rowid).val(dataArray[i][7]);
 								$("#"+table+id+spicesClassname+rowid).val(dataArray[i][8]);
 								$("#"+table+id+cellTypeClassname+rowid).val(dataArray[i][9]);
@@ -211,7 +243,7 @@ function loadOrder(file){
 								$("#"+table+id+TOEClassname+rowid).val(dataArray[i][11]);
 							}
 							rowid++;
-						}
+						} 
 						else if(dataArray[i][0] == ""){	// ny tubetag
 						    if(dataArray[i+1]) {
 							tmpTubeTag = dataArray[i+1][0];

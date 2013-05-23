@@ -434,12 +434,6 @@ function validateRunType(){
  */
 function validateRuntypeOnTheFly(parameter){
 	var runtype = $(".runtype");
-	var runtype0 = $("#runtype0");
-	var runtype1 = $("#runtype1");
-	var runtype2 = $("#runtype2");
-	var runtype3 = $("#runtype3");
-	var runtype4 = $("#runtype4");
-	var tempRuntype;
 	var counter = 0;
 	var index=-1;
 	var temp = "";
@@ -454,6 +448,8 @@ function validateRuntypeOnTheFly(parameter){
 
 	// This loop count one up everytime runtype is filled.
 	for(var i=0;i<runtype.length;i++){
+//		$("#" + runtype[i].id).val(i);
+
 		if(runtype[i].value != ""){
 			counter++;
 			temp = runtype[i].value;
@@ -461,43 +457,29 @@ function validateRuntypeOnTheFly(parameter){
 		}
 	}
 	
-	switch (index){
-		case (0):
-			tempRuntype = runtype0;
-			break;
-		case (1):
-			tempRuntype = runtype1;
-			break;
-		case (2):
-			tempRuntype = runtype2;
-			break;
-		case (3):
-			tempRuntype = runtype3;
-			break;
-		case (4):
-			tempRuntype = runtype4;
-			break;
-	}
-	
-	if(counter>1){	//Check only one box is filled
+	if(counter>1){	//Check if more than one box is filled
 		setErrorOnBox(runtype);
 		return false;
 	} else if (counter == 0){	//Check if any is filled
 		//reset all - so it is possible to write to the other boxes again.
-		setRuntypeReset(runtype0);
-		setRuntypeReset(runtype1);
-		setRuntypeReset(runtype2);
-		setRuntypeReset(runtype3);
-		setRuntypeReset(runtype4);
+		for(var z = 0; z < runtype.length;z++){
+			setRuntypeReset($("#"+runtype[z].id));
+		}
 		return false;
-	}else{
-		runtypeCases("runtype"+index,runtype0,runtype1,runtype2,runtype3,runtype4);
-		var boo = validateIfIntNumberBetween(temp,runtypeMin,runtypeMax,"runtype"); // check when one is filled - check if it's an integer and between 1-32
-		if(boo){
-			setValidOnBox(tempRuntype);
+	}else{		// else only one box is filled
+		
+		// set all boxes to impossible to not type a input - (gray-scale all boxes)
+		for(var z = 0; z < runtype.length;z++){
+			setRuntypeNoInput($("#"+runtype[z].id));
+		}
+		setRuntypeReset($("#"+runtype[index].id));		// remove gray-scale on the valid box.
+		
+		// check when one is filled - check if the value is an integer and between 1-32
+		if(validateIfIntNumberBetween(temp,runtypeMin,runtypeMax,"runtype")){ 
+			setValidOnBox($("#"+runtype[index].id));
 			return true;
 		}else{
-			setErrorOnBox(tempRuntype);
+			setErrorOnBox($("#"+runtype[index].id));
 			return false;
 		}
 	}

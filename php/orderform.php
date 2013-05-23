@@ -86,7 +86,7 @@ if(isset($load_csv)) {
 }
 
 //Openfile	to store the csvfile		- Remember file permission on folder/!
-$fh = fopen($path ."/". $filename,"w") or die("can't open file!");//.$path."/".$filename); // only set for debugging!!, to avoid XSS attack
+$fh = fopen($path ."/". $filename,"w") or die("can't open file!")//.$path."/".$filename); // only set for debugging!!, to avoid XSS attack
 $csv_array = array_merge(required_section(), tube_section());
 $csv_content = csv_from_array($csv_array);
 //echo $csv_content;			//- for debugging
@@ -160,11 +160,28 @@ function required_section() {
   $PImail = $_POST["PI-email"];
   $Addinfo = $_POST["Addinfo"];
   
-  $Runtype0 = $_POST["runtype_0"];
-  $Runtype1 = $_POST["runtype_1"];
-  $Runtype2 = $_POST["runtype_2"];
-  $Runtype3 = $_POST["runtype_3"];
-  $Runtype4 = $_POST["runtype_4"];
+  //Runtype variables
+  $runtype25PEMiSeq = $_POST["runtype25PEMiSeq"];
+  
+  $runtype50SR = $_POST["runtype50SR"];
+  $runtype50PE = $_POST["runtype50PE"];
+  $runtype50SRRapid = $_POST["runtype50SRRapid"];
+  $runtype50PERapid = $_POST["runtype50PERapid"];
+  $runtype50SRMiSeq = $_POST["runtype50SRMiSeq"];
+  
+  $runtype75PE = $_POST["runtype75PE"];
+  
+  $runtype100SR = $_POST["runtype100SR"];
+  $runtype100PE = $_POST["runtype100PE"];
+  $runtype100SRRapid = $_POST["runtype100SRRapid"];
+  $runtype100PERapid = $_POST["runtype100PERapid"];
+  
+  $runtype150SRRapid = $_POST["runtype150SRRapid"];
+  $runtype150PERapid = $_POST["runtype150PERapid"];
+  $runtype150PEMiSeq = $_POST["runtype150PEMiSeq"];
+  
+  $runtype250SRMiSeq = $_POST["runtype250SRMiSeq"];
+  $runtype250PEMiSeq = $_POST["runtype250PEMiSeq"];
   
   $PhiX = $_POST["phiX"];
   $SeqLib = $_POST["seqLib"];
@@ -221,10 +238,13 @@ function required_section() {
 	     array("Additional info:"),
 	     array($AddinfoWrapped),
 	     array(),
-	     array("Cycles", "Single-Read", "Paired-End"),
-	     array("50",  "_".$Runtype0."_", "_".$Runtype1."_"),
-	     array("75",  "",                "_".$Runtype2."_"),
-	     array("100", "_".$Runtype3."_", "_".$Runtype4."_"),
+	     array("Cycles", "Single-Read"		, "Paired-End" 			,"SR_Rapid"				,"PE_Rapid"				,"SR_MiSeq"				,"PE_MiSeq"),
+	     array("25",""					,""					,""						,""						,""						,"_".$runtype25PEMiSeq."_"),
+	     array("50",  "_".$runtype50SR."_"	, "_".$runtype50PE."_"	,"_".$runtype50SRRapid."_"	,"_".$runtype50PERapid."_"	,"_".$runtype50SRMiSeq."_"	,""),
+	     array("75",  ""					, "_".$runtype75PE."_"	,""						,""						,""						,""),
+	     array("100", "_".$runtype100SR."_"	, "_".$runtype100PE."_"	,"_".$runtype100SRRapid."_"	,"_".$runtype100PERapid."_"	,""						,""),
+	     array("150",""					,""					,"_".$runtype150SRRapid."_"	,"_".$runtype150PERapid."_"	,""						,"_".$runtype150PEMiSeq."_"),
+	     array("250",""					,""					,""						,""						,"_".$runtype250SRMiSeq."_"	,"_".$runtype250PEMiSeq."_"),
 	     $br,
 	     array("phiX required?",$PhiX),
 	     array("Libraries built?", $SeqLib),
