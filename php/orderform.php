@@ -111,8 +111,8 @@ if(empty($admin_info) && $admin_status){ // don't send an email if admin only ed
 	  Follow the instructions in the email to submit the order note to the
 	  Sequencing Center for processing.
 	  <p>
-	  View as CSV file: <a href="orderform?csv=<? echo $orderNoteName; ?>">
-	  https://dna.ku.dk/orderform/php/orderform?csv=<? echo $orderNoteName; ?></a>.
+	  View as CSV file: <a href="orderform.php?csv=<? echo $orderNoteName; ?>">
+	  https://dna.ku.dk/orderform/php/orderform.php?csv=<? echo $orderNoteName; ?></a>.
 
 	  <p>
 	  Edit the ordernote: <a href="<? echo baseurl() . "?load=" . $orderNoteName; ?>">
@@ -363,7 +363,7 @@ function mail_csv($csvFile) {
   $mailfrom = "seqcenter@snm.ku.dk";
   $mailsubject = 'Please confirm: Your sequencing order ' . $orderNoteName;
   $orderurl = "https://dna.ku.dk/orderform/?load=". $orderNoteName;
-  $csvurl = "https://dna.ku.dk/orderform/php/orderform?csv=". $orderNoteName;
+  $csvurl = "https://dna.ku.dk/orderform/php/orderform.php?csv=". $orderNoteName;
   //Send mail
   $ReplyTo = "The Sequencing Center <seqcenter@snm.ku.dk>, $BPmail, ".str_replace(" ","",$PImail);
   //create a boundary string. It must be unique
