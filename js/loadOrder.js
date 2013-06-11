@@ -1,7 +1,7 @@
 function loadOrder(file){
-        //var url = "http://people.binf.ku.dk/lh/test/";
+        var url = "http://people.binf.ku.dk/lh/test/";
         var protocol = window.location.protocol
-	var url = protocol + "//dna.ku.dk/orderform/php/orderform.php?csv=";
+	//var url = protocol + "//dna.ku.dk/orderform/php/orderform.php?csv=";
 
 	var filnavn = file;
 	var end = true;
@@ -113,9 +113,12 @@ function loadOrder(file){
 						$("#runtype50SR").val(dataArray[i][1].replace(/_/g,""));
 					else if(dataArray[i][2] != "__")
 						$("#runtype50PE").val(dataArray[i][2].replace(/_/g,""));
-					else if(dataArray[i][3] != "__")
-						$("#runtype50SRRapid").val(dataArray[i][3].replace(/_/g,""));
-					else if(dataArray[i][4] != "__")
+					else if(dataArray[i][3] != "__"){
+						if(!emptyString(dataArray[i][3]))
+							$("#runtype50SRRapid").val(dataArray[i][3].replace(/_/g,""));
+						else
+							break;
+					}else if(dataArray[i][4] != "__")
 						$("#runtype50PERapid").val(dataArray[i][4].replace(/_/g,""));
 					else if(dataArray[i][5] != "__")
 						$("#runtype50SRMiSeq").val(dataArray[i][5].replace(/_/g,""));
@@ -129,9 +132,12 @@ function loadOrder(file){
 						$("#runtype100SR").val(dataArray[i][1].replace(/_/g,""));
 					else if(dataArray[i][2] != "__")
 						$("#runtype100PE").val(dataArray[i][2].replace(/_/g,""));
-					else if(dataArray[i][3] != "__")
-						$("#runtype100SRRapid").val(dataArray[i][3].replace(/_/g,""));
-					else if(dataArray[i][4] != "__")
+					else if(dataArray[i][3] != "__"){
+						if(!emptyString(dataArray[i][3]))
+							$("#runtype100SRRapid").val(dataArray[i][3].replace(/_/g,""));
+						else
+							break;
+					}else if(dataArray[i][4] != "__")
 						$("#runtype100PERapid").val(dataArray[i][4].replace(/_/g,""));
 					break;
 				case "150":
