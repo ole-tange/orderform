@@ -1,7 +1,7 @@
 function loadOrder(file){
-        var url = "http://people.binf.ku.dk/lh/test/";
+        //var url = "http://people.binf.ku.dk/lh/test/";
         var protocol = window.location.protocol
-	//var url = protocol + "//dna.ku.dk/orderform/php/orderform.php?csv=";
+	var url = protocol + "//dna.ku.dk/orderform/php/orderform.php?csv=";
 
 	var filnavn = file;
 	var end = true;
