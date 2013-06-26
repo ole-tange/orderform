@@ -202,6 +202,8 @@ function generateOrderNoteName(orderNoteID) {
     orderNoteNameInput.type = "hidden";
     orderNoteNameInput.name = "orderNoteName";
     orderNoteNameInput.value = orderNoteID + "_" + LabPersonName;
+    /* Order VTAM had spaces in the name. Avoid that */
+    orderNoteNameInput.value = orderNoteNameInput.value.replace(/[^a-z0-9]/ig,"_");
     seqTable.appendChild(orderNoteNameInput);
 }
 
