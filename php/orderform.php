@@ -381,7 +381,7 @@ function mail_csv($csvFile) {
   $mailbody = 
     "!!! The order will NOT be processed unless you reply to this email !!!<br/><br/>" .
     "Find your sequencing order " . $orderNoteName . " at: <a href=$csvurl>$csvurl</a>.<br/><br/>" .
-    "Please review it. If you need to change it you need to make a new order.<br/><br/>".
+    "Please do not submit the order without checking that the system has indeed registered all your data correctly. If you need to change the order you need to make a new order.<br/><br/>".
     "You can create a new order based on this order by going to: <a href=$orderurl>$orderurl</a>.<br/><br/>" .
     "When you have reviewed the order please reply to this email that you want the order processed.<br/><br/>" .
     "When referring to this order in the future, please refer to " .
